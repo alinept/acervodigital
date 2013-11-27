@@ -1,0 +1,88 @@
+<?page title="Acervo Digital - UFMA"?>
+
+<?link href="../assets/css/bootstrap-combined.no-icons.min.css" rel="stylesheet" type="text/css"?>
+<?link href="../assets/css/font-awesome.css" rel="stylesheet" type="text/css"?>
+<?link href="../assets/css/application.css" rel="stylesheet" type="text/css"?>
+
+<zk xmlns:n="native"
+    xmlns="http://www.w3.org/1999/xhtml">
+	<div class="container">  
+        <div class="page-header">
+            <div class="left-header pull-left">
+                <h1>SGDU</h1>
+                <p>
+                    Sistema de Gerenciamento de Documentos universitários</p>
+            </div>
+            
+            <div class="right-header pull-right">
+                
+                <h3>
+                    Login
+                </h3>
+                
+                <div class="input-prepend input-append">
+                    <div class="btn-group">
+                        <button class="btn dropdown-opcoes-buscar" data-toggle="dropdown">
+                            Opções
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                        	<form class="form-vertical">
+				                <li>
+				                	<div style="margin-left:5px;">
+					                    <label class="checkbox">
+					                      <input type="checkbox" name="titulo"/> Por título 
+					                    </label>
+					                    <label class="checkbox">
+					                      <input type="checkbox" name="descricao"/> Por descrição 
+					                    </label>
+					                    <label class="checkbox">
+					                      <input type="checkbox" name="conteudo"/> Por conteúdo 
+					                    </label>
+					                    <a href="#" class="btn btn-primary"> Adicionar Tags </a>
+				                	</div>
+				                </li>
+				            </form>
+                        </ul>
+                    </div>
+                    <input placeholder="Digite aqui" class="span2" id="appendedDropdownButton" type="text"></input>
+                    <a id="form-pesquisar-submit" class="btn btn-primary" style="margin-right:5px"><i class="icon-search"></i> Pesquisar </a>
+                </div>
+                
+            </div> 
+            <div class="clearfix"></div>
+        </div>
+            
+        <div class="content">
+            <div class="span3 well" style="margin: 0 auto !important;float: none !important;">
+            	<form class="form-vertical" action="index.zul" id="form-login">
+				  <div class="control-group">
+				    <label class="control-label" for="inputEmail">Email</label>
+				    <div class="controls">
+				      <input type="text" id="inputEmail" placeholder="Email"/>
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <label class="control-label" for="inputPassword">Password</label>
+				    <div class="controls">
+				      <input type="password" id="inputPassword" placeholder="Password"/>
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <div class="controls">
+				      <button type="submit" class="btn btn-primary">Login</button>
+				    </div>
+				  </div>
+				</form>
+            </div>
+        </div>
+        <hr />
+        
+        <div class="footer">
+            SGDU © Todos os direitos reservados
+        </div>
+        
+    </div>
+    <script type="text/javascript" src="../assets/js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="../assets/js/application.js"></script>
+</zk>
