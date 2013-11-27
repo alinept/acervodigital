@@ -1,4 +1,9 @@
-<div class="left-header pull-left">
-    <h1>SGDU</h1>
-    <p>Sistema de Gerenciamento de Documentos universitários</p>
-</div>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+        xmlns:h="http://www.w3.org/1999/xhtml"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<h:div class="left-header pull-left">
+    	<h:h1>SGDU</h:h1>
+    	<h:p>Sistema de Gerenciamento de Documentos universitários</h:p>
+	</h:div>
+</zk>

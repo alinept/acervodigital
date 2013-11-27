@@ -4,87 +4,84 @@
 <?link href="assets/css/font-awesome.css" rel="stylesheet" type="text/css"?>
 <?link href="assets/css/application.css" rel="stylesheet" type="text/css"?>
 
-<zk xmlns:n="native" 
-	xmlns="http://www.w3.org/1999/xhtml">
-	<div class="container">  
-        <div class="page-header">
-            <div class="left-header pull-left">
-			    <h1>SGDU</h1>
-			    <p>Sistema de Gerenciamento de Documentos universitários</p>
-			</div>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml">
+    <h:div class="container">  
+        <h:div class="page-header">
+            <include src="partials/left-header.zul"/>
             
-            <div class="right-header pull-right">
-                <h3>
+            <h:div class="right-header pull-right">
+                <h:h3>
                     Buscar documentos
-                </h3>
-                <a href="admin/" class="btn btn-primary pull-right"><i class="icon-user"></i> Login</a>
-            </div> 
-            <div class="clearfix"></div>
-        </div>
-        <div class="content">
-            <form class="form-inline">
-                <div class="input-prepend input-block-level">
-                    <span  class="add-on"><i class="icon-search"></i></span>
-                    <input id="prependedInput" type="text" name="buscar" placeholder="Digite aqui"/>
-                </div>
-                <div style="margin-top:5px;">
-                    <label class="checkbox" style="margin-right:5px">
-                      <input type="checkbox" name="titulo"/> Por título 
-                    </label>
-                    <label class="checkbox" style="margin-right:5px">
-                      <input type="checkbox" name="descricao"/> Por descrição 
-                    </label>
-                    <label class="checkbox" style="margin-right:5px">
-                      <input type="checkbox" name="conteudo"/> Por conteúdo 
-                    </label>
-                    <a href="#" class="btn btn-primary" style="margin-right:5px"> + Adicionar Tags </a>
-                    <a type="submit" class="btn btn-large pull-right" style="margin-right:5px"><i class="icon-search"></i> Pesquisar </a>
-                </div>
-            </form>
-        </div>
+                </h:h3>
+                <h:a href="admin/" class="btn btn-primary pull-right"><h:i class="icon-user"></h:i> Login</h:a>
+            </h:div> 
+            <h:div class="clearfix"></h:div>
+        </h:div>
+        <h:div class="content">
+            <h:form class="form-inline">
+                <h:div class="input-prepend input-block-level">
+                    <h:span  class="add-on"><h:i class="icon-search"></h:i></h:span>
+                    <h:input id="prependedInput" type="text" name="buscar" placeholder="Digite aqui"/>
+                </h:div>
+                <h:div style="margin-top:5px;">
+                    <h:label class="checkbox" style="margin-right:5px">
+                      <h:input type="checkbox" name="titulo"/> Por título 
+                    </h:label>
+                    <h:label class="checkbox" style="margin-right:5px">
+                      <h:input type="checkbox" name="descricao"/> Por descrição 
+                    </h:label>
+                    <h:label class="checkbox" style="margin-right:5px">
+                      <h:input type="checkbox" name="conteudo"/> Por conteúdo 
+                    </h:label>
+                    <h:a href="#" class="btn btn-primary" style="margin-right:5px"> + Adicionar Tags </h:a>
+                    <h:a type="submit" class="btn btn-large pull-right" style="margin-right:5px"><h:i class="icon-search"></h:i> Pesquisar </h:a>
+                </h:div>
+            </h:form>
+        </h:div>
         
-        <div class="row">
-        	<div class="span12">
-	        	<h3>Titulo 1 <a href="#"><i class="icon-download-alt"></i></a></h3> 
-	        	<p>
-	        		..Lorem ipsum dolor sit amet, <strong>consectetuer adipiscing elit</strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-	penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
-	        	</p>
-        	</div>
-        	<div class="span12">
-	        	<h3>Titulo 1 <a href="#"><i class="icon-download-alt"></i></a></h3> 
-	        	<p>
-	        		..Lorem ipsum dolor sit amet, <strong>consectetuer adipiscing elit</strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-	penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
-	        	</p>
-        	</div>
-        	<div class="span12">
-	        	<h3>Titulo 1 <a href="#"><i class="icon-download-alt"></i></a></h3> 
-	        	<p>
-	        		..Lorem ipsum dolor sit amet, <strong>consectetuer adipiscing elit</strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-	penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
-	        	</p>
-        	</div>
-        </div>
+        <h:div class="row">
+            <h:div class="span12">
+                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
+                <h:p>
+                    ..Lorem ipsum dolor sit amet, <h:strong>consectetuer adipiscing elit</h:strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
+                </h:p>
+            </h:div>
+            <h:div class="span12">
+                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
+                <h:p>
+                    ..Lorem ipsum dolor sit amet, <h:strong>consectetuer adipiscing elit</h:strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
+                </h:p>
+            </h:div>
+            <h:div class="span12">
+                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
+                <h:p>
+                    ..Lorem ipsum dolor sit amet, <h:strong>consectetuer adipiscing elit</h:strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
+                </h:p>
+            </h:div>
+        </h:div>
         
-        <div class="pagination">
-		  <ul>
-		    <li><a href="#">Prev</a></li>
-		    <li><a href="#">1</a></li>
-		    <li><a href="#">2</a></li>
-		    <li><a href="#">3</a></li>
-		    <li><a href="#">4</a></li>
-		    <li><a href="#">5</a></li>
-		    <li><a href="#">Next</a></li>
-		  </ul>
-		</div>
+        <h:div class="pagination">
+          <h:ul>
+            <h:li><h:a href="#">Prev</h:a></h:li>
+            <h:li><h:a href="#">1</h:a></h:li>
+            <h:li><h:a href="#">2</h:a></h:li>
+            <h:li><h:a href="#">3</h:a></h:li>
+            <h:li><h:a href="#">4</h:a></h:li>
+            <h:li><h:a href="#">5</h:a></h:li>
+            <h:li><h:a href="#">Next</h:a></h:li>
+          </h:ul>
+        </h:div>
         
-        <hr />
-        
-        <div class="footer">
+        <h:hr />
+
+        <h:div class="footer">
             SGDU © Todos os direitos reservados
-        </div>
-    </div>
+        </h:div>
+    </h:div>
     <script type="text/javascript" src="assets/js/bootstrap-dropdown.js"></script>
     <script type="text/javascript" src="assets/js/application.js"></script>
 </zk>

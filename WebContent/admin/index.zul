@@ -4,65 +4,61 @@
 <?link href="../assets/css/font-awesome.css" rel="stylesheet" type="text/css"?>
 <?link href="../assets/css/application.css" rel="stylesheet" type="text/css"?>
 
-<zk xmlns:n="native"
-    xmlns="http://www.w3.org/1999/xhtml">
-	<div class="container">  
-        <div class="page-header">
-            <div class="left-header pull-left">
-                <h1>SGDU</h1>
-                <p>
-                    Sistema de Gerenciamento de Documentos universitários</p>
-            </div>
+<zk xmlns="http://www.zkoss.org/2005/zul"
+    xmlns:h="http://www.w3.org/1999/xhtml">
+	<h:div class="container">  
+        <h:div class="page-header">
+            <include src="../partials/left-header.zul"/>
             
-            <div class="right-header pull-right">
+            <h:div class="right-header pull-right">
                 
-                <h3>
+                <h:h3>
                     Área Administrativa
-                </h3>
+                </h:h3>
                 
-                <div class="input-prepend input-append">
-                    <div class="btn-group">
-                        <button class="btn dropdown-opcoes-buscar" data-toggle="dropdown">
+                <h:div class="input-prepend input-append">
+                    <h:div class="btn-group">
+                        <h:button class="btn dropdown-opcoes-buscar" data-toggle="dropdown">
                             Opções
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                        	<form class="form-vertical">
-				                <li>
-				                	<div style="margin-left:5px;">
-					                    <label class="checkbox">
-					                      <input type="checkbox" name="titulo"/> Por título 
-					                    </label>
-					                    <label class="checkbox">
-					                      <input type="checkbox" name="descricao"/> Por descrição 
-					                    </label>
-					                    <label class="checkbox">
-					                      <input type="checkbox" name="conteudo"/> Por conteúdo 
-					                    </label>
-					                    <a href="#" class="btn btn-primary"> Adicionar Tags </a>
-				                	</div>
-				                </li>
-				            </form>
-                        </ul>
-                    </div>
-                    <input placeholder="Digite aqui" class="span2" id="appendedDropdownButton" type="text"></input>
-                    <a id="form-pesquisar-submit" class="btn btn-primary" style="margin-right:5px"><i class="icon-search"></i> Pesquisar </a>
-                </div>
-                <a href="#" class="btn pull-right"><i class="icon-user"></i> Sair</a>
-            </div> 
-            <div class="clearfix"></div>
-        </div>
+                            <h:span class="caret"></h:span>
+                        </h:button>
+                        <h:ul class="dropdown-menu">
+                        	<h:form class="form-vertical">
+				                <h:li>
+				                	<h:div style="margin-left:5px;">
+					                    <h:label class="checkbox">
+					                      <h:input type="checkbox" name="titulo"/> Por título 
+					                    </h:label>
+					                    <h:label class="checkbox">
+					                      <h:input type="checkbox" name="descricao"/> Por descrição 
+					                    </h:label>
+					                    <h:label class="checkbox">
+					                      <h:input type="checkbox" name="conteudo"/> Por conteúdo 
+					                    </h:label>
+					                    <h:a href="#" class="btn btn-primary"> Adicionar Tags </h:a>
+				                	</h:div>
+				                </h:li>
+				            </h:form>
+                        </h:ul>
+                    </h:div>
+                    <h:input placeholder="Digite aqui" class="span2" id="appendedDropdownButton" type="text"/>
+                    <h:a id="form-pesquisar-submit" class="btn btn-primary" style="margin-right:5px"><h:i class="icon-search"></h:i> Pesquisar </h:a>
+                </h:div>
+                <h:a href="#" class="btn pull-right"><h:i class="icon-user"></h:i> Sair</h:a>
+            </h:div> 
+            <h:div class="clearfix"></h:div>
+        </h:div>
             
-        <div class="content">
-            <h3>Conteúdo</h3>
-        </div>
-        <hr />
+        <h:div class="content">
+            <h:h3>Conteúdo</h:h3>
+        </h:div>
+        <h:hr />
         
-        <div class="footer">
+        <h:div class="footer">
             SGDU © Todos os direitos reservados
-        </div>
+        </h:div>
         
-    </div>
+    </h:div>
     <script type="text/javascript" src="../assets/js/bootstrap-dropdown.js"></script>
     <script type="text/javascript" src="../assets/js/application.js"></script>
 </zk>
