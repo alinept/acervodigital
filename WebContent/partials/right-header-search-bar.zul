@@ -1,0 +1,44 @@
+<zk xmlns="http://www.zkoss.org/2005/zul"
+	xmlns:h="http://www.w3.org/1999/xhtml">
+	<h:div class="input-prepend input-append">
+		<h:div class="btn-group">
+			<h:button class="btn dropdown-opcoes-buscar"
+				data-toggle="dropdown">
+				Opções
+				<h:span class="caret"></h:span>
+			</h:button>
+			<h:ul class="dropdown-menu">
+				<h:form class="form-vertical">
+					<h:li>
+						<h:div style="margin-left:5px;">
+							<h:label class="checkbox">
+								<h:input type="checkbox" name="titulo" />
+								Por título
+							</h:label>
+							<h:label class="checkbox">
+								<h:input type="checkbox"
+									name="descricao" />
+								Por descrição
+							</h:label>
+							<h:label class="checkbox">
+								<h:input type="checkbox"
+									name="conteudo" />
+								Por conteúdo
+							</h:label>
+							<h:a href="#" class="btn btn-primary">
+								Adicionar Tags
+							</h:a>
+						</h:div>
+					</h:li>
+				</h:form>
+			</h:ul>
+		</h:div>
+		<h:input placeholder="Digite aqui" class="span2"
+			id="appendedDropdownButton" type="text" />
+		<h:a id="form-pesquisar-submit" class="btn btn-primary"
+			style="margin-right:5px">
+			<h:i class="icon-search"></h:i>
+			Pesquisar
+		</h:a>
+	</h:div>
+</zk>

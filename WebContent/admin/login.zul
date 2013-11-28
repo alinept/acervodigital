@@ -11,9 +11,9 @@
             <include src="../partials/left-header.zul"/>
             
             <h:div class="right-header pull-right">
-                
-                <h:h3>Login</h:h3>
-                
+                <h:h3>
+                	Login
+                </h:h3>
                 <h:div class="input-prepend input-append">
                     <h:div class="btn-group">
                         <h:button class="btn dropdown-opcoes-buscar" data-toggle="dropdown">

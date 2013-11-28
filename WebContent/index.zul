@@ -14,30 +14,31 @@
                 <h:h3>
                     Buscar documentos
                 </h:h3>
+                <include sclass="pull-left" src="partials/right-header-search-bar.zul"/>
                 <h:a href="admin/" class="btn btn-primary pull-right"><h:i class="icon-user"></h:i> Login</h:a>
             </h:div> 
             <h:div class="clearfix"></h:div>
         </h:div>
         <h:div class="content well well-content">
             <h:form class="form-inline">
-                <h:div class="input-prepend input-block-level">
-                    <h:span  class="add-on"><h:i class="icon-search"></h:i></h:span>
-                    <h:input id="prependedInput" type="text" name="buscar" placeholder="Digite aqui"/>
-                </h:div>
-                <h:div style="margin-top:5px;">
-                    <h:label class="checkbox" style="margin-right:5px">
-                      <h:input type="checkbox" name="titulo"/> Por título 
-                    </h:label>
-                    <h:label class="checkbox" style="margin-right:5px">
-                      <h:input type="checkbox" name="descricao"/> Por descrição 
-                    </h:label>
-                    <h:label class="checkbox" style="margin-right:5px">
-                      <h:input type="checkbox" name="conteudo"/> Por conteúdo 
-                    </h:label>
-                    <h:a href="#" class="btn btn-primary" style="margin-right:5px"> + Adicionar Tags </h:a>
-                    <h:a type="submit" class="btn btn-large pull-right" style="margin-right:5px"><h:i class="icon-search"></h:i> Pesquisar </h:a>
-                </h:div>
-            </h:form>
+		        <h:div class="input-prepend input-block-level">
+		            <h:span  class="add-on"><h:i class="icon-search"></h:i></h:span>
+		            <h:input id="prependedInput" type="text" name="buscar" placeholder="Digite aqui"/>
+		        </h:div>
+		        <h:div style="margin-top:5px;">
+		            <h:label class="checkbox" style="margin-right:5px">
+		              <h:input type="checkbox" name="titulo"/> Por título 
+		            </h:label>
+		            <h:label class="checkbox" style="margin-right:5px">
+		              <h:input type="checkbox" name="descricao"/> Por descrição 
+		            </h:label>
+		            <h:label class="checkbox" style="margin-right:5px">
+		              <h:input type="checkbox" name="conteudo"/> Por conteúdo 
+		            </h:label>
+		            <h:a href="#" class="btn btn-primary" style="margin-right:5px"> + Adicionar Tags </h:a>
+		            <h:a type="submit" class="btn btn-large pull-right" style="margin-right:5px"><h:i class="icon-search"></h:i> Pesquisar </h:a>
+		        </h:div>
+		    </h:form>
             
             <h:div class="row">
 	            <h:div class="span12">
