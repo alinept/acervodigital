@@ -12,7 +12,9 @@
             
             <h:div class="right-header pull-right">
                 
-                <h:h3>Login</h:h3>
+                <h:h3>
+                    Enviar Documento
+                </h:h3>
                 
                 <h:div class="input-prepend input-append">
                     <h:div class="btn-group">
@@ -42,26 +44,31 @@
                     <h:input placeholder="Digite aqui" class="span2" id="appendedDropdownButton" type="text"/>
                     <h:a id="form-pesquisar-submit" class="btn btn-primary" style="margin-right:5px"><h:i class="icon-search"></h:i> Pesquisar </h:a>
                 </h:div>
-                
+                <h:a href="#" class="btn pull-right"><h:i class="icon-user"></h:i> Sair</h:a>
             </h:div> 
             <h:div class="clearfix"></h:div>
         </h:div>
         
-        <h:div class="content">
-            <h:form class="form-signin" method="post">
-			  <h:h3 class="form-signin-heading">Entre com seus dados</h:h3>
-			  <h:label>Email</h:label>
-			  <h:input type="text" class="input-block-level" placeholder="Email" name="email"/>
-			  <h:label>Senha</h:label>
-			  <h:input type="password" class="input-block-level" placeholder="Senha" name="senha"/>
-			  <h:label class="checkbox">
-			    <h:input type="checkbox" value="remember-me"/> Lembrar me
-			    <h:a href="#" class="pull-right">Nova conta</h:a>
-			  </h:label>
-			  <h:button class="btn btn-large btn-primary" type="submit">Entrar</h:button>
-			</h:form>
+        <h:div class="content well well-content">
+            <h:h3>Formulário de inserção de documentos</h:h3>
+            
+            <h:form>
+            	<h:label>Título</h:label>
+            	<h:input class="input-block-level" type="text" placeholder="Digite um título para seu documento"/>
+            	<h:label>Descrição</h:label>
+            	<h:input class="input-block-level" type="text" placeholder="Descreva sucintamente"/>
+            	<h:label>Tipo</h:label>
+            	<h:input class="input-block-level" type="text" placeholder="Defina um tipo para seu documento. Ex(monografia,requerimento ..)"/>
+            	<h:label>Tags</h:label>
+            	<h:a href="#" class="btn">+Adicionar Tags</h:a>
+            	<h:label>Arquivos</h:label>
+            	<h:a href="#" class="btn">+Adicionar Arquivos</h:a>
+            	<h:div class="form-actions">
+            		<h:a href="#" class="btn btn-primary pull-left"><h:i class="icon-arrow-left"></h:i> Voltar</h:a>
+					<h:button class="btn btn-success pull-right" type="submit"><h:i class="icon-ok"></h:i> Submeter Documento</h:button>
+				</h:div>            	
+            </h:form>
         </h:div>
-        
         <h:hr />
         
         <h:div class="footer">

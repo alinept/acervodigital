@@ -18,7 +18,7 @@
             </h:div> 
             <h:div class="clearfix"></h:div>
         </h:div>
-        <h:div class="content">
+        <h:div class="content well well-content">
             <h:form class="form-inline">
                 <h:div class="input-prepend input-block-level">
                     <h:span  class="add-on"><h:i class="icon-search"></h:i></h:span>
@@ -38,44 +38,50 @@
                     <h:a type="submit" class="btn btn-large pull-right" style="margin-right:5px"><h:i class="icon-search"></h:i> Pesquisar </h:a>
                 </h:div>
             </h:form>
+            
+            <h:div class="row">
+	            <h:div class="span12">
+	                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
+	                <h:p>
+	                    ..Lorem ipsum dolor sit amet, <h:strong>consectetuer adipiscing elit</h:strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+	    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
+	                </h:p>
+	            </h:div>
+	            <h:div class="span12">
+	                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
+	                <h:p>
+	                    ..Lorem ipsum dolor sit amet, <h:strong>consectetuer adipiscing elit</h:strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+	    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
+	                </h:p>
+	            </h:div>
+	            <h:div class="span12">
+	                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
+	                <h:p>
+	                    ..Lorem ipsum dolor sit amet, <h:strong>consectetuer adipiscing elit</h:strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+	    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
+	                </h:p>
+	            </h:div>
+	        </h:div>
+	        
+	       
+	        <h:div class="pull-left" style="margin:20px 0 20px 0;">
+	        	<h:a href="#" class="btn"><h:i class="icon-arrow-left"></h:i> Voltar</h:a>
+	        </h:div>
+	        
+	        <h:div class="pagination pull-right">
+	          <h:ul>
+	            <h:li><h:a href="#">Prev</h:a></h:li>
+	            <h:li><h:a href="#">1</h:a></h:li>
+	            <h:li><h:a href="#">2</h:a></h:li>
+	            <h:li><h:a href="#">3</h:a></h:li>
+	            <h:li><h:a href="#">4</h:a></h:li>
+	            <h:li><h:a href="#">5</h:a></h:li>
+	            <h:li><h:a href="#">Next</h:a></h:li>
+	          </h:ul>
+	        </h:div>
+	        <h:div class="clearfix"></h:div>
         </h:div>
-        
-        <h:div class="row">
-            <h:div class="span12">
-                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
-                <h:p>
-                    ..Lorem ipsum dolor sit amet, <h:strong>consectetuer adipiscing elit</h:strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
-                </h:p>
-            </h:div>
-            <h:div class="span12">
-                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
-                <h:p>
-                    ..Lorem ipsum dolor sit amet, <h:strong>consectetuer adipiscing elit</h:strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
-                </h:p>
-            </h:div>
-            <h:div class="span12">
-                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
-                <h:p>
-                    ..Lorem ipsum dolor sit amet, <h:strong>consectetuer adipiscing elit</h:strong>. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-    penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem...
-                </h:p>
-            </h:div>
-        </h:div>
-        
-        <h:div class="pagination">
-          <h:ul>
-            <h:li><h:a href="#">Prev</h:a></h:li>
-            <h:li><h:a href="#">1</h:a></h:li>
-            <h:li><h:a href="#">2</h:a></h:li>
-            <h:li><h:a href="#">3</h:a></h:li>
-            <h:li><h:a href="#">4</h:a></h:li>
-            <h:li><h:a href="#">5</h:a></h:li>
-            <h:li><h:a href="#">Next</h:a></h:li>
-          </h:ul>
-        </h:div>
-        
+
         <h:hr />
 
         <h:div class="footer">

@@ -49,8 +49,10 @@
             <h:div class="clearfix"></h:div>
         </h:div>
             
-        <h:div class="content">
+        <h:div class="content well well-content">
+            <h:a class="btn pull-right" href="enviar_documento.zul"> +Enviar Documento</h:a> 
             <h:h3>Conteúdo</h:h3>
+            
         </h:div>
         <h:hr />
         
