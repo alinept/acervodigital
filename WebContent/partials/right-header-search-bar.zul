@@ -25,7 +25,7 @@
 									name="conteudo" />
 								Por conteúdo
 							</h:label>
-							<h:a href="#" class="btn btn-primary">
+							<h:a href="#" data-toggle="modal" data-target="#tags-modal" class="btn btn-primary">
 								Adicionar Tags
 							</h:a>
 						</h:div>

@@ -35,7 +35,7 @@
 		            <h:label class="checkbox" style="margin-right:5px">
 		              <h:input type="checkbox" name="conteudo"/> Por conteúdo 
 		            </h:label>
-		            <h:a href="#" class="btn btn-primary" style="margin-right:5px"> + Adicionar Tags </h:a>
+		            <h:a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tags-modal" style="margin-right:5px"> + Adicionar Tags </h:a>
 		            <h:a type="submit" class="btn btn-large pull-right" style="margin-right:5px"><h:i class="icon-search"></h:i> Pesquisar </h:a>
 		        </h:div>
 		    </h:form>
@@ -64,7 +64,6 @@
 	            </h:div>
 	        </h:div>
 	        
-	       
 	        <h:div class="pull-left" style="margin:20px 0 20px 0;">
 	        	<h:a href="#" class="btn"><h:i class="icon-arrow-left"></h:i> Voltar</h:a>
 	        </h:div>
@@ -81,6 +80,33 @@
 	          </h:ul>
 	        </h:div>
 	        <h:div class="clearfix"></h:div>
+	        <h:div id="tags-modal" class="modal hide fade">
+	        	<h:div class="modal-header">
+	        		<h:button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</h:button>
+	        		<h:h3>Adicionar Tag</h:h3>
+	        	</h:div>
+	        	<h:div class="modal-content">
+	        		<h:form class="form form-horizontal" style="margin-top:20px;">
+	        			<h:div class="control-group">
+		        			<h:label class="control-label">Nome da Tag</h:label>
+		        			<h:div class="controls">
+		        				<h:input type="text"/>
+		        			</h:div>
+	        			</h:div>
+	        			
+	        			<h:div class="control-group">
+		        			<h:label class="control-label">Valor</h:label>
+		        			<h:div class="controls">
+		        				<h:input type="text"/>
+		        			</h:div>
+	        			</h:div>
+	        		</h:form>
+	        	</h:div>
+	        	<h:div class="modal-footer">
+	        		<h:a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Fechar</h:a>
+	        		<h:a href="#" class="btn btn-primary">Salvar Tag</h:a>
+	        	</h:div>
+	        </h:div>
         </h:div>
 
         <h:hr />
@@ -89,6 +115,7 @@
             SGDU © Todos os direitos reservados
         </h:div>
     </h:div>
-    <script type="text/javascript" src="assets/js/bootstrap-dropdown.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/js/application.js"></script>
 </zk>
