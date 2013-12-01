@@ -7,12 +7,11 @@ public class Documento {
 	
       
       private int id;
-      private String titulo;
-      private String descricao;
       private Date dataExpedicao;
       private Date dataUpload;
       private Usuario proprietario;
       private List<Tag> tags;
+      private String conteudo;
       
 	public int getId() {
 		return id;
@@ -20,18 +19,7 @@ public class Documento {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTitulo() {
-		return titulo;
-	}
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-	public String getDescricao() {
-		return descricao;
-	}
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
+	
 	public Date getDataExpedicao() {
 		return dataExpedicao;
 	}
@@ -55,6 +43,12 @@ public class Documento {
 	}
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
+	}
+	public String getConteudo() {
+		return conteudo;
+	}
+	public void setConteudo(String conteudo) {
+		this.conteudo = conteudo;
 	}        
       
       

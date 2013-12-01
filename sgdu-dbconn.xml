@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Arquivo de configuracao para conexao entre o banco de dados e o sistema SGDU -->
+
+<database_connection>
+	<jdbc_url>jdbc:postgresql://localhost/acervo</jdbc_url>
+	<jdbc_driver>org.postgresql.Driver</jdbc_driver>
+	<user>postgres</user>
+	<password>postgres</password>
+</database_connection>
