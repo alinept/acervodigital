@@ -12,6 +12,8 @@ public class Documento {
       private Usuario proprietario;
       private List<Tag> tags;
       private String conteudo;
+      private Diretorio diretorio;
+      
       
 	public int getId() {
 		return id;
@@ -49,7 +51,14 @@ public class Documento {
 	}
 	public void setConteudo(String conteudo) {
 		this.conteudo = conteudo;
+	}
+	public Diretorio getDiretorio() {
+		return diretorio;
+	}
+	public void setDiretorio(Diretorio diretorio) {
+		this.diretorio = diretorio;
 	}        
-      
+     
+	
       
 }

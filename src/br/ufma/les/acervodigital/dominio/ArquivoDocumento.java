@@ -2,9 +2,9 @@ package br.ufma.les.acervodigital.dominio;
 
 public class ArquivoDocumento {
 	
+	private Documento documento;
 	private String nomeArquivo;
     private byte[] byteStream;
-    private Diretorio diretorio;
     
 	public String getNomeArquivo() {
 		return nomeArquivo;
@@ -18,13 +18,13 @@ public class ArquivoDocumento {
 	public void setByteStream(byte[] byteStream) {
 		this.byteStream = byteStream;
 	}
-	public Diretorio getDiretorio() {
-		return diretorio;
+	public Documento getDocumento() {
+		return documento;
 	}
-	public void setDiretorio(Diretorio diretorio) {
-		this.diretorio = diretorio;
+	public void setDocumento(Documento documento) {
+		this.documento = documento;
 	}
-    
+	  
     
 
 }

@@ -1,5 +1,10 @@
 package br.ufma.les.acervodigital.dao;
 
-public class ArquivoDocumentoDAO {
+import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
 
+
+public interface ArquivoDocumentoDAO {
+	
+	boolean inserirArquivo(ArquivoDocumento arquivo);
+	
 }
