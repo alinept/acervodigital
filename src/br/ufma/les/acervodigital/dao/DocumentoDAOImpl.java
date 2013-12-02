@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 
 import br.ufma.les.acervodigital.database.Conexao;
 import br.ufma.les.acervodigital.dominio.Documento;
+import br.ufma.sgdu.database.DatabaseConnection;
 
 public class DocumentoDAOImpl implements DocumentoDAO{
 
@@ -33,14 +34,28 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 
 	@Override
 	public boolean deletarDocumento(Documento documento) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		PreparedStatement statement = Conexao.get().prepareStatement("DELETE FROM arquivo WHERE fk_documento = ?;");
+		statement.setInt(1, documento.getId());
+		statement.executeUpdate();
+		
+		statement = Conexao.get().prepareStatement("DELETE FROM documento WHERE id_documento = ?;");
+		statement.setInt(1, documento.getId());
+		statement.executeUpdate();
+		
+		return true;
 	}
 
 	@Override
 	public boolean atualizaDocumento(Documento documento) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		
+//			PreparedStatement statement =
+//				DatabaseConnection.get().prepareStatement("UPDATE documento SET titulo = ?, " +
+//						"descricao = ?, data_expedicao = ? WHERE id_doc = ?;");
+//			statement.setString(1, newTitle);
+//			statement.setString(2, newDesc);
+//			statement.setDate(3, new java.sql.Date( newExpDate.getTime() ));
+//			statement.setInt(4, idDoc);
+//			statement.executeUpdate();
 	}
 
 	
