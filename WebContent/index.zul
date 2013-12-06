@@ -14,33 +14,26 @@
                 <h:h3>
                     Buscar documentos
                 </h:h3>
-                <include sclass="pull-left" src="partials/right-header-search-bar.zul"/>
+                <!-- <include sclass="pull-left" src="partials/right-header-search-bar.zul"/> -->
                 <h:a href="admin/" class="btn btn-primary pull-right"><h:i class="icon-user"></h:i> Login</h:a>
             </h:div> 
             <h:div class="clearfix"></h:div>
         </h:div>
         <h:div class="content well well-content">
-            <h:form class="form-inline">
-		        <h:div class="input-prepend input-block-level">
-		            <h:span  class="add-on"><h:i class="icon-search"></h:i></h:span>
-		            <h:input id="prependedInput" type="text" name="buscar" placeholder="Digite aqui"/>
-		        </h:div>
-		        <h:div style="margin-top:5px;">
-		            <h:label class="checkbox" style="margin-right:5px">
-		              <h:input type="checkbox" name="titulo"/> Por título 
-		            </h:label>
-		            <h:label class="checkbox" style="margin-right:5px">
-		              <h:input type="checkbox" name="descricao"/> Por descrição 
-		            </h:label>
-		            <h:label class="checkbox" style="margin-right:5px">
-		              <h:input type="checkbox" name="conteudo"/> Por conteúdo 
-		            </h:label>
-		            <h:a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tags-modal" style="margin-right:5px"> + Adicionar Tags </h:a>
-		            <h:a type="submit" class="btn btn-large pull-right" style="margin-right:5px"><h:i class="icon-search"></h:i> Pesquisar </h:a>
-		        </h:div>
-		    </h:form>
+        	
+        	<div id="searchText">
+        		<textbox placeholder="Digite aqui" sclass="input-block-level" id="searchString" value="@bind(fs.searchString)" />
+        		<hbox sclass="form-inline">
+					<checkbox id="titleCheckBox" label="Por título"/>
+					<checkbox id="descCheckBox" label="Por descrição"/>
+					<checkbox id="contCheckBox" label="Por conteúdo"/>
+					<h:a href="#" class="btn btn-primary" data-toggle="modal" data-target="#tags-modal" style="margin-right:5px"> + Adicionar Tags </h:a>
+				</hbox>
+		        <button sclass="btn btn-large pull-right" id="searchButton"> Pesquisar </button>
+        	</div>
+        	<div class="clearfix"></div>
             
-            <h:div class="row">
+            <!-- <h:div class="row">
 	            <h:div class="span12">
 	                <h:h3>Titulo 1 <h:a href="#"><h:i class="icon-download-alt"></h:i></h:a></h:h3> 
 	                <h:p>
@@ -79,40 +72,42 @@
 	            <h:li><h:a href="#">Next</h:a></h:li>
 	          </h:ul>
 	        </h:div>
-	        <h:div class="clearfix"></h:div>
-	        <h:div id="tags-modal" class="modal hide fade">
-	        	<h:div class="modal-header">
-	        		<h:button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</h:button>
-	        		<h:h3>Adicionar Tag</h:h3>
-	        	</h:div>
-	        	<h:div class="modal-content">
-	        		<h:form class="form form-horizontal" style="margin-top:20px;">
-	        			<h:div class="control-group">
-		        			<h:label class="control-label">Nome da Tag</h:label>
-		        			<h:div class="controls">
-		        				<h:input type="text"/>
-		        			</h:div>
-	        			</h:div>
-	        			
-	        			<h:div class="control-group">
-		        			<h:label class="control-label">Valor</h:label>
-		        			<h:div class="controls">
-		        				<h:input type="text"/>
-		        			</h:div>
-	        			</h:div>
-	        		</h:form>
-	        	</h:div>
-	        	<h:div class="modal-footer">
-	        		<h:a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Fechar</h:a>
-	        		<h:a href="#" class="btn btn-primary">Salvar Tag</h:a>
-	        	</h:div>
-	        </h:div>
+	        <h:div class="clearfix"></h:div> -->
+	        
         </h:div>
 
         <h:hr />
 
         <h:div class="footer">
             SGDU © Todos os direitos reservados
+        </h:div>
+        
+        <h:div id="tags-modal" class="modal hide fade">
+        	<h:div class="modal-header">
+        		<h:button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</h:button>
+        		<h:h3>Adicionar Tag</h:h3>
+        	</h:div>
+        	<h:div class="modal-content">
+        		<h:form class="form form-horizontal" style="margin-top:20px;">
+        			<h:div class="control-group">
+	        			<h:label class="control-label">Nome da Tag</h:label>
+	        			<h:div class="controls">
+	        				<h:input type="text"/>
+	        			</h:div>
+        			</h:div>
+        			
+        			<h:div class="control-group">
+	        			<h:label class="control-label">Valor</h:label>
+	        			<h:div class="controls">
+	        				<h:input type="text"/>
+	        			</h:div>
+        			</h:div>
+        		</h:form>
+        	</h:div>
+        	<h:div class="modal-footer">
+        		<h:a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Fechar</h:a>
+        		<h:a href="#" class="btn btn-primary">Salvar Tag</h:a>
+        	</h:div>
         </h:div>
     </h:div>
     <script type="text/javascript" src="assets/js/jquery.js"></script>
