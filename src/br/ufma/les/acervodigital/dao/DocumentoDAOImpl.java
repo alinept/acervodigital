@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 
 import br.ufma.les.acervodigital.database.Conexao;
 import br.ufma.les.acervodigital.dominio.Documento;
-import br.ufma.sgdu.database.DatabaseConnection;
 
 public class DocumentoDAOImpl implements DocumentoDAO{
 
@@ -56,9 +55,12 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 //			statement.setDate(3, new java.sql.Date( newExpDate.getTime() ));
 //			statement.setInt(4, idDoc);
 //			statement.executeUpdate();
+		
+		return true;
 	}
 
 	
 	
 
 }
+

@@ -41,5 +41,8 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 				
 		return usuario;
 	}
-
+    
+	public void inserirUsuario(){
+		
+	}
 }
