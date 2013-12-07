@@ -63,5 +63,39 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		}
 	}
 	
+	public void alterarUsuario(Usuario usuario) throws Exception{
+		
+		String sql = "update usuario set login = ?, nome = ?, email = ?, senha = ?  where id = "
+				+ usuario.getId();
+		
+		try{
+			PreparedStatement statement = Conexao.get().prepareStatement(sql);
+			
+			statement.setString(1, usuario.getLogin());
+			statement.setString(2, usuario.getNome());
+			statement.setString(3, usuario.getEmail());
+			statement.setString(4, usuario.getSenha());
+			statement.executeUpdate();
+			statement.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
+	public void excluirUsuario(String idUsuario) throws Exception{
+		
+		String sql = "DELETE FROM usuario where id = "+ idUsuario;
+		
+		try{
+			PreparedStatement statement = Conexao.get().prepareStatement(sql);
+			
+			statement.executeUpdate();
+			statement.close();
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }
