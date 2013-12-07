@@ -42,7 +42,12 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		return usuario;
 	}
     
-	public void inserirUsuario(){
+	public void inserirUsuario(Usuario usuario){
+		
+		PreparedStatement statement = Conexao.get().prepareStatement(
+				"INSERT INTO " + "usuario(login,nome,email,senha) values ("
+						+ usuario.getLogin() + "," + usuario.getNome() + ","
+						+ usuario.getEmail() + "," + usuario.getSenha()+")" );
 		
 	}
 }
