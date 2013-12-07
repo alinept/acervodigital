@@ -43,7 +43,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		return usuario;
 	}
     
-	public void inserirUsuario(Usuario usuario){
+	public void inserirUsuario(Usuario usuario) throws Exception{
 		
 		try{
 		PreparedStatement statement = Conexao.get().prepareStatement(
@@ -51,6 +51,10 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 						+ usuario.getLogin() + "," + usuario.getNome() + ","
 						+ usuario.getEmail() + "," + usuario.getSenha()+")" );
 		
+		statement.setString(1, usuario.getLogin());
+		statement.setString(2, usuario.getNome());
+		statement.setString(3, usuario.getEmail());
+		statement.setString(4, usuario.getSenha());
 		statement.executeUpdate();
 		statement.close();
 		
@@ -58,4 +62,6 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			e.printStackTrace();
 		}
 	}
+	
+	
 }
