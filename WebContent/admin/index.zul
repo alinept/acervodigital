@@ -31,6 +31,34 @@
             SGDU © Todos os direitos reservados
         </h:div>
         
+        <h:div id="tags-modal" class="modal hide fade">
+        	<h:div class="modal-header">
+        		<h:button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</h:button>
+        		<h:h3>Adicionar Tag</h:h3>
+        	</h:div>
+        	<h:div class="modal-content">
+        		<h:form class="form form-horizontal" style="margin-top:20px;">
+        			<h:div class="control-group">
+	        			<h:label class="control-label">Nome da Tag</h:label>
+	        			<h:div class="controls">
+	        				<h:input type="text"/>
+	        			</h:div>
+        			</h:div>
+        			
+        			<h:div class="control-group">
+	        			<h:label class="control-label">Valor</h:label>
+	        			<h:div class="controls">
+	        				<h:input type="text"/>
+	        			</h:div>
+        			</h:div>
+        		</h:form>
+        	</h:div>
+        	<h:div class="modal-footer">
+        		<h:a href="#" class="btn" data-dismiss="modal" aria-hidden="true">Fechar</h:a>
+        		<h:a href="#" class="btn btn-primary">Salvar Tag</h:a>
+        	</h:div>
+        </h:div>
+        
     </h:div>
     <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../assets/js/application.js"></script>
