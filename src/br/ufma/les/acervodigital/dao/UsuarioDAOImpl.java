@@ -2,6 +2,7 @@ package br.ufma.les.acervodigital.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import br.ufma.les.acervodigital.database.Conexao;
 import br.ufma.les.acervodigital.dominio.TipoAcesso;
@@ -44,10 +45,17 @@ public class UsuarioDAOImpl implements UsuarioDAO{
     
 	public void inserirUsuario(Usuario usuario){
 		
+		try{
 		PreparedStatement statement = Conexao.get().prepareStatement(
 				"INSERT INTO " + "usuario(login,nome,email,senha) values ("
 						+ usuario.getLogin() + "," + usuario.getNome() + ","
 						+ usuario.getEmail() + "," + usuario.getSenha()+")" );
 		
+		statement.executeUpdate();
+		statement.close();
+		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }
