@@ -12,6 +12,11 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 
 	TipoAcessoDAO tipoAcessoDAO;
 	
+	public UsuarioDAOImpl()
+	{
+		tipoAcessoDAO = new TipoAcessoDAOImpl();
+	}
+	
 	@Override
 	public Usuario buscarUsuario(String login, String senha) throws Exception {
 		
@@ -43,13 +48,12 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		return usuario;
 	}
     
+	@Override
 	public void inserirUsuario(Usuario usuario) throws Exception{
 		
 		try{
 		PreparedStatement statement = Conexao.get().prepareStatement(
-				"INSERT INTO " + "usuario(login,nome,email,senha) values ("
-						+ usuario.getLogin() + "," + usuario.getNome() + ","
-						+ usuario.getEmail() + "," + usuario.getSenha()+")" );
+				"INSERT INTO " + "usuario(login,nome,email,senha) values (?,?,?,?)");
 		
 		statement.setString(1, usuario.getLogin());
 		statement.setString(2, usuario.getNome());
@@ -63,6 +67,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		}
 	}
 	
+	@Override
 	public void alterarUsuario(Usuario usuario) throws Exception{
 		
 		String sql = "update usuario set login = ?, nome = ?, email = ?, senha = ?  where id = "
@@ -83,9 +88,10 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		}
 	}
 	
-	public void excluirUsuario(String idUsuario) throws Exception{
+	@Override
+	public void excluirUsuario(Usuario usuario) throws Exception{
 		
-		String sql = "DELETE FROM usuario where id = "+ idUsuario;
+		String sql = "DELETE FROM usuario where id = "+ usuario.getId();
 		
 		try{
 			PreparedStatement statement = Conexao.get().prepareStatement(sql);

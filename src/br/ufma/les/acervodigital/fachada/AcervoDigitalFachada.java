@@ -1,5 +1,34 @@
 package br.ufma.les.acervodigital.fachada;
 
+import java.util.ArrayList;
+
+import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
+import br.ufma.les.acervodigital.dominio.Documento;
+import br.ufma.les.acervodigital.dominio.Tag;
+import br.ufma.les.acervodigital.dominio.TipoAcesso;
+import br.ufma.les.acervodigital.dominio.Usuario;
+
 public interface AcervoDigitalFachada {
-	//todas as funcoes do DAO aqui.
+	/*##################ArquivoDocumento###################*/
+	boolean inserirArquivo(ArquivoDocumento arquivo);
+	
+	/*##################Diretorio###################*/
+	
+	/*##################Documento###################*/
+	boolean inserirDocumento(Documento documento) throws Exception ;
+	boolean deletarDocumento(Documento documento) throws Exception ;
+	boolean atualizaDocumento(Documento documento) throws Exception ;
+
+	/*##################Tag###################*/
+	boolean salvarTags(ArrayList<Tag> tags) ;
+	
+	/*##################TipoAcesso###################*/
+	TipoAcesso findAcessoByCodigo(int codigo) throws Exception ;
+	
+	/*##################Usuario###################*/
+	Usuario buscarUsuario(String login, String senha) throws Exception ;
+	public void inserirUsuario(Usuario usuario) throws Exception ;
+	public void alterarUsuario(Usuario usuario) throws Exception ;
+	public void excluirUsuario(Usuario usuario) throws Exception ;
+	
 }

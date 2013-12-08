@@ -57,7 +57,7 @@ public class Conexao {
 	    File dbconn = new File("sgdu-dbconn.xml");
 		Document xml = null;
 		
-		if( !dbconn.isFile() ){
+		if(!dbconn.isFile() ){
 			throw new FileNotFoundException("Falta o arquivo de configuração\n" +
 					dbconn.getAbsolutePath() );
 		}
