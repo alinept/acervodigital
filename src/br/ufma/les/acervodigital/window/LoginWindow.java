@@ -1,6 +1,9 @@
 package br.ufma.les.acervodigital.window;
 
 import org.zkoss.zk.ui.ComponentNotFoundException;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Session;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.Label;
@@ -64,7 +67,8 @@ public class LoginWindow extends Window{
 		
 		if(usuario!=null)
 		{
-			((Label)getFellow("statusLabel")).setValue("Login feito");
+			Sessions.getCurrent().setAttribute("usuario", usuario);
+			Executions.sendRedirect("/index.zul");
 		}
 		
 		else{
