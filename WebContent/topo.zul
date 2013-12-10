@@ -62,6 +62,14 @@
 	</tablechildren>		   		
 </tablelayout>
 </groupbox>
+	<div align="left" width="80%">
+		<menubar>
+			<menu label="Meus dados" />
+			<menu label="Gerencias Contas" />
+			<menu label="Gerenciar Diretorios e Documentos" />
+			<menu label="Inserir Documento" />
+		</menubar>
+	</div>
 </div>
 	
 </window>
