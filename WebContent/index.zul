@@ -1,29 +1,34 @@
 <?page title="Acervo Digital - UFMA"?>
-<window border="none" id="win" use="br.ufma.les.acervodigital.window.IndexWindow">
+<?link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"?>
+<?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
+<window border="none" id="win"
+	use="br.ufma.les.acervodigital.window.IndexWindow">
 
-<zk xmlns:h="http://www.w3.org/1999/xhtml">
-	<style src="/css/style.css"/>
-	
-	<div>
-		<include src="/topo.zul"/>
-	</div>
-	<separator height="40px"></separator>
-	<div align="center" sclass="mo_footer" width="60%">
-		<vbox>
-			<separator height="10px"/>
-			<textbox width="430px" style="font-size:14px" id="textboxSearch"/>
-			
-			<div align="center">
-				<button label="Pesquisar" width="200px" height="28px" style="font-size: 14px" onClick="winSearch.searchDocument()"/>
+	<zk xmlns:h="http://www.w3.org/1999/xhtml">
+		<div class="container">
+			<div>
+				<include src="/topo.zul" />
 			</div>
-		</vbox>
-	
-		
-	</div>
-		<vbox align="center">
-			<separator height="15px"/>
-			<label value="Universidade Federal do Maranhão" style="font-size:10px; font-weight: bold"/>
-			
-		</vbox>
-</zk>
+			<separator height="40px"></separator>
+			<div sclass="mo_footer" width="80%">
+				<div>
+					<textbox sclass="input-block-level"
+						style="font-size:14px" id="textboxSearch" />
+				</div>
+				<div>
+					<button label="Pesquisar" width="200px"
+						height="28px" style="font-size: 14px"
+						onClick="winSearch.searchDocument()" />
+				</div>
+
+
+			</div>
+			<vbox align="center">
+				<separator height="15px" />
+				<label value="Universidade Federal do Maranhão"
+					style="font-size:10px; font-weight: bold" />
+
+			</vbox>
+		</div>
+	</zk>
 </window>

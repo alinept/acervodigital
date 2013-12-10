@@ -13,4 +13,10 @@
 		<name>org.zkoss.zkmax.tablet.ui.disabled</name>
 		<value>true</value>
 	</library-property>
+	<!--
+	Disable theme css. 
+	-->
+	<desktop-config>
+	    <disable-theme-uri>~./zul/css/zk.wcs</disable-theme-uri>
+	</desktop-config>
 </zk>

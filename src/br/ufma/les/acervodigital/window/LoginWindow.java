@@ -69,9 +69,7 @@ public class LoginWindow extends Window{
 		{
 			Sessions.getCurrent().setAttribute("usuario", usuario);
 			Executions.sendRedirect("/index.zul");
-		}
-		
-		else{
+		} else{
 			((Label)getFellow("statusLabel")).setValue("Login ou senha incorretos");
 		}
 	}

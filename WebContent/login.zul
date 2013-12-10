@@ -1,47 +1,58 @@
 <?page title="Acervo UFMA - Login" contentType="text/html;charset=UTF-8"?>
+<?link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"?>
+<?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
+
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
-<window border="none" id="win" use="br.ufma.les.acervodigital.window.LoginWindow">
-<div align="center">
-	<separator height="50px"/>
-	<groupbox width="500px" height="380px" id="groupbox">
-		<div width="300px">
-		<h:a href="index.zul" style="color:black; text-decoration:none">
-			<label value="Acervo Digital" style="font-size:23px; font-weight: bold; font-style:italic; align: center; text-shadow:4px 4px 3px #c9a859"/>
-		</h:a>
-		</div>
-		<div height="10px"/>
-		<vbox align="center">
-			<h:a href="http://www.ufma.br">
-				<image src="images/logoufma.png" width="125px" height="125px"/>
-			</h:a>
-			<div width="300px" align="center">
-				<label value="Login Usuário" style="font-size:18px; color:gray; font-weight: bold; font-style:italic" />
-			</div>
-		</vbox>
-		<separator height="25px"/>
-		<vbox align="center">
-			<hbox>
-				<space width="2px"/>
-				<label value="Login:" style="color:gray; font-size: 12px"/>
-				<textbox style="font-size: 12px" id="textboxUsername"/>
-			</hbox>
-			<hbox>
-				<label value="Senha:" style="color:gray; font-size: 12px"/>
-				<textbox type="password" style="font-size: 12px" id="textboxPassword"/>
-			</hbox>
-			<div height="2px"/>
-				<div align="center">
-					<button label="Entrar" width="75px" style="font-size:14px" onClick="win.realizarLogin()"/>
+	<window border="none" id="win"
+		use="br.ufma.les.acervodigital.window.LoginWindow">
+
+		<div sclass="container">
+			<separator height="50px" />
+			<groupbox sclass="well" id="groupbox">
+				<div style="text-align:center;">
+					<h:a href="index.zul"
+						style="text-align:center; color:black; text-decoration:none">
+						<label value="Acervo Digital"
+							style="font-size:23px; font-weight: bold; font-style:italic; align: center; text-shadow:4px 4px 3px #c9a859" />
+					</h:a>
 				</div>
-		</vbox>
-		<separator height="5px"/>
-		<label value="" style="font-size:12px; font-weight: bold; color:red" id="statusLabel"/>
-		<separator height="20px"/>
-		<vbox align="center">
-			<label value="Universidade Federal do Maranhão" style="font-size:10px; font-weight: bold"/>
-			<label value="Developers: equipe LES" style="font-size:10px; font-style:italic"/>
-		</vbox>
-	</groupbox>
-</div>
-</window>
+				<div height="10px" />
+				<vbox style="margin:0 auto;">
+					<h:a href="http://www.ufma.br">
+						<image src="images/logoufma.png" width="125px"
+							height="125px" />
+					</h:a>
+				</vbox>
+				<div class="form-signin">
+					<space height="5px;"></space>
+					<h:h4>Login</h:h4>
+					<textbox sclass="input-block-level"
+						placeholder="Login" id="textboxUsername" />
+					<h:h4>Senha</h:h4>
+					<textbox sclass="input-block-level"
+						placeholder="Senha" id="textboxPassword" />
+					<h:a href="#" class="pull-right">Nova conta</h:a>
+
+					<button sclass="btn btn-large btn-primary"
+						label="Entrar" onClick="win.realizarLogin()" />
+				</div>
+
+
+				<separator height="5px" />
+				<label value=""
+					style="font-size:12px; font-weight: bold; color:red"
+					id="statusLabel" />
+				<separator height="20px" />
+				<div style="text-align:center;">
+					<label value="Universidade Federal do Maranhão"
+						style="font-size:10px; font-weight: bold" />
+						<h:br/>
+					<label value="Developers: equipe LES"
+						style="font-size:10px; font-style:italic" />
+				</div>
+			</groupbox>
+
+
+		</div>
+	</window>
 </zk>
