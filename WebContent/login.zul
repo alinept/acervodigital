@@ -1,5 +1,6 @@
 <?page title="Acervo UFMA - Login" contentType="text/html;charset=UTF-8"?>
 <?link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"?>
+<?link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"?>
 <?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
 
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
@@ -8,7 +9,7 @@
 
 		<div sclass="container">
 			<separator height="50px" />
-			<groupbox sclass="well" id="groupbox">
+			<div sclass="well" id="groupbox">
 				<div style="text-align:center;">
 					<h:a href="index.zul"
 						style="text-align:center; color:black; text-decoration:none">
@@ -30,7 +31,7 @@
 						placeholder="Login" id="textboxUsername" />
 					<h:h4>Senha</h:h4>
 					<textbox sclass="input-block-level"
-						placeholder="Senha" id="textboxPassword" />
+						placeholder="Senha" type="password" id="textboxPassword" />
 					<h:a href="#" class="pull-right">Nova conta</h:a>
 
 					<button sclass="btn btn-large btn-primary"
@@ -50,7 +51,7 @@
 					<label value="Developers: equipe LES"
 						style="font-size:10px; font-style:italic" />
 				</div>
-			</groupbox>
+			</div>
 
 
 		</div>

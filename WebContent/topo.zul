@@ -1,76 +1,89 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
 <zk>
-<window title="" id="win" border="none" use="br.ufma.les.acervodigital.window.TopoWindow">
-<div align="center">
-<groupbox width="80%">
-<separator height="15px"/>
-<tablelayout columns="4" width="780px">
-	<tablechildren width="75px">
-		<panel>
-			<panelchildren>
-				<hbox>
-					<separator width="20px"/>
-					<image src="images/logoufma.png" width="80px" height="80px"/>
-				</hbox>
-			</panelchildren>
-		</panel>
-	</tablechildren>
-	
-	<tablechildren width="400px">
-		<panel>
-			<panelchildren>
-			<hbox>
-				<separator width="10px"/>
-				<vbox>
-					<separator />
-					<label value="Universidade Federal do Maranhão"
-					style="font-size:17px;font-weight: bold; text-shadow:3px 3px 2px #c9a859"/>
-					<label value="Acervo Digital"
-					style="font-size:18px; color:gray; font-weight: bold;"/>
-				</vbox>	
-			</hbox>
-			</panelchildren>
-		</panel>
-	</tablechildren>
-	
-	<tablechildren>
-		<panel>
-			<panelchildren>
-			  <div align="right">
-			  <separator/>
-			  <vbox>	
-				<hbox>
-				    <image src="images/user.png"/>
-<!-- 				    <label value="" style="font-weight:bold; color:gray;" id="admTypeLabel"/> -->
-					<label value="@{win.usuario.nome}" style="font-weight:bold; color:gray;"/>	
-				</hbox>
-				<div align="right">
-					<button label="Sair" onClick="win.logout()"/>
-			   	</div>
-			  </vbox>
-			  </div>
-			</panelchildren>
-		</panel>
-	</tablechildren>
-	
-	<tablechildren width="20px">
-		<panel>
-			<panelchildren>
-				<separator height="50px" width="10px"/>			
-			</panelchildren>
-		</panel>
-	</tablechildren>		   		
-</tablelayout>
-</groupbox>
-	<div align="left" width="80%">
-		<menubar>
-			<menu label="Meus dados" />
-			<menu label="Gerencias Contas" />
-			<menu label="Gerenciar Diretorios e Documentos" />
-			<menu label="Inserir Documento" />
-		</menubar>
-	</div>
-</div>
-	
-</window>
+	<window title="" id="win" border="none"
+		use="br.ufma.les.acervodigital.window.TopoWindow">
+		<div align="center">
+			<groupbox width="100%">
+				<separator height="15px" />
+				<tablelayout columns="4" width="780px">
+					<tablechildren width="75px">
+						<panel>
+							<panelchildren>
+								<hbox>
+									<separator width="20px" />
+									<image src="images/logoufma.png"
+										width="80px" height="80px" />
+								</hbox>
+							</panelchildren>
+						</panel>
+					</tablechildren>
+
+					<tablechildren width="400px">
+						<panel>
+							<panelchildren>
+								<hbox>
+									<separator width="10px" />
+									<vbox>
+										<separator />
+										<label
+											value="Universidade Federal do Maranhão"
+											style="font-size:17px;font-weight: bold; text-shadow:3px 3px 2px #c9a859" />
+										<label value="Acervo Digital"
+											style="font-size:18px; color:gray; font-weight: bold;" />
+									</vbox>
+								</hbox>
+							</panelchildren>
+						</panel>
+					</tablechildren>
+
+					<tablechildren>
+						<panel>
+							<panelchildren>
+								<div align="right">
+									<separator />
+									<vbox>
+										<hbox>
+											<image
+												src="images/user.png" />
+											<!-- 				    <label value="" style="font-weight:bold; color:gray;" id="admTypeLabel"/> -->
+											<label
+												value="@{win.usuario.nome}"
+												style="font-weight:bold; color:gray;" />
+										</hbox>
+										<div align="right">
+											<button label="Sair"
+												onClick="win.logout()" />
+										</div>
+									</vbox>
+								</div>
+							</panelchildren>
+						</panel>
+					</tablechildren>
+
+					<tablechildren width="20px">
+						<panel>
+							<panelchildren>
+								<separator height="50px" width="10px" />
+							</panelchildren>
+						</panel>
+					</tablechildren>
+				</tablelayout>
+			</groupbox>
+			<div align="left">
+				<menubar>
+					<menu sclass="btn" label="Meus dados" />
+					<menu sclass="btn" label="Gerencias Contas" />
+					<menu sclass="btn"
+						label="Gerenciar Diretorios e Documentos" />
+					<menu sclass="btn" label="teste">
+						<menupopup>
+							<menuitem label="teste" />
+							<menuitem label="teste2" />
+						</menupopup>
+					</menu>
+				</menubar>
+			</div>
+		</div>
+
+	</window>
 </zk>
