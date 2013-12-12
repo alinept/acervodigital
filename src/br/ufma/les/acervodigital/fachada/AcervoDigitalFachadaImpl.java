@@ -1,6 +1,7 @@
 package br.ufma.les.acervodigital.fachada;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import br.ufma.les.acervodigital.dao.ArquivoDocumentoDAO;
 import br.ufma.les.acervodigital.dao.ArquivoDocumentoDAOImpl;
@@ -93,6 +94,18 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 		
 		usuarioDAO.excluirUsuario(usuario);
 		
+	}
+
+	@Override
+	public List<Documento> buscarDocumento(String busca, ArrayList<Tag> tags,
+			boolean porTitulo, boolean porDescricao, boolean porConteudo)
+			throws Exception {
+		return documentoDAO.buscar(busca, tags, porTitulo, porDescricao, porConteudo);
+	}
+
+	@Override
+	public List<ArquivoDocumento> getDocumentFiles(int idDoc) throws Exception {
+		return arquivoDocumentoDAO.getDocumentFiles(idDoc);
 	}
 	
 

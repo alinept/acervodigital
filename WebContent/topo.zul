@@ -1,68 +1,52 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
-<zk>
-<window title="" id="win" border="none" use="br.ufma.les.acervodigital.window.TopoWindow">
-<div align="center">
-<groupbox width="80%">
-<separator height="15px"/>
-<tablelayout columns="4" width="780px">
-	<tablechildren width="75px">
-		<panel>
-			<panelchildren>
-				<hbox>
-					<separator width="20px"/>
-					<image src="images/logoufma.png" width="80px" height="80px"/>
-				</hbox>
-			</panelchildren>
-		</panel>
-	</tablechildren>
-	
-	<tablechildren width="400px">
-		<panel>
-			<panelchildren>
-			<hbox>
-				<separator width="10px"/>
-				<vbox>
-					<separator />
-					<label value="Universidade Federal do Maranhão"
-					style="font-size:17px;font-weight: bold; text-shadow:3px 3px 2px #c9a859"/>
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+	<window title="" id="win" border="none"
+		use="br.ufma.les.acervodigital.window.TopoWindow">
+		<div>
+			
+			<div class="page-header" style="margin-bottom:0px;">
+				<div class="pull-left">
+					<image width="60%" src="images/logoufma.png" />
+				</div>
+				<div class="pull-left">
+					<label
+						value="Universidade Federal do Maranhão"
+						style="font-size:17px;font-weight: bold; text-shadow:3px 3px 2px #c9a859" />
+					<div class="clearfix"></div>
 					<label value="Acervo Digital"
-					style="font-size:18px; color:gray; font-weight: bold;"/>
-				</vbox>	
-			</hbox>
-			</panelchildren>
-		</panel>
-	</tablechildren>
-	
-	<tablechildren>
-		<panel>
-			<panelchildren>
-			  <div align="right">
-			  <separator/>
-			  <vbox>	
-				<hbox>
-				    <image src="images/user.png"/>
-<!-- 				    <label value="" style="font-weight:bold; color:gray;" id="admTypeLabel"/> -->
-					<label value="@{win.usuario.nome}" style="font-weight:bold; color:gray;"/>	
-				</hbox>
-				<div align="right">
-					<button label="Sair" onClick="win.logout()"/>
-			   	</div>
-			  </vbox>
-			  </div>
-			</panelchildren>
-		</panel>
-	</tablechildren>
-	
-	<tablechildren width="20px">
-		<panel>
-			<panelchildren>
-				<separator height="50px" width="10px"/>			
-			</panelchildren>
-		</panel>
-	</tablechildren>		   		
-</tablelayout>
-</groupbox>
-</div>
-	
-</window>
+						style="font-size:18px; color:gray; font-weight: bold;" />
+				</div>
+				
+				<div class="pull-right">
+					<hbox>
+						<image
+							src="images/user.png" />
+						<!-- 				    <label value="" style="font-weight:bold; color:gray;" id="admTypeLabel"/> -->
+						<label
+							value="@{win.usuario.nome}"
+							style="font-weight:bold; color:gray;" />
+					</hbox>
+					<div align="right">
+						<button zclass="btn btn-danger" label="Sair"
+							onClick="win.logout()" />
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+
+			<menubar>
+				<menu label="Meus dados" />
+				<menu label="Gerencias Contas" />
+				<menu 
+					label="Gerenciar Diretorios e Documentos" />
+				<menu label="teste">
+					<menupopup>
+						<menuitem label="teste" />
+						<menuitem label="teste2" />
+					</menupopup>
+				</menu>
+			</menubar>
+		</div>
+
+	</window>
 </zk>
