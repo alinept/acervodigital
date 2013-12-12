@@ -12,6 +12,7 @@ import br.ufma.les.acervodigital.dominio.Usuario;
 public interface AcervoDigitalFachada {
 	/*##################ArquivoDocumento###################*/
 	boolean inserirArquivo(ArquivoDocumento arquivo);
+	List<ArquivoDocumento> getDocumentFiles(int idDoc) throws Exception;
 	
 	/*##################Diretorio###################*/
 	

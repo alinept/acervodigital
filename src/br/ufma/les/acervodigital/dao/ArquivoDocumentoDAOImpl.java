@@ -47,15 +47,21 @@ public class ArquivoDocumentoDAOImpl implements ArquivoDocumentoDAO{
 		ArrayList<ArquivoDocumento> r = new ArrayList<ArquivoDocumento>();
 		
 		PreparedStatement statement = Conexao.get().prepareStatement("SELECT " +
-				"* FROM arquivo WHERE fk_documento = ? ORDER BY indice ASC;");
+				"* FROM arquivo WHERE fk_documento = ? ORDER BY id_arquivo ASC;");
 		statement.setInt(1, idDoc);
 		
 		ResultSet resultSet = statement.executeQuery();
+		
 		while( resultSet.next() ){
-			String filename = resultSet.getString(1);
-			byte [] byteStream = resultSet.getBytes(2);
+			ArquivoDocumento a = new ArquivoDocumento();
 			
-			r.add( new DocumentFile(filename, byteStream) );
+			String filename = resultSet.getString("nome");
+			byte [] byteStream = resultSet.getBytes("dados");
+			
+			a.setByteStream(byteStream);
+			a.setNomeArquivo(filename);
+			
+			r.add(a);
 		}
 		return r;
 	}

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
@@ -150,57 +151,20 @@ public class ResultadoBuscaWindow extends IndexWindow {
 		public void onEvent(Event arg0) throws Exception {
 			
 			
-			List<ArquivoDocumento> files = acervoDigitalFachada. 
+			List<ArquivoDocumento> files = acervoDigitalFachada.getDocumentFiles(docs.get(index).getId()); 
 					
-			researcher.getDocumentFiles( docResearch.get(index).getId() );
-			
 			if( files.isEmpty() ) return;
 			
-			String filename = files.get(0).getFilename();
-			if( FileSupportVerificator.isHTMLType(filename) ){
-				Executions.getCurrent().getDesktop().getSession().setAttribute("htmlSource",
-						new String( files.get(0).getByteStream() ));
-				Executions.sendRedirect("/html_viewer.zul");
-			}
-			else if( FileSupportVerificator.isPDFType(filename) ){
-				Executions.getCurrent().getDesktop().getSession().setAttribute("pdfFile",
-						new AMedia(files.get(0).getFilename(), ".pdf", "application/pdf",
+			String filename = files.get(0).getNomeArquivo();
+			
+			//if( FileSupportVerificator.isPDFType(filename) ){
+				Sessions.getCurrent().setAttribute("pdfFile",
+						new AMedia(files.get(0).getNomeArquivo(), ".pdf", "application/pdf",
 								files.get(0).getByteStream()) );	
-				Executions.sendRedirect("/pdf_viewer.zul");
-			}
-			else if( FileSupportVerificator.isDOCType(filename) ||
-					FileSupportVerificator.isDOCXType(filename)){
-				(new Download(index)).onEvent(arg0);
-			}
-			else if( FileSupportVerificator.isImageValid(filename) ){
-				ArrayList<AMedia> imageArray = new ArrayList<AMedia>();
-				Iterator<DocumentFile> ite = files.iterator();
-				DocumentFile docCur;
-				while( ite.hasNext() ){
-					docCur = ite.next();
-					if( FileSupportVerificator.isJPEGType(docCur.getFilename()) ){
-						imageArray.add( new AMedia(docCur.getFilename(), ".jpg", "image/jpeg",
-								docCur.getByteStream() ));
-					}
-					else if( FileSupportVerificator.isPNGType(docCur.getFilename()) ){
-						imageArray.add( new AMedia(docCur.getFilename(), ".png", "image/png",
-								docCur.getByteStream() ));
-					}
-					else if( FileSupportVerificator.isGIFType(docCur.getFilename()) ){
-						imageArray.add( new AMedia(docCur.getFilename(), ".gif", "image/gif",
-								docCur.getByteStream() ));
-					}
-					else if( FileSupportVerificator.isBMPType(docCur.getFilename()) ){
-						imageArray.add( new AMedia(docCur.getFilename(), ".bmp", "image/bmp",
-								docCur.getByteStream() ));
-					}
-				}
-				Executions.getCurrent().getDesktop().getSession().setAttribute("imageArray",
-						imageArray);
-				Executions.getCurrent().getDesktop().getSession().setAttribute("goBackURLImageViewer",
-						"/search_results.zul");
-				Executions.sendRedirect("/image_viewer.zul");
-			}
+				Executions.sendRedirect("/viewPdf.zul");
+			//}
+		
+				
 		}
 	}
 	
@@ -213,28 +177,14 @@ public class ResultadoBuscaWindow extends IndexWindow {
 
 		@Override
 		public void onEvent(Event arg0) throws Exception {
-			DbDocResearcher researcher = new DbDocResearcher();
-			ArrayList<DocumentFile> files = researcher.getDocumentFiles( docResearch.get(index).getId() );
+			
+			List<ArquivoDocumento> files = acervoDigitalFachada.getDocumentFiles(docs.get(index).getId()); 
 			if( files.isEmpty() ) return;
 			
-			String filename = files.get(0).getFilename();
-			if( FileSupportVerificator.isPDFType(filename) ){
-				Filedownload.save(files.get(0).getByteStream(), "application/pdf", 
-						files.get(0).getFilename() );
+			String filename = files.get(0).getNomeArquivo();
+			
+			Filedownload.save(files.get(0).getByteStream(), "application/pdf", 
+						files.get(0).getNomeArquivo());
 			}
-			else if( FileSupportVerificator.isDOCType(filename)){
-				Filedownload.save(files.get(0).getByteStream(), "application/msword", 
-						files.get(0).getFilename() );
-			}
-			else if( FileSupportVerificator.isDOCXType(filename) ){
-				Filedownload.save(files.get(0).getByteStream(),
-				"application/vnd.openxmlformats-officedocument.wordprocessingml.document", 
-				files.get(0).getFilename() );
-			}
-			else if( FileSupportVerificator.isHTMLType(filename) ){
-				Filedownload.save(files.get(0).getByteStream(), "text/html", 
-						files.get(0).getFilename() );
-			}
-		}
 	}
 }
