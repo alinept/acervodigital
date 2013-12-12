@@ -37,8 +37,6 @@
 					<button sclass="btn btn-large btn-primary"
 						label="Entrar" onClick="win.realizarLogin()" />
 				</div>
-
-
 				<separator height="5px" />
 				<label value=""
 					style="font-size:12px; font-weight: bold; color:red"
@@ -52,8 +50,6 @@
 						style="font-size:10px; font-style:italic" />
 				</div>
 			</div>
-
-
 		</div>
 	</window>
 </zk>
