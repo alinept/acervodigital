@@ -32,7 +32,7 @@ public class TopoWindow extends Window{
         
         if(usuario == null)
         {
-        	Messagebox.show("Faça login");
+        	Messagebox.show("Faca login");
         	Executions.sendRedirect("/login.zul");
         }
     }
