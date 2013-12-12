@@ -5,7 +5,7 @@
 
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
 	<window border="none" id="win"
-		use="br.ufma.les.acervodigital.window.LoginWindow">
+		use="br.ufma.les.acervodigital.window.LoginWindow" onOK="win.realizarLogin()">
 
 		<div sclass="container">
 			<separator height="50px" />

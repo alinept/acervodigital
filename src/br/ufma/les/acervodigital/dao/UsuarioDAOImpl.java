@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.ufma.les.acervodigital.database.Conexao;
+import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.dominio.TipoAcesso;
 import br.ufma.les.acervodigital.dominio.Usuario;
 
@@ -103,5 +104,35 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public Usuario findByCodigo(int codigo) throws Exception {
+		Usuario usuario = new Usuario();
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+				"usuario WHERE id_usuario = ? ");
+		statement.setInt(1, codigo);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		if (resultSet.next()) {
+			
+			usuario.setEmail(resultSet.getString("email"));
+			usuario.setId(resultSet.getInt("id_usuario"));
+			usuario.setLogin(resultSet.getString("login"));
+			usuario.setNome(resultSet.getString("nome"));
+			usuario.setSenha(resultSet.getString("senha"));
+
+			TipoAcesso tipoAcesso = new TipoAcesso();
+			int codigoAcesso = resultSet.getInt("fk_perfil");
+			tipoAcesso = tipoAcessoDAO.findByCodigo(codigoAcesso);
+			
+			usuario.setTipoAcesso(tipoAcesso);
+			
+			
+		}		
+				
+		return usuario;
 	}
 }

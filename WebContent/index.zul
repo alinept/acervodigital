@@ -10,17 +10,33 @@
 				<include src="/topo.zul" />
 			</div>
 			<separator height="40px"></separator>
-			<div sclass="mo_footer" width="80%">
-				<div>
-					<textbox sclass="input-block-level"
-						style="font-size:14px" id="textboxSearch" />
-				</div>
-				<div>
-					<button label="Pesquisar" width="200px"
-						height="28px" style="font-size: 14px"
-						onClick="winSearch.searchDocument()" />
-				</div>
+			
+			
+			<div sclass="mo_footer" width="80%" align="center">
+				<hbox>
+					<label value="Pesquise no acervo:" style="font-weight: bold"/>
+					<vbox>
+						<div>
+							<textbox sclass="input-block-level"
+								style="font-size:14px" value="@{win.stringBusca}" width="300px" />
+						</div>
+						<div>
+							<checkbox label="Por Título" checked="true"
+								id="checkboxTitulo" />
+							<checkbox label="Por Descrição"
+								checked="true" id="checkboxDescricao" />
+							<checkbox label="Por Conteúdo"
+								checked="false" id="checkboxConteudo" />
+							<space width="25px" />
 
+						</div>
+					</vbox>
+					<div>
+						<button label="Pesquisar" width="200px"
+							height="28px" style="font-size: 14px"
+							onClick="win.buscarDocumento()" />
+					</div>
+				</hbox>
 
 			</div>
 			<vbox align="center">

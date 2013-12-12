@@ -8,5 +8,7 @@ public interface UsuarioDAO {
 	public void inserirUsuario(Usuario usuario) throws Exception;
 	public void alterarUsuario(Usuario usuario) throws Exception;
 	public void excluirUsuario(Usuario usuario) throws Exception;
+	
+	Usuario findByCodigo(int codigo) throws Exception;
 
 }
