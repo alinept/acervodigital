@@ -5,22 +5,19 @@
 	use="br.ufma.les.acervodigital.window.IndexWindow">
 
 	<zk xmlns:h="http://www.w3.org/1999/xhtml">
+		
 		<div class="container">
 			<div>
 				<include src="/topo.zul" />
 			</div>
-			<separator height="40px"></separator>
-			
-			
-			<div sclass="mo_footer" width="80%" align="center">
-				<hbox>
-					<label value="Pesquise no acervo:" style="font-weight: bold"/>
-					<vbox>
+			<div class="well well-small well-content">
+				<div>
+					<h:h3>Pesquise no acervo</h:h3>
+					
 						<div>
-							<textbox sclass="input-block-level"
-								style="font-size:14px" value="@{win.stringBusca}" width="300px" />
+							<textbox zclass="input-block-level" value="@{win.stringBusca}" placeholder="" />
 						</div>
-						<div>
+						<div class="form-inline pull-left">
 							<checkbox label="Por Título" checked="true"
 								id="checkboxTitulo" />
 							<checkbox label="Por Descrição"
@@ -30,21 +27,17 @@
 							<space width="25px" />
 
 						</div>
-					</vbox>
 					<div>
-						<button label="Pesquisar" width="200px"
-							height="28px" style="font-size: 14px"
+						<button zclass="btn btn-large btn-primary pull-right" label="Pesquisar"
 							onClick="win.buscarDocumento()" />
+						<div class="clearfix"></div>
 					</div>
-				</hbox>
-
+				</div>
 			</div>
-			<vbox align="center">
-				<separator height="15px" />
-				<label value="Universidade Federal do Maranhão"
-					style="font-size:10px; font-weight: bold" />
-
-			</vbox>
+			<h:br/>
+			<div class="footer">
+				<label value="SGDU @ Universidade Federal do Maranhão" />
+			</div>
 		</div>
 	</zk>
 </window>

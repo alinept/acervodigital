@@ -9,7 +9,7 @@
 
 		<div sclass="container">
 			<separator height="50px" />
-			<div sclass="well" id="groupbox">
+			<div id="groupbox">
 				<div style="text-align:center;">
 					<h:a href="index.zul"
 						style="text-align:center; color:black; text-decoration:none">
@@ -20,12 +20,14 @@
 				<div height="10px" />
 				<vbox style="margin:0 auto;">
 					<h:a href="http://www.ufma.br">
-						<image src="images/logoufma.png" width="125px"
-							height="125px" />
+						<image src="images/logoufma.png" />
 					</h:a>
 				</vbox>
-				<div class="form-signin">
-					<space height="5px;"></space>
+				<div class="form-signin" style="margin-top:5px;">
+					
+					<label zclass="label label-important" style="margin-top:5px;" value=""
+						id="statusLabel" />
+					
 					<h:h4>Login</h:h4>
 					<textbox sclass="input-block-level"
 						placeholder="Login" id="textboxUsername" />
@@ -36,19 +38,20 @@
 
 					<button sclass="btn btn-large btn-primary"
 						label="Entrar" onClick="win.realizarLogin()" />
+					
+					
+					
 				</div>
 				<separator height="5px" />
-				<label value=""
-					style="font-size:12px; font-weight: bold; color:red"
-					id="statusLabel" />
-				<separator height="20px" />
-				<div style="text-align:center;">
-					<label value="Universidade Federal do Maranhão"
-						style="font-size:10px; font-weight: bold" />
-						<h:br/>
-					<label value="Developers: equipe LES"
-						style="font-size:10px; font-style:italic" />
-				</div>
+				
+				
+			</div>
+			<div style="text-align:center;">
+				<label value="Universidade Federal do Maranhão"
+					style="font-size:10px; font-weight: bold" />
+					<h:br/>
+				<label value="Developers: equipe LES"
+					style="font-size:10px; font-style:italic" />
 			</div>
 		</div>
 	</window>
