@@ -1,7 +1,10 @@
 package br.ufma.les.acervodigital.dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.ufma.les.acervodigital.database.Conexao;
 import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
@@ -38,6 +41,23 @@ public class ArquivoDocumentoDAOImpl implements ArquivoDocumentoDAO{
 
 		return false;
 
+	}
+	
+	public List<ArquivoDocumento> getDocumentFiles(int idDoc) throws Exception{
+		ArrayList<ArquivoDocumento> r = new ArrayList<ArquivoDocumento>();
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT " +
+				"* FROM arquivo WHERE fk_documento = ? ORDER BY indice ASC;");
+		statement.setInt(1, idDoc);
+		
+		ResultSet resultSet = statement.executeQuery();
+		while( resultSet.next() ){
+			String filename = resultSet.getString(1);
+			byte [] byteStream = resultSet.getBytes(2);
+			
+			r.add( new DocumentFile(filename, byteStream) );
+		}
+		return r;
 	}
 
 }

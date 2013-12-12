@@ -14,6 +14,8 @@ public class Documento {
       private String conteudo;
       private Diretorio diretorio;
       
+      private String titulo;
+      private String descricao;
       
 	public int getId() {
 		return id;
@@ -57,6 +59,18 @@ public class Documento {
 	}
 	public void setDiretorio(Diretorio diretorio) {
 		this.diretorio = diretorio;
+	}
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}        
      
 	
