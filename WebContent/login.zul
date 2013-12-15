@@ -23,6 +23,7 @@
 						<image src="images/logoufma.png" />
 					</h:a>
 				</vbox>
+				<separator height="20px"/>
 				<div class="form-signin" style="margin-top:5px;">
 					
 					<label zclass="label label-important" style="margin-top:5px;" value=""
@@ -34,12 +35,16 @@
 					<h:h4>Senha</h:h4>
 					<textbox sclass="input-block-level"
 						placeholder="Senha" type="password" id="textboxPassword" />
-					<h:a href="#" class="pull-right">Nova conta</h:a>
-
-					<button sclass="btn btn-large btn-primary"
-						label="Entrar" onClick="win.realizarLogin()" />
 					
-					
+					<hbox>
+						
+						<button sclass="btn btn-large btn-primary"
+								label="Entrar" onClick="win.realizarLogin()" />
+						
+						<div align="right">
+							<a label="Nova Conta" onClick="win.irNovoUsuario()"/>
+						</div>
+					</hbox>
 					
 				</div>
 				<separator height="5px" />

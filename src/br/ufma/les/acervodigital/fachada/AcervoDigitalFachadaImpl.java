@@ -107,6 +107,16 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 	public List<ArquivoDocumento> getDocumentFiles(int idDoc) throws Exception {
 		return arquivoDocumentoDAO.getDocumentFiles(idDoc);
 	}
+
+	@Override
+	public Documento findDocumentoByNome(String nome) throws Exception {
+		return documentoDAO.findByNome(nome);
+	}
+
+	@Override
+	public List<Tag> findAllTags() throws Exception {
+		return tagDAO.findAll();
+	}
 	
 
 }

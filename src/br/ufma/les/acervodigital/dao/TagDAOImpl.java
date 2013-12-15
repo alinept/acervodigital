@@ -1,7 +1,13 @@
 package br.ufma.les.acervodigital.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
+
+import br.ufma.les.acervodigital.database.Conexao;
 import br.ufma.les.acervodigital.dominio.Tag;
+import br.ufma.les.acervodigital.dominio.TipoAcesso;
 
 public class TagDAOImpl implements TagDAO{
 
@@ -29,6 +35,30 @@ public class TagDAOImpl implements TagDAO{
 //		}
 		
 		return false;
+	}
+
+	@Override
+	public List<Tag> findAll() throws Exception{
+		
+		List<Tag> tags = new ArrayList<Tag>();
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+				"tag ");
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		while(resultSet.next()) {
+			
+			Tag tag = new Tag();
+			tag.setDescricao(resultSet.getString("descricao"));
+			tag.setNome(resultSet.getString("nome"));
+			tag.setId(resultSet.getInt("id_tag"));
+			
+			tags.add(tag);
+			
+		}		
+				
+		return tags;
 	}
 
 }

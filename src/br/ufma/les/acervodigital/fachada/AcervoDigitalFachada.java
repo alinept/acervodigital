@@ -20,10 +20,13 @@ public interface AcervoDigitalFachada {
 	boolean inserirDocumento(Documento documento) throws Exception ;
 	boolean deletarDocumento(Documento documento) throws Exception ;
 	boolean atualizaDocumento(Documento documento) throws Exception ;
+	Documento findDocumentoByNome(String nome) throws Exception;
+	
 	List<Documento> buscarDocumento(String busca, ArrayList<Tag> tags, boolean porTitulo, boolean porDescricao, boolean porConteudo) throws Exception;
 	
 	/*##################Tag###################*/
 	boolean salvarTags(ArrayList<Tag> tags) ;
+	List<Tag> findAllTags() throws Exception;
 	
 	/*##################TipoAcesso###################*/
 	TipoAcesso findAcessoByCodigo(int codigo) throws Exception ;

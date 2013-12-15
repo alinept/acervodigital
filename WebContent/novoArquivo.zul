@@ -1,0 +1,60 @@
+<?page title="Acervo Digital - UFMA"?>
+<?link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"?>
+<?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
+
+<zk xmlns:h="http://www.w3.org/1999/xhtml">
+
+<window border="none" id="win"
+	use="br.ufma.les.acervodigital.window.NovoArquivoWindow">
+		<div>
+			<include src="/topo.zul" />
+		</div>
+
+<div align="center">
+	<groupbox style="border-color: #C2E8FF">
+		<caption label="Título do Documento"/>
+		<textbox width="740px" id="titleTextBox"/>
+	</groupbox>
+	<groupbox style="border-color: #C2E8FF">
+		<caption label="Descrição"/>
+		<textbox width="740px" height="120px" multiline="true" id="descriptionTextBox"/>
+	</groupbox>
+	<groupbox style="border-color: #C2E8FF">
+		<caption label="Data Expedição" style="border-color: #C2E8FF"/>
+		<div align="center">
+			<datebox id="dateBox"/>
+		</div>
+	</groupbox>
+	<groupbox width="750px" style="border-color: #C2E8FF">
+		<caption label="Buscar Documento para Upload"/>
+		
+		<vbox width="270px">
+				<hbox>
+					<label value="Arquivo de Texto:"/>
+					<separator width="20px"/>
+					<button label="Upload" id="docUploadButton" onClick="win.uploadDoc()"/>
+				
+					<image src="images/ajuda.gif" onClick="win.helpDoc()"/>
+				</hbox>
+				<separator height="10px"/>
+								
+			<separator height="10px"/>
+			<div align="center">
+				<label value="Arquivo selecionado:"/>
+			</div>
+			<textbox height="50px" width="260px" multiline="true" style="font-weight:bold; color:black; border-color:black ;background-color: white"
+						disabled="true" id="fileUploadedTextBox"/>
+		</vbox>
+ 			
+	</groupbox>
+	<separator height="10px"/>
+	<div align="left">   
+    	<button label="Voltar" image="images/voltar.png" onClick="win.goBack()"/>
+	</div>
+	<separator height="25px"/>
+	<button label="Enviar" style="font-size:14px" onClick="win.send()"/>
+</div>
+
+
+</window>
+</zk>

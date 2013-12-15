@@ -44,9 +44,12 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			
 			usuario.setTipoAcesso(tipoAcesso);
 			
+			return usuario;
 		}		
-				
-		return usuario;
+	
+		return null;
+		
+		
 	}
     
 	@Override

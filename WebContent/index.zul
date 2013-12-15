@@ -32,6 +32,9 @@
 							onClick="win.buscarDocumento()" />
 						<div class="clearfix"></div>
 					</div>
+					<div align="right">
+							<a label="Envie seu material" onClick="win.irNovoArquivo()"/>
+					</div>
 				</div>
 			</div>
 			<h:br/>

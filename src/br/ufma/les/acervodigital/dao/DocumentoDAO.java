@@ -13,6 +13,7 @@ public interface DocumentoDAO {
 	boolean atualizaDocumento(Documento documento) throws Exception;
 	
 	Documento findByCodigo(int codigo) throws Exception;
+	Documento findByNome(String nome) throws Exception;
 	
 	List<Documento> buscar(String busca, ArrayList<Tag> tags, boolean porTitulo, boolean porDescricao, boolean porConteudo) throws Exception;
 	

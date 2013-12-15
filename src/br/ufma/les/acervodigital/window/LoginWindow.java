@@ -41,6 +41,7 @@ public class LoginWindow extends Window{
 		
 		// obtem os componentes da pagina
 		try{
+			
 			nomeUsuario = (Textbox)getFellow("textboxUsername");
 			senha = (Textbox)getFellow("textboxPassword");
 		}
@@ -68,9 +69,15 @@ public class LoginWindow extends Window{
 		{
 			Sessions.getCurrent().setAttribute("usuario", usuario);
 			Executions.sendRedirect("/index.zul");
+		
 		} else{
 			((Label)getFellow("statusLabel")).setValue("Login ou senha incorretos");
 		}
+	}
+	
+	public void irNovoUsuario()
+	{
+		Executions.sendRedirect("/dadosUsuario.zul");
 	}
 	
     private boolean isEmpty(String str){
