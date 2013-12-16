@@ -74,11 +74,6 @@ public class IndexWindow extends Window{
 		
     	Executions.sendRedirect("/resultadosBusca.zul");
 	}
-
-	public void irNovoArquivo()
-	{
-		Executions.sendRedirect("/novoArquivo.zul");
-	}
 	
 	public String getStringBusca() {
 		return stringBusca;

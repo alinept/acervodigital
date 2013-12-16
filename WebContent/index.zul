@@ -9,6 +9,7 @@
 		<div class="container">
 			<div>
 				<include src="/topo.zul" />
+				
 			</div>
 			<div class="well well-small well-content">
 				<div>
@@ -32,9 +33,7 @@
 							onClick="win.buscarDocumento()" />
 						<div class="clearfix"></div>
 					</div>
-					<div align="right">
-							<a label="Envie seu material" onClick="win.irNovoArquivo()"/>
-					</div>
+					
 				</div>
 			</div>
 			<h:br/>

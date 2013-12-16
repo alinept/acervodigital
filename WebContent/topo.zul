@@ -29,6 +29,9 @@
 					<div align="right">
 						<button zclass="btn btn-danger" label="Sair"
 							onClick="win.logout()" />
+						<h:br/>
+						<a sclass="btn btn-info" style="margin-top:5px;" label="Envie seu documento" onClick="win.irNovoArquivo()"/>
+				
 					</div>
 				</div>
 				<div class="clearfix"></div>

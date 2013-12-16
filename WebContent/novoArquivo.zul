@@ -4,57 +4,70 @@
 
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
 
-<window border="none" id="win"
-	use="br.ufma.les.acervodigital.window.NovoArquivoWindow">
-		<div>
+	<window border="none" id="win"
+		use="br.ufma.les.acervodigital.window.NovoArquivoWindow">
+		<div sclass="container">
 			<include src="/topo.zul" />
 		</div>
 
-<div align="center">
-	<groupbox style="border-color: #C2E8FF">
-		<caption label="Título do Documento"/>
-		<textbox width="740px" id="titleTextBox"/>
-	</groupbox>
-	<groupbox style="border-color: #C2E8FF">
-		<caption label="Descrição"/>
-		<textbox width="740px" height="120px" multiline="true" id="descriptionTextBox"/>
-	</groupbox>
-	<groupbox style="border-color: #C2E8FF">
-		<caption label="Data Expedição" style="border-color: #C2E8FF"/>
-		<div align="center">
-			<datebox id="dateBox"/>
-		</div>
-	</groupbox>
-	<groupbox width="750px" style="border-color: #C2E8FF">
-		<caption label="Buscar Documento para Upload"/>
-		
-		<vbox width="270px">
-				<hbox>
-					<label value="Arquivo de Texto:"/>
-					<separator width="20px"/>
-					<button label="Upload" id="docUploadButton" onClick="win.uploadDoc()"/>
+		<div class="container">
+			<div class="well well-content well-small">
+				<groupbox zclass="clearfix">
+					<h:h4>Título do Documento</h:h4>
+					<textbox sclass="input-block-level"
+						id="titleTextBox" />
+				</groupbox>
+				<groupbox zclass="clearfix" style="margin-bottom:5px;">
+					<h:h4>Descrição</h:h4>
+					<textbox sclass="input-block-level" rows="4"
+						multiline="true" id="descriptionTextBox" />
+				</groupbox>
+				<groupbox zclass="clearfix">
+					<h:h4>Data de Expedição</h:h4>
+					<div class="input-prepend">
+						<datebox sclass="input-append" id="dateBox" />
+					</div>
+				</groupbox>
+				<groupbox zclass="clearfix">
+					<h:h4>Buscar Documento para Upload</h:h4>
+						<div class="pull-left">
+							<label sclass="label" value="Arquivo de Texto:" />
+							<separator width="20px" />
+							<button sclass="btn" label="Upload"
+								id="docUploadButton" onClick="win.uploadDoc()" />
+
+							<image src="images/ajuda.gif"
+								onClick="win.helpDoc()" />
+						</div>
+
+						<div class="pull-right">
+							<label sclass="label label-info" value="Arquivo selecionado:" />
+							<separator width="20px" />	
+							<textbox multiline="true"
+							rows="2" sclass="span5"
+							disabled="true" id="fileUploadedTextBox" />
+						</div>
+					
+
+				</groupbox>
+				<separator height="10px" />
 				
-					<image src="images/ajuda.gif" onClick="win.helpDoc()"/>
-				</hbox>
-				<separator height="10px"/>
-								
-			<separator height="10px"/>
-			<div align="center">
-				<label value="Arquivo selecionado:"/>
+				<div class="form-actions">
+					<button sclass="pull-left btn" label="Voltar"
+						image="images/voltar.png" onClick="win.goBack()" />
+	
+					<button sclass="pull-right btn btn-primary btn-large"
+						label="Enviar" onClick="win.send()" />
+				</div>
+				<div class="clearfix"></div>
+				<h:br />
+				<div class="footer">
+					<label
+						value="SGDU @ Universidade Federal do Maranhão" />
+				</div>
 			</div>
-			<textbox height="50px" width="260px" multiline="true" style="font-weight:bold; color:black; border-color:black ;background-color: white"
-						disabled="true" id="fileUploadedTextBox"/>
-		</vbox>
- 			
-	</groupbox>
-	<separator height="10px"/>
-	<div align="left">   
-    	<button label="Voltar" image="images/voltar.png" onClick="win.goBack()"/>
-	</div>
-	<separator height="25px"/>
-	<button label="Enviar" style="font-size:14px" onClick="win.send()"/>
-</div>
+		</div>
+		<script type="text/javascript" src="assets/js/application.js"></script>
 
-
-</window>
+	</window>
 </zk>

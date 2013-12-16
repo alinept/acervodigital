@@ -37,6 +37,11 @@ public class TopoWindow extends Window{
         }
     }
 	
+	public void irNovoArquivo()
+	{
+		Executions.sendRedirect("/novoArquivo.zul");
+	}
+	
 	public void logout()
 	{
 		Sessions.getCurrent().removeAttribute("usuario");
