@@ -1,5 +1,6 @@
 package br.ufma.les.acervodigital.fachada;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +17,12 @@ import br.ufma.les.acervodigital.dao.TipoAcessoDAOImpl;
 import br.ufma.les.acervodigital.dao.UsuarioDAO;
 import br.ufma.les.acervodigital.dao.UsuarioDAOImpl;
 import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
+import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.dominio.Documento;
 import br.ufma.les.acervodigital.dominio.Tag;
 import br.ufma.les.acervodigital.dominio.TipoAcesso;
 import br.ufma.les.acervodigital.dominio.Usuario;
+import br.ufma.les.acervodigital.treemodel.ObjectSql;
 
 public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 
@@ -116,6 +119,43 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 	@Override
 	public List<Tag> findAllTags() throws Exception {
 		return tagDAO.findAll();
+	}
+
+	@Override
+	public Diretorio findDiretorioByCodigo(int codigo) throws Exception {
+		return diretorioDAO.findDiretorioByCodigo(codigo);
+	}
+
+	@Override
+	public void inserirDiretorio(Diretorio diretorio) throws SQLException,
+			Exception {
+		diretorioDAO.inserirDiretorio(diretorio);
+	}
+
+	@Override
+	public void alterarDiretorio(Diretorio diretorio) throws SQLException,
+			Exception {
+		diretorioDAO.alterarDiretorio(diretorio);
+	}
+
+	@Override
+	public void excluirDiretorio(int idDiretorio) throws SQLException,
+			Exception {
+		
+		diretorioDAO.excluirDiretorio(idDiretorio);
+		
+	}
+
+	@Override
+	public List<ObjectSql> retornaCaminhoDiretoriosAbaixo(int id)
+			throws SQLException, Exception {
+		return diretorioDAO.retornaCaminhoDiretoriosAbaixo(id);
+	}
+
+	@Override
+	public List<ObjectSql> retornaCaminhoDiretorioRaiz() throws SQLException,
+			Exception {
+		return diretorioDAO.retornaCaminhoDiretorioRaiz();
 	}
 	
 

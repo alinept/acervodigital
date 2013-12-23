@@ -56,6 +56,8 @@ public class TopoWindow extends Window{
 		this.usuario = usuario;
 	}
 	
-	
-	
+	public void gerenciarDiretorios()
+	{
+		Executions.sendRedirect("/gerenciarDiretorios.zul");
+	}
 }

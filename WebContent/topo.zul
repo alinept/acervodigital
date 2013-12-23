@@ -41,7 +41,7 @@
 				<menu label="Meus dados" />
 				<menu label="Gerencias Contas" />
 				<menu 
-					label="Gerenciar Diretorios e Documentos" />
+					label="Gerenciar Diretorios e Documentos" onClick="win.gerenciarDiretorios()"/>
 				<menu label="teste">
 					<menupopup>
 						<menuitem label="teste" />

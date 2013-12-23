@@ -4,10 +4,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.ufma.les.acervodigital.database.Conexao;
 import br.ufma.les.acervodigital.dominio.Diretorio;
-import br.ufma.les.acervodigital.dominio.Usuario;
+import br.ufma.les.acervodigital.treemodel.ObjectSql;
 
 public class DiretorioDAOImpl implements DiretorioDAO{
 
@@ -41,28 +43,95 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 		return diretorio;
 	}
 	
-  public void UsuarioDiretorio(Usuario usuario) throws SQLException, Exception{
+	@Override
+  public List<ObjectSql> retornaCaminhoDiretoriosAbaixo(int id) throws SQLException, Exception{
+	  	
+	  List<ObjectSql> estrutura = new ArrayList<ObjectSql>();
 	  
-	  Diretorio dir = new Diretorio();
-	  int diretorio_pai = 0;
+	  String sql = "WITH RECURSIVE cte_recursiva (id_diretorio,nome,nivel,arvore)"
+			  	+" AS("
+			  	+" SELECT id_diretorio"
+			  	+" , nome"
+			  	+" , 1 AS nivel"
+			  	+" , CAST(nome AS VARCHAR(255)) AS arvore"
+			  	+" FROM diretorio"
+			  	+" WHERE diretorio_pai = ?"
+			  	+" UNION ALL"
+			  	+" SELECT g.id_diretorio"
+			  	+" , g.nome"
+			  	+" , c.nivel + 1 AS nivel"
+			  	+" , CAST((c.arvore || '/' || g.nome) AS VARCHAR(255)) AS arvore"
+			  	+" FROM diretorio g"
+			  	+" INNER JOIN cte_recursiva c "
+			  	+" ON g.diretorio_pai = c.id_diretorio" 
+			  	+" )"
+			  	+" SELECT nivel"
+			  	+" , arvore "
+			  	+" FROM cte_recursiva;";
+	      
+	  PreparedStatement statement = Conexao.get().prepareStatement(sql);
+	  statement.setInt(1, id);
 	  
-	  PreparedStatement sql = Conexao.get().prepareStatement("SELECT id_diretorio FROM diretorio WHERE proprietario = "+ usuario.getId()+"");
-	  
-	  ResultSet resultSet = sql.executeQuery();
-	  if(resultSet.next()){
-		  diretorio_pai = resultSet.getInt("diretorio_pai");	  
-	  }
-	  
+	  ResultSet resultSet = statement.executeQuery();
 		
-		  PreparedStatement statement = Conexao.get().prepareStatement(
-		  "WITH RECURSIVE arvore_diretorios(id,nome) AS (id_diretorio,nome FROM diretorio WHERE diretorio_pai="
-		  + diretorio_pai+"");
-		  
-    
-		 
+		if (resultSet.next()) {
+			
+			ObjectSql obj = new ObjectSql();
+			obj.setNivel(resultSet.getInt("nivel"));
+			obj.setCaminhoDiretorio(resultSet.getString("arvore"));
+			
+			estrutura.add(obj);
+						
+		}		
+	  
+	  return estrutura;
   }
   
-  public void InserirDiretorio(Diretorio diretorio) throws SQLException, Exception{
+  @Override
+  public List<ObjectSql> retornaCaminhoDiretorioRaiz() throws SQLException, Exception{
+	  	
+	  List<ObjectSql> estrutura = new ArrayList<ObjectSql>();
+	  
+	  String sql = "WITH RECURSIVE cte_recursiva (id_diretorio,nome,nivel,arvore)"
+			  	+" AS("
+			  	+" SELECT id_diretorio"
+			  	+" , nome"
+			  	+" , 1 AS nivel"
+			  	+" , CAST(nome AS VARCHAR(255)) AS arvore"
+			  	+" FROM diretorio"
+			  	+" WHERE diretorio_pai IS NULL"
+			  	+" UNION ALL"
+			  	+" SELECT g.id_diretorio"
+			  	+" , g.nome"
+			  	+" , c.nivel + 1 AS nivel"
+			  	+" , CAST((c.arvore || '/' || g.nome) AS VARCHAR(255)) AS arvore"
+			  	+" FROM diretorio g"
+			  	+" INNER JOIN cte_recursiva c "
+			  	+" ON g.diretorio_pai = c.id_diretorio" 
+			  	+" )"
+			  	+" SELECT nivel"
+			  	+" , arvore "
+			  	+" FROM cte_recursiva;";
+	      
+	  PreparedStatement statement = Conexao.get().prepareStatement(sql);
+	  
+	  ResultSet resultSet = statement.executeQuery();
+		
+		if (resultSet.next()) {
+			
+			ObjectSql obj = new ObjectSql();
+			obj.setNivel(resultSet.getInt("nivel"));
+			obj.setCaminhoDiretorio(resultSet.getString("arvore"));
+			
+			estrutura.add(obj);
+						
+		}		
+	  
+	  return estrutura;
+  }
+  
+  @Override
+  public void inserirDiretorio(Diretorio diretorio) throws SQLException, Exception{
 	  
 		PreparedStatement statement = Conexao
 				.get()
@@ -79,6 +148,7 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 
   }
   
+  @Override
   public void alterarDiretorio(Diretorio diretorio) throws SQLException, Exception{
 	  
 	  PreparedStatement statement = Conexao.get().prepareStatement("UPDATE diretorio set nome=?,proprietario=?,diretorio_pai=? WHERE id_diretorio=?");
@@ -92,9 +162,10 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 	  
   }
   
+  @Override
   public void excluirDiretorio(int idDiretorio) throws SQLException, Exception{
 	  
-	  PreparedStatement statement = Conexao.get().prepareStatement("delete from where="+idDiretorio);
+	  PreparedStatement statement = Conexao.get().prepareStatement("delete diretorio where="+idDiretorio);
 	  statement.executeUpdate();
 	  statement.close();
   }
