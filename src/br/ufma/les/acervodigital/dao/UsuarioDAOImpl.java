@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.ufma.les.acervodigital.database.Conexao;
-import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.dominio.TipoAcesso;
 import br.ufma.les.acervodigital.dominio.Usuario;
 
@@ -137,5 +136,21 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		}		
 				
 		return usuario;
+	}
+
+	@Override
+	public boolean isLoginValido(String login) throws Exception {
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+				"usuario WHERE login = ? ");
+		statement.setString(1, login);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		if (resultSet.next()) return false;
+		else return true;
+				
+		
+
 	}
 }

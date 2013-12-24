@@ -7,7 +7,6 @@ import java.util.List;
 
 import br.ufma.les.acervodigital.database.Conexao;
 import br.ufma.les.acervodigital.dominio.Tag;
-import br.ufma.les.acervodigital.dominio.TipoAcesso;
 
 public class TagDAOImpl implements TagDAO{
 

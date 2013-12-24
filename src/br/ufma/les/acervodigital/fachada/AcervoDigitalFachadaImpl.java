@@ -157,6 +157,11 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 			Exception {
 		return diretorioDAO.retornaCaminhoDiretorioRaiz();
 	}
+
+	@Override
+	public boolean isLoginUsuarioValido(String login) throws Exception {
+		return usuarioDAO.isLoginValido(login);
+	}
 	
 
 }

@@ -22,6 +22,13 @@ public class PackageDataUtil {
     	}
     }
     
+    public void addFilhos(ObjectSql obj,List<ObjectSql> estrutura, int posicao)
+    {
+    	for(int i = posicao; i<estrutura.size();i++)
+    	{
+    		if(!(estrutura.get(i).nivel == obj.nivel + 1)) break;
+    	}
+    }
     
  
     public static DiretorioTreeNode<PackageData> getRoot() {

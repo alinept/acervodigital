@@ -10,5 +10,7 @@ public interface UsuarioDAO {
 	public void excluirUsuario(Usuario usuario) throws Exception;
 	
 	Usuario findByCodigo(int codigo) throws Exception;
+	
+	boolean isLoginValido(String login) throws Exception;
 
 }
