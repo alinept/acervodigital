@@ -39,9 +39,12 @@
 
 			<menubar>
 				<menu label="Meus dados" />
-				<menu label="Gerencias Contas" />
-				<menu 
-					label="Gerenciar Diretorios e Documentos" onClick="win.gerenciarDiretorios()"/>
+				<menu label="Gerenciar" >
+					<menupopup>
+						<menuitem label="Diretórios" onClick="win.gerenciarDiretorios()"/>
+						<menuitem label="Contas"/>
+					</menupopup>
+				</menu>
 				<menu label="teste">
 					<menupopup>
 						<menuitem label="teste" />
