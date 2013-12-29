@@ -6,7 +6,7 @@ import br.ufma.les.acervodigital.dominio.Diretorio;
 
 public class DiretorioTreeNode<T> extends DefaultTreeNode<T>  {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8085873079938209759L;;
 	// Node Control the default open
 
 	private boolean open = false;
