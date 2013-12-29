@@ -1,5 +1,7 @@
 package br.ufma.les.acervodigital.dao;
 
+import java.util.List;
+
 import br.ufma.les.acervodigital.dominio.Usuario;
 
 public interface UsuarioDAO {
@@ -12,5 +14,7 @@ public interface UsuarioDAO {
 	Usuario findByCodigo(int codigo) throws Exception;
 	
 	boolean isLoginValido(String login) throws Exception;
+	
+	List<Usuario> usuariosNaoValidados();
 
 }

@@ -3,6 +3,7 @@ package br.ufma.les.acervodigital.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import br.ufma.les.acervodigital.database.Conexao;
 import br.ufma.les.acervodigital.dominio.TipoAcesso;
@@ -56,12 +57,14 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		
 		try{
 		PreparedStatement statement = Conexao.get().prepareStatement(
-				"INSERT INTO " + "usuario(login,nome,email,senha) values (?,?,?,?)");
+				"INSERT INTO " + "usuario(login,nome,email,senha, validado) values (?,?,?,?,?)");
 		
 		statement.setString(1, usuario.getLogin());
 		statement.setString(2, usuario.getNome());
 		statement.setString(3, usuario.getEmail());
 		statement.setString(4, usuario.getSenha());
+		if(usuario.isValidado()) statement.setInt(5, 1);
+		else statement.setInt(5, 0);
 		statement.executeUpdate();
 		statement.close();
 		
@@ -73,7 +76,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	@Override
 	public void alterarUsuario(Usuario usuario) throws Exception{
 		
-		String sql = "update usuario set login = ?, nome = ?, email = ?, senha = ?  where id = "
+		String sql = "update usuario set login = ?, nome = ?, email = ?, senha = ?, validado = ?  where id = "
 				+ usuario.getId();
 		
 		try{
@@ -83,6 +86,8 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			statement.setString(2, usuario.getNome());
 			statement.setString(3, usuario.getEmail());
 			statement.setString(4, usuario.getSenha());
+			if(usuario.isValidado()) statement.setInt(5, 1);
+			else statement.setInt(5, 0);
 			statement.executeUpdate();
 			statement.close();
 			
@@ -125,7 +130,8 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			usuario.setLogin(resultSet.getString("login"));
 			usuario.setNome(resultSet.getString("nome"));
 			usuario.setSenha(resultSet.getString("senha"));
-
+			if(resultSet.getInt("validado") == 1) usuario.setValidado(true);
+			else usuario.setValidado(false);
 			TipoAcesso tipoAcesso = new TipoAcesso();
 			int codigoAcesso = resultSet.getInt("fk_perfil");
 			tipoAcesso = tipoAcessoDAO.findByCodigo(codigoAcesso);
@@ -152,5 +158,11 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 				
 		
 
+	}
+
+	@Override
+	public List<Usuario> usuariosNaoValidados() {
+		
+		return null;
 	}
 }

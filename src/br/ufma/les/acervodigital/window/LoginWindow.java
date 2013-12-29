@@ -77,7 +77,7 @@ public class LoginWindow extends Window{
 	
 	public void irNovoUsuario()
 	{
-		Executions.sendRedirect("/dadosUsuario.zul");
+		Executions.sendRedirect("/novoUsuario.zul");
 	}
 	
     private boolean isEmpty(String str){

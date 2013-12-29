@@ -94,9 +94,10 @@
 							<div align="right" width="150px">
 								<label value="" style="font-size:17px; "/>		
 							</div>
-							
 							<button sclass="btn btn-large btn-primary"
-								label="Submeter Cadastro" onClick="win.submeterContrato()" />
+								label="Submeter Cadastro" onClick="win.submeterCadastro()" />
+							<button sclass="btn btn-large btn-primary"
+								label="Cancelar" onClick="win.cancelarCadastro()" />
 							
 						</hbox>
 						<separator height="20px" />

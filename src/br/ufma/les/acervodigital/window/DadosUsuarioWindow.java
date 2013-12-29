@@ -1,10 +1,12 @@
 package br.ufma.les.acervodigital.window;
 
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Window;
 
+import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
 
@@ -46,12 +48,55 @@ public class DadosUsuarioWindow extends Window{
 		}
 	}
 	
-	public void submeterContrato()
+	public void submeterCadastro()
 	{
-		if(!nome.equals("") && nome != null)
-		{
+		try{
+			
+			if(nome.equals("") || nome != null)
+			{
+				new Exception("Preecha o campo nome");
+			}
+			if(login.equals("") || login != null)
+			{
+				new Exception("Preecha o campo login");
+			}
+			
+			if(email.equals("") || email != null)
+			{
+				new Exception("Preecha o campo email");
+			}
+			
+			if(senha.equals("") || senha != null)
+			{
+				new Exception("Preecha o campo senha");
+			}
+			
+			Label lbLogin = (Label) getFellow("statusLogin");
+			if(lbLogin.getValue().equals("Login já existente"))
+			{
+				new Exception("Insira um login válido");
+			}
+			Label lbValidacao = (Label) getFellow("captchaResult");
+			if(!lbValidacao.getValue().equals("OK"))
+			{
+				new Exception("Erro no campo de validação");
+			}
+			//se chegou até aqui, ok, pode salvar !
+			
+			Usuario u = new Usuario();
+			u.setNome(nome);
+			u.setLogin(login);
+			u.setEmail(email);
+			u.setSenha(senha);
+		}catch(Exception e){
 			
 		}
+	
+	}
+	
+	public void cancelarCadastro()
+	{
+		Executions.sendRedirect("/login.zul");
 	}
 
 	public String getNome() {
