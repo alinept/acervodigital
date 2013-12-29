@@ -5,7 +5,7 @@
 
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
 	<window border="none" id="win"
-		use="br.ufma.les.acervodigital.window.DadosUsuarioWindow" onOK="win.enviarDados()">
+		use="br.ufma.les.acervodigital.window.DadosUsuarioWindow" onOK="win.submeterContrato()">
 
 		<div sclass="container" width="70%">
 			<separator height="50px" />
@@ -96,16 +96,16 @@
 							</div>
 							
 							<button sclass="btn btn-large btn-primary"
-								label="Submeter Cadastro" onClick="win.realizarLogin()" />
+								label="Submeter Cadastro" onClick="win.submeterContrato()" />
 							
 						</hbox>
-					
+						<separator height="20px" />
 						
 				
 				
 					
 				</div>
-				<separator height="5px" />
+				<separator height="10px" />
 				
 				
 			</div>

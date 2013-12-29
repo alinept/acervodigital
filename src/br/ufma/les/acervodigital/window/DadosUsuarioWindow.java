@@ -45,6 +45,14 @@ public class DadosUsuarioWindow extends Window{
 			((Label)getFellow("statusLogin")).setValue("");
 		}
 	}
+	
+	public void submeterContrato()
+	{
+		if(!nome.equals("") && nome != null)
+		{
+			
+		}
+	}
 
 	public String getNome() {
 		return nome;
