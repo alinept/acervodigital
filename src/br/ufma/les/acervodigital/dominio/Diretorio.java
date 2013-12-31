@@ -9,6 +9,8 @@ public class Diretorio {
      private Date dataCriacao;
      private Usuario proprietario;
      private Diretorio pai;
+     private int idpai;
+     
 	public Integer getId() {
 		return id;
 	}
@@ -38,6 +40,12 @@ public class Diretorio {
 	}
 	public void setPai(Diretorio pai) {
 		this.pai = pai;
+	}
+	public int getIdpai() {
+		return idpai;
+	}
+	public void setIdpai(int idpai) {
+		this.idpai = idpai;
 	}
      
      
