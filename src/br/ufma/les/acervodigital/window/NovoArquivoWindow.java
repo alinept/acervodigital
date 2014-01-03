@@ -186,9 +186,11 @@ private static final long serialVersionUID = 7268970269306314382L;
 				catch (IllegalStateException e ) {
 					try{
 						content = DocumentAnalize.getText( doc.getStringData(), type);
+						e.printStackTrace();
 					}
 					catch (IllegalStateException e1 ) {
 						content = DocumentAnalize.getText( doc.getReaderData(), type);
+						e1.printStackTrace();
 					}
 				}
 				break;
