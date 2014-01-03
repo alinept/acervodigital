@@ -15,6 +15,6 @@ public interface UsuarioDAO {
 	
 	boolean isLoginValido(String login) throws Exception;
 	
-	List<Usuario> usuariosNaoValidados();
+	List<Usuario> usuariosNaoValidados() throws Exception ;
 
 }

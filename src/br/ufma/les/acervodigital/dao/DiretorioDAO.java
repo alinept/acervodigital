@@ -14,4 +14,8 @@ public interface DiretorioDAO {
 	void excluirDiretorio(int idDiretorio) throws SQLException, Exception;
 	List<ObjectSql> retornaCaminhoDiretoriosAbaixo(int id) throws SQLException, Exception;
 	List<ObjectSql> retornaCaminhoDiretorioRaiz() throws SQLException, Exception;
+	List<Diretorio> carregarDiretorios() throws SQLException, Exception;
+	public abstract List<Diretorio> carregarFilhos(int idDiretorio) throws SQLException,
+			Exception;
+	
 }

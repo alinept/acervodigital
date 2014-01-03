@@ -60,4 +60,9 @@ public class TopoWindow extends Window{
 	{
 		Executions.sendRedirect("/gerenciarDiretorios.zul");
 	}
+	
+	public void gerenciarContas()
+	{
+		Executions.sendRedirect("/gerenciarContas.zul");
+	}
 }

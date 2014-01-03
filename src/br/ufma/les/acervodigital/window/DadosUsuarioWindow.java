@@ -1,5 +1,6 @@
 package br.ufma.les.acervodigital.window;
 
+import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
@@ -54,32 +55,33 @@ public class DadosUsuarioWindow extends Window{
 			
 			if(nome.equals("") || nome != null)
 			{
-				new Exception("Preecha o campo nome");
+				throw new Exception("Preecha o campo nome");
+				
 			}
 			if(login.equals("") || login != null)
 			{
-				new Exception("Preecha o campo login");
+				throw new Exception("Preecha o campo login");
 			}
 			
 			if(email.equals("") || email != null)
 			{
-				new Exception("Preecha o campo email");
+				throw new Exception("Preecha o campo email");
 			}
 			
 			if(senha.equals("") || senha != null)
 			{
-				new Exception("Preecha o campo senha");
+				throw new Exception("Preecha o campo senha");
 			}
 			
 			Label lbLogin = (Label) getFellow("statusLogin");
 			if(lbLogin.getValue().equals("Login já existente"))
 			{
-				new Exception("Insira um login válido");
+				throw new Exception("Insira um login válido");
 			}
 			Label lbValidacao = (Label) getFellow("captchaResult");
 			if(!lbValidacao.getValue().equals("OK"))
 			{
-				new Exception("Erro no campo de validação");
+				throw new Exception("Erro no campo de validação");
 			}
 			//se chegou até aqui, ok, pode salvar !
 			
@@ -88,8 +90,17 @@ public class DadosUsuarioWindow extends Window{
 			u.setLogin(login);
 			u.setEmail(email);
 			u.setSenha(senha);
-		}catch(Exception e){
+			u.setValidado(false);
 			
+			acervoDigitalFachada.inserirUsuario(u);
+			
+			Messagebox.show("Cadastro efetuado com sucesso " +
+					"Contate um moderador para alteração de perfil",
+					"Cadastro Salvo", Messagebox.OK, Messagebox.INFORMATION);
+			
+		}catch(Exception e){
+			Messagebox.show("Erro: "+ e,
+					"Erro ao salvar", Messagebox.OK, Messagebox.ERROR);
 		}
 	
 	}

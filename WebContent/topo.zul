@@ -42,7 +42,7 @@
 				<menu label="Gerenciar" >
 					<menupopup>
 						<menuitem label="Diretórios" onClick="win.gerenciarDiretorios()"/>
-						<menuitem label="Contas"/>
+						<menuitem label="Contas" onClick="win.gerenciarContas()"/>
 					</menupopup>
 				</menu>
 				<menu label="teste">
