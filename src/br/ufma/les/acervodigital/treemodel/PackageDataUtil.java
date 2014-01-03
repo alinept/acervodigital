@@ -16,7 +16,7 @@ public class PackageDataUtil {
      
                         {
                             add(new DiretorioTreeNode<PackageData>(new PackageData(
-                                    estrutura.get(0).getCaminhoDiretorio(), "")));
+                                "teste", "")));
                         }
                     }, true); // dist opened
     	}
