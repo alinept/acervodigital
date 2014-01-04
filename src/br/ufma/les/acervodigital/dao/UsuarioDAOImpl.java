@@ -58,13 +58,14 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		
 		try{
 		PreparedStatement statement = Conexao.get().prepareStatement(
-				"INSERT INTO " + "usuario(login,nome,email,senha, validado) values (?,?,?,?,?)");
+				"INSERT INTO " + "usuario(login,nome,email,senha,fk_perfil, validado) values (?,?,?,?,?,?)");
 		
 		statement.setString(1, usuario.getLogin());
 		statement.setString(2, usuario.getNome());
 		statement.setString(3, usuario.getEmail());
 		statement.setString(4, usuario.getSenha());
-		if(usuario.isValidado()) statement.setInt(5, 1);
+		statement.setInt(5, usuario.getTipoAcesso().getId());
+		if(usuario.isValidado()) statement.setInt(6, 1);
 		else statement.setInt(5, 0);
 		statement.executeUpdate();
 		statement.close();
