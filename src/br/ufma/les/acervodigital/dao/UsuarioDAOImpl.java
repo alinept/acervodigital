@@ -66,7 +66,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		statement.setString(4, usuario.getSenha());
 		statement.setInt(5, usuario.getTipoAcesso().getId());
 		if(usuario.isValidado()) statement.setInt(6, 1);
-		else statement.setInt(5, 0);
+		else statement.setInt(6, 0);
 		statement.executeUpdate();
 		statement.close();
 		
