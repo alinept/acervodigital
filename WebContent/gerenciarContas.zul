@@ -22,23 +22,32 @@
 						<div align="center">
 							<hbox>
 								<label value="Filtro: " style="font-size:17px; "/>		
-								<textbox placeholder="nome usuário" width="500px" />
-								<button label="buscar"/>
+								<textbox placeholder="nome usuário" width="500px" value="@{win.campoBusca }"/>
+								<button label="buscar" onClick="win.buscarUsuario()"/>
 							</hbox>
 						</div>
 						<separator height="20px" />
-						
-						<listbox id="listDinheiro"
-								model="@{win.listaDinheiro}" width="150px"
-								selectedItem="@{win.dinheiro}">
+						<label value= "Usuários Sem Validação" style="font-size:18px; font-weight: bold; text-shadow:2px 2px 1px #c9a859"/>
+						<separator bar="true"/>
+						<separator height="20px"/>
+						<div align="center">
+							<listbox id="listUsuarios"
+								model="@{win.usuarios}" width="600px"
+								selectedItem="@{win.usuario}">
 								<listhead>
-									<listheader label="Dinheiro" />
+									<listheader label="Nome" width="300px"/>
+									<listheader label="Login" width="150px"/>
+									<listheader label="Perfil" width="150px"/>
 								</listhead>
-								<listitem self="@{each=dinheiro}">
-									<listcell label="@{dinheiro.valor}" />
+								<listitem self="@{each=usuario}">
+									<listcell label="@{usuario.nome}" />
+									<listcell label="@{usuario.login}" />
+									<listcell label="@{usuario.tipoAcesso.nome}" />
+									
 								</listitem>
 
 							</listbox>
+						</div>
 				</div>
 			
 			<div class="footer">

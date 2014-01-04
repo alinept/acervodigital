@@ -116,6 +116,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 
 	@Override
 	public Usuario findByCodigo(int codigo) throws Exception {
+		
 		Usuario usuario = new Usuario();
 		
 		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
@@ -177,10 +178,47 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			u.setEmail(resultSet.getString("email"));
 			u.setId(resultSet.getInt("id_usuario"));
 			u.setLogin(resultSet.getString("login"));
+			u.setNome(resultSet.getString("nome"));
 			u.setTipoAcesso(tipoAcessoDAO.findByCodigo(resultSet.getInt("fk_perfil")));
 			u.setSenha(resultSet.getString("senha"));
 			if(resultSet.getInt("validado") == 1) u.setValidado(true);
 			else u.setValidado(false);
+			
+			usuarios.add(u);
+		}		
+				
+		return usuarios;
+	}
+
+	@Override
+	public List<Usuario> findByNome(String nome) throws Exception {
+
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		nome = "%"+nome+"%";
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+				"usuario WHERE nome like ? ");
+		statement.setString(1, nome);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		if (resultSet.next()) {
+			Usuario usuario = new Usuario();
+			
+			usuario.setEmail(resultSet.getString("email"));
+			usuario.setId(resultSet.getInt("id_usuario"));
+			usuario.setLogin(resultSet.getString("login"));
+			usuario.setNome(resultSet.getString("nome"));
+			usuario.setSenha(resultSet.getString("senha"));
+			if(resultSet.getInt("validado") == 1) usuario.setValidado(true);
+			else usuario.setValidado(false);
+			TipoAcesso tipoAcesso = new TipoAcesso();
+			int codigoAcesso = resultSet.getInt("fk_perfil");
+			tipoAcesso = tipoAcessoDAO.findByCodigo(codigoAcesso);
+			
+			usuario.setTipoAcesso(tipoAcesso);
+			
+			usuarios.add(usuario);
 		}		
 				
 		return usuarios;

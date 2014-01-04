@@ -53,22 +53,22 @@ public class DadosUsuarioWindow extends Window{
 	{
 		try{
 			
-			if(nome.equals("") || nome != null)
+			if(nome.equals("") || nome == null)
 			{
 				throw new Exception("Preecha o campo nome");
 				
 			}
-			if(login.equals("") || login != null)
+			if(login.equals("") || login == null)
 			{
 				throw new Exception("Preecha o campo login");
 			}
 			
-			if(email.equals("") || email != null)
+			if(email.equals("") || email == null)
 			{
 				throw new Exception("Preecha o campo email");
 			}
 			
-			if(senha.equals("") || senha != null)
+			if(senha.equals("") || senha == null)
 			{
 				throw new Exception("Preecha o campo senha");
 			}
@@ -91,7 +91,7 @@ public class DadosUsuarioWindow extends Window{
 			u.setEmail(email);
 			u.setSenha(senha);
 			u.setValidado(false);
-			
+			u.setTipoAcesso(acervoDigitalFachada.findAcessoByCodigo(1));
 			acervoDigitalFachada.inserirUsuario(u);
 			
 			Messagebox.show("Cadastro efetuado com sucesso " +

@@ -32,7 +32,9 @@ public class TopoWindow extends Window{
         
         if(usuario == null)
         {
-        	Messagebox.show("Faca login");
+        	Messagebox.show("É necessário efetuar login para acessar esta página" 
+					,"Usuário não autenticado", Messagebox.OK, Messagebox.EXCLAMATION);
+        
         	Executions.sendRedirect("/login.zul");
         }
     }

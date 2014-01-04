@@ -162,6 +162,18 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 	public boolean isLoginUsuarioValido(String login) throws Exception {
 		return usuarioDAO.isLoginValido(login);
 	}
+
+	@Override
+	public List<Usuario> usuariosNaoValidados() throws Exception {
+		
+		return usuarioDAO.usuariosNaoValidados();
+	}
+
+	@Override
+	public List<Usuario> findUsuarioByNome(String nome) throws Exception {
+		
+		return usuarioDAO.findByNome(nome);
+	}
 	
 
 }

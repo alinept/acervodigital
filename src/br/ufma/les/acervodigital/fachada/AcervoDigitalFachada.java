@@ -46,4 +46,6 @@ public interface AcervoDigitalFachada {
 	public void alterarUsuario(Usuario usuario) throws Exception ;
 	public void excluirUsuario(Usuario usuario) throws Exception ;
 	boolean isLoginUsuarioValido(String login) throws Exception ;
+	List<Usuario> usuariosNaoValidados() throws Exception ;
+	List<Usuario> findUsuarioByNome(String nome) throws Exception ;
 }
