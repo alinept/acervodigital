@@ -15,13 +15,13 @@
 					<h:h2>Gerenciar Diretórios</h:h2>
 					<separator bar="true"/>
 					<separator height="20px" />
-					<groupbox id="grp" closable="false" mold='3d' apply="br.ufma.les.acervodigital.treemodel.BinaryPackageController">
+					<groupbox id="grp" closable="false" mold='3d'>
 						<caption label="Diretórios" />
-						<tree id="tree" hflex="1" model="${grp$composer.treeModel}">
+						<tree id="tree" hflex="1" model="@{win.arvore}">
 							<treecols>
 								<treecol hflex="1" label="Path" />
 								<treecol hflex="1" label="Description" />
-								<treecol width="300px" label="Ações" />
+								<treecol width="200px" label="Ações" />
 							</treecols>
 							<template name="model">
 								<treeitem>
@@ -31,7 +31,7 @@
 										<treecell
 											label="${each.data.description}" />
 										<treecell>
-											<button label="+"/>
+											<button image="images/add.png"/>
 											<button label="-"/>
 											<button label="edit"/>
 										</treecell>
