@@ -2,8 +2,11 @@ package br.ufma.les.acervodigital.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.ufma.les.acervodigital.database.Conexao;
+import br.ufma.les.acervodigital.dominio.Tag;
 import br.ufma.les.acervodigital.dominio.TipoAcesso;
 
 public class TipoAcessoDAOImpl implements TipoAcessoDAO{
@@ -27,6 +30,29 @@ public class TipoAcessoDAOImpl implements TipoAcessoDAO{
 		}		
 				
 		return tipoAcesso;
+	}
+
+	@Override
+	public List<TipoAcesso> findAll() throws Exception {
+		List<TipoAcesso> tipos = new ArrayList<TipoAcesso>();
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+				"perfil ");
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		while(resultSet.next()) {
+			
+			TipoAcesso tipo = new TipoAcesso();	
+			tipo.setId(resultSet.getInt("id_perfil"));
+			tipo.setNome(resultSet.getString("nome"));
+			tipo.setDescricao(resultSet.getString("descricao"));
+			tipo.setPermissao(resultSet.getInt("permissao"));
+			
+			tipos.add(tipo);
+		}		
+				
+		return tipos;
 	}
 
 }
