@@ -21,7 +21,7 @@
 							<treecols>
 								<treecol hflex="1" label="Path" />
 								<treecol hflex="1" label="Description" />
-								<treecol width="100px" label="Size" />
+								<treecol width="300px" label="Ações" />
 							</treecols>
 							<template name="model">
 								<treeitem>
@@ -30,6 +30,11 @@
 											label="${each.data.path}" />
 										<treecell
 											label="${each.data.description}" />
+										<treecell>
+											<button label="+"/>
+											<button label="-"/>
+											<button label="edit"/>
+										</treecell>
 									</treerow>
 								</treeitem>
 							</template>
