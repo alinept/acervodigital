@@ -7,8 +7,10 @@ import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.TreeModel;
 import org.zkoss.zul.TreeNode;
+import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.Window;
 
+import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
 import br.ufma.les.acervodigital.treemodel.PackageData;
@@ -22,13 +24,15 @@ private static final long serialVersionUID = 1L;
 	private DataBinder binder;
 	private AcervoDigitalFachada acervoDigitalFachada;
 	private TreeModel<TreeNode<PackageData>> arvore;
+
 	
 	public void onCreate()
     {
     	window = (Window)getFellow("win");
         binder =  new AnnotateDataBinder(window);
-        binder.loadAll();
+        
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
+        
         PackageDataUtil pk = new PackageDataUtil();
         try {
 			pk.montaArvore(acervoDigitalFachada.retornaCaminhoDiretorioRaiz());
@@ -37,12 +41,32 @@ private static final long serialVersionUID = 1L;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	
     	arvore = new DefaultTreeModel<PackageData>(pk.getRoot());
 
         binder.loadAll();
     }
+	
+	public void abrirNovoDiretorio(){
+		
+		Window winNovoDiretorio = (Window) getFellow("novoDiretorio");
+		winNovoDiretorio.setVisible(true);
+		winNovoDiretorio.setPosition("center");
+		winNovoDiretorio.setMode("modal");
+		
+		binder.loadAll();
+		
+	}
 
+	public void editarDiretorio()
+	{
+		
+	}
+	
+	public void excluirDiretorio()
+	{
+		
+	}
+	
 	public TreeModel<TreeNode<PackageData>> getArvore() {
 		return arvore;
 	}
@@ -50,7 +74,5 @@ private static final long serialVersionUID = 1L;
 	public void setArvore(TreeModel<TreeNode<PackageData>> arvore) {
 		this.arvore = arvore;
 	}
-	
-	
 
 }

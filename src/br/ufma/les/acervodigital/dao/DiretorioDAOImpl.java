@@ -25,7 +25,7 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 		
 		List<Diretorio> colecaoDiretorio= new ArrayList<Diretorio>();
 		
-		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM diretorio WHERE diretorio_pai=0");
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM diretorio WHERE diretorio_pai = 0");
 		ResultSet rs = statement.executeQuery();
 		
 		
