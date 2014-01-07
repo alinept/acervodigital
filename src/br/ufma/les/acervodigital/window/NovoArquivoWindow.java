@@ -28,7 +28,7 @@ public class NovoArquivoWindow extends Window{
 private static final long serialVersionUID = 7268970269306314382L;
 	
 	private Media doc = null;
-	
+	private Media docaux = null;
 	public Window window;
 	protected DataBinder binder;
 	private AcervoDigitalFachada acervoDigitalFachada;
@@ -53,7 +53,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 	
 	public void uploadDoc(){
 		
-		Media docaux = Fileupload.get();
+		//docaux = Fileupload.get();
 		
 		if( docaux != null){
 			
@@ -237,5 +237,23 @@ private static final long serialVersionUID = 7268970269306314382L;
 				
 		}
 	}
+
+	public Media getDoc() {
+		return doc;
+	}
+
+	public void setDoc(Media doc) {
+		this.doc = doc;
+	}
+
+	public Media getDocaux() {
+		return docaux;
+	}
+
+	public void setDocaux(Media docaux) {
+		this.docaux = docaux;
+	}
+	
+	
 
 }

@@ -34,10 +34,17 @@
 							<label sclass="label" value="Arquivo de Texto:" />
 							<separator width="20px" />
 							<button sclass="btn" label="Upload"
-								id="docUploadButton" onClick="win.uploadDoc()" />
+								id="docUploadButton" onClick="win.uploadDoc()"/>
 
 							<image src="images/ajuda.gif"
 								onClick="win.helpDoc()" />
+								
+							<button label="Upload Image" upload="true,maxsize=300">
+								<attribute name="onUpload"><![CDATA[
+									win.setDocaux(event.getMedia());
+									win.uploadDoc();
+								]]></attribute>
+							</button>
 						</div>
 
 						<div class="pull-right">
