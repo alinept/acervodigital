@@ -21,7 +21,7 @@
 							<attribute name="onSelect">
 						   	    if (!tree.getSelectedItem().getValue().equals("")){
 									Treeitem t = (Treeitem)self.getSelectedItem();
-							    	System.out.println(t.getLabel());
+							    	win.setDiretorioSelecionado(t.getLabel());
 							    }
 							</attribute>
 							<treecols>
@@ -74,13 +74,13 @@
 			<div align="right" width="150px">
 				<label value="Diretório Pai: "/>
 			</div>
-			<textbox width="200px" disabled="true"/>
+			<textbox width="200px" disabled="true" value="@{win.diretorioPai.name }"/>
 		</hbox>
 		</vbox>
 		<separator height="30px"/>
 		<div align="center">
-			<button label="Salvar"/>
-			<button label="Cancelar"/>
+			<button label="Salvar" />
+			<button label="Cancelar" onClick="win.cancelarNovoDiretorio()"/>
 		</div>
 	</window>
 </window>

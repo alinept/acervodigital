@@ -213,5 +213,28 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 	  statement.executeUpdate();
 	  statement.close();
   }
+
+
+@Override
+public Diretorio findDiretorioByNome(String nome) throws Exception {
+	Diretorio diretorio = new Diretorio();
+	
+	PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+			"diretorio WHERE nome = ? ");
+	statement.setString(1, nome);
+	
+	ResultSet resultSet = statement.executeQuery();
+	
+	if (resultSet.next()) {
+		
+		diretorio.setDataCriacao(resultSet.getDate("data_criacao"));
+		diretorio.setId(resultSet.getInt("id_diretorio"));
+		diretorio.setName(resultSet.getString("nome"));
+		//diretorio.setProprietario(usuarioDAO.findByCodigo(resultSet.getInt("fk_proprietario")));
+		
+	}		
+			
+	return diretorio;
+}
   
 }

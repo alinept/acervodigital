@@ -2,16 +2,14 @@ package br.ufma.les.acervodigital.window;
 
 import java.sql.SQLException;
 
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.TreeModel;
 import org.zkoss.zul.TreeNode;
-import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.Window;
 
+import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
 import br.ufma.les.acervodigital.treemodel.PackageData;
@@ -25,7 +23,8 @@ private static final long serialVersionUID = 1L;
 	private DataBinder binder;
 	private AcervoDigitalFachada acervoDigitalFachada;
 	private TreeModel<TreeNode<PackageData>> arvore;
-
+	private String diretorioSelecionado;
+	private Diretorio diretorioPai;
 	
 	public void onCreate()
     {
@@ -47,14 +46,20 @@ private static final long serialVersionUID = 1L;
         binder.loadAll();
     }
 	
-	public void abrirNovoDiretorio(){
+	public void abrirNovoDiretorio() throws Exception{
 		
-		Window winNovoDiretorio = (Window) getFellow("novoDiretorio");
-		winNovoDiretorio.setVisible(true);
-		winNovoDiretorio.setPosition("center");
-		winNovoDiretorio.setMode("modal");
-		
-		
+		if(!diretorioSelecionado.equals("") && diretorioSelecionado != null)
+		{
+			Window winNovoDiretorio = (Window) getFellow("novoDiretorio");
+			winNovoDiretorio.setVisible(true);
+			winNovoDiretorio.setPosition("center");
+			winNovoDiretorio.setMode("modal");
+			
+			diretorioPai = acervoDigitalFachada.findDiretorioByNome(diretorioSelecionado);
+			
+		}else{
+			
+		}
 		binder.loadAll();
 		
 	}
@@ -69,6 +74,14 @@ private static final long serialVersionUID = 1L;
 		
 	}
 	
+	public void cancelarNovoDiretorio()
+	{
+		Window winNovoDiretorio = (Window) getFellow("novoDiretorio");
+		winNovoDiretorio.setVisible(false);
+		
+		binder.loadAll();
+	}
+	
 	public TreeModel<TreeNode<PackageData>> getArvore() {
 		return arvore;
 	}
@@ -77,4 +90,21 @@ private static final long serialVersionUID = 1L;
 		this.arvore = arvore;
 	}
 
+	public String getDiretorioSelecionado() {
+		return diretorioSelecionado;
+	}
+
+	public void setDiretorioSelecionado(String diretorioSelecionado) {
+		this.diretorioSelecionado = diretorioSelecionado;
+	}
+
+	public Diretorio getDiretorioPai() {
+		return diretorioPai;
+	}
+
+	public void setDiretorioPai(Diretorio diretorioPai) {
+		this.diretorioPai = diretorioPai;
+	}
+
+	
 }
