@@ -2,6 +2,8 @@ package br.ufma.les.acervodigital.window;
 
 import java.sql.SQLException;
 
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.SelectEvent;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.DefaultTreeModel;
@@ -10,7 +12,6 @@ import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.Window;
 
-import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
 import br.ufma.les.acervodigital.treemodel.PackageData;
@@ -52,6 +53,7 @@ private static final long serialVersionUID = 1L;
 		winNovoDiretorio.setVisible(true);
 		winNovoDiretorio.setPosition("center");
 		winNovoDiretorio.setMode("modal");
+		
 		
 		binder.loadAll();
 		
