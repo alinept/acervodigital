@@ -25,15 +25,18 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 	@Override
 	public boolean inserirDocumento(Documento documento) throws Exception {
 		
+		 java.sql.Date dataExpedicao = new java.sql.Date(documento.getDataExpedicao().getTime());
+		 java.sql.Date dataUpload = new java.sql.Date(documento.getDataUpload().getTime());
+		
 		PreparedStatement statement =
 				Conexao.get().prepareStatement("INSERT INTO documento (data_criacao, data_upload, fk_proprietario, conteudo, fk_diretorio) " +
-						"VALUES (? , ? , ? , ?)");
+						"VALUES (? , ? , ? , ?, ?)");
 			
-			statement.setDate(1, (Date) documento.getDataExpedicao() );
-			statement.setDate(2, (Date) documento.getDataUpload() );
+			statement.setDate(1, dataExpedicao);
+			statement.setDate(2, dataUpload);
 			statement.setInt(3, documento.getProprietario().getId());
 			statement.setString(4, documento.getConteudo());
-			statement.setInt(5, documento.getDiretorio().getId());
+			statement.setInt(5, 1);
 			
 			statement.executeUpdate();
 			statement.close();

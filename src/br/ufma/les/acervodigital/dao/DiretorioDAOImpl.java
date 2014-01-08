@@ -177,6 +177,7 @@ public class DiretorioDAOImpl implements DiretorioDAO{
   @Override
   public void inserirDiretorio(Diretorio diretorio) throws SQLException, Exception{
 	  
+	    java.sql.Date sqlDate = new java.sql.Date(diretorio.getDataCriacao().getTime());
 		PreparedStatement statement = Conexao
 				.get()
 				.prepareStatement(
