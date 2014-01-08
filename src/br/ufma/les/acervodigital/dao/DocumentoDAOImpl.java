@@ -3,6 +3,7 @@ package br.ufma.les.acervodigital.dao;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -24,13 +25,13 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 	
 	@Override
 	public boolean inserirDocumento(Documento documento) throws Exception {
-		
+		 int id = 0;
 		 java.sql.Date dataExpedicao = new java.sql.Date(documento.getDataExpedicao().getTime());
 		 java.sql.Date dataUpload = new java.sql.Date(documento.getDataUpload().getTime());
 		
 		PreparedStatement statement =
 				Conexao.get().prepareStatement("INSERT INTO documento (data_criacao, data_upload, fk_proprietario, conteudo, fk_diretorio) " +
-						"VALUES (? , ? , ? , ?, ?)");
+						"VALUES (? , ? , ? , ?, ?)",Statement.RETURN_GENERATED_KEYS);
 			
 			statement.setDate(1, dataExpedicao);
 			statement.setDate(2, dataUpload);
@@ -39,8 +40,13 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 			statement.setInt(5, 1);
 			
 			statement.executeUpdate();
-			statement.close();
+			ResultSet rsId = statement.getGeneratedKeys();
+			if(rsId.next()){
+				id = rsId.getInt("id_documento");
+			}
 			
+			statement.close();
+			documento.setId(id);
 			//salvar tags
 	
 			return true;

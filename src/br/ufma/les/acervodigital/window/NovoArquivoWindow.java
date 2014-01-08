@@ -154,7 +154,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 				acervoDigitalFachada.inserirDocumento(d);
 				
 				
-				insertFile(doc , FileSupportVerificator.PDF_TYPE);
+				insertFile(doc , FileSupportVerificator.PDF_TYPE,d);
 				
 								
 			}
@@ -199,7 +199,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 	}
 	
 	
-	private void insertFile(Media doc, short type) throws Exception{
+	private void insertFile(Media doc, short type, Documento documento ) throws Exception{
 		switch (type) {
 			case FileSupportVerificator.PDF_TYPE:
 				String title = ((Textbox)getFellow("titleTextBox")).getValue();
@@ -209,7 +209,8 @@ private static final long serialVersionUID = 7268970269306314382L;
 					ArquivoDocumento a = new ArquivoDocumento();
 					a.setByteStream(InputStream2ByteConverter.get(doc.getStreamData()));
 					a.setNomeArquivo(doc.getName().replace(' ', '_'));
-					a.setDocumento(acervoDigitalFachada.findDocumentoByNome(title));
+					a.setDocumento(documento);
+					//a.setDocumento(acervoDigitalFachada.findDocumentoByNome(title));
 					acervoDigitalFachada.inserirArquivo(a);
 					
 				}
