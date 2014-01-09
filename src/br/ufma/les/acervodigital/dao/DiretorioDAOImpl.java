@@ -202,13 +202,15 @@ public class DiretorioDAOImpl implements DiretorioDAO{
   @Override
   public void alterarDiretorio(Diretorio diretorio) throws SQLException, Exception{
 	  
-	  PreparedStatement statement = Conexao.get().prepareStatement("UPDATE diretorio set nome=?,proprietario=?,diretorio_pai=? WHERE id_diretorio=?");
+	  PreparedStatement statement = Conexao.get().prepareStatement("UPDATE diretorio set nome = ?, diretorio_pai = ? WHERE id_diretorio = ? ");
 	  
 	  statement.setString(1, diretorio.getName());
-	  statement.setInt(2,diretorio.getProprietario().getId());
-	  statement.setInt(3, diretorio.getPai().getId());
-	  statement.setInt(4, diretorio.getId());
+	  //statement.setInt(2,diretorio.getProprietario().getId());
+	  statement.setInt(2, diretorio.getPai().getId());
+	  statement.setInt(3, diretorio.getId());
+	  
 	  statement.executeUpdate();
+	  
 	  statement.close();
 	  
   }
@@ -237,6 +239,7 @@ public Diretorio findDiretorioByNome(String nome) throws Exception {
 		diretorio.setDataCriacao(resultSet.getDate("data_criacao"));
 		diretorio.setId(resultSet.getInt("id_diretorio"));
 		diretorio.setName(resultSet.getString("nome"));
+		diretorio.setPai(findDiretorioByCodigo(resultSet.getInt("diretorio_pai")));
 		//diretorio.setProprietario(usuarioDAO.findByCodigo(resultSet.getInt("fk_proprietario")));
 		
 	}		

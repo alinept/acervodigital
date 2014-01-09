@@ -76,6 +76,8 @@ private static final long serialVersionUID = 1L;
 
 					diretorioPai = acervoDigitalFachada
 							.findDiretorioByNome(diretorioSelecionado);
+					
+					Sessions.getCurrent().setAttribute("modo", "novo");
 
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -96,22 +98,35 @@ private static final long serialVersionUID = 1L;
 	
 	public void salvarDiretorio() throws SQLException, Exception
 	{
+		String modo = (String) Sessions.getCurrent().getAttribute("modo");
+		
 		if(!diretorio.getName().equals("") || diretorio.getName() != null)
 		{
-			diretorio.setPai(diretorioPai);
-			diretorio.setDataCriacao(data);
-			
-			Usuario usuario = (Usuario) Sessions.getCurrent().getAttribute("usuario");
-			
-			diretorio.setProprietario(usuario);
-			
-			acervoDigitalFachada.inserirDiretorio(diretorio);
-			
-			Messagebox
-			.show("Diretório salvo com sucesso",
-					"Informação", Messagebox.OK,
-					Messagebox.INFORMATION);
-			
+			if(modo.equals("novo"))
+			{
+				diretorio.setPai(diretorioPai);
+				diretorio.setDataCriacao(data);
+				
+				Usuario usuario = (Usuario) Sessions.getCurrent().getAttribute("usuario");
+				
+				diretorio.setProprietario(usuario);
+				
+				acervoDigitalFachada.inserirDiretorio(diretorio);
+				
+				Messagebox
+				.show("Diretório salvo com sucesso",
+						"Informação", Messagebox.OK,
+						Messagebox.INFORMATION);
+			}
+			else if(modo.equals("editar"))
+			{
+				acervoDigitalFachada.alterarDiretorio(diretorio);
+				Messagebox
+				.show("Diretório editado com sucesso",
+						"Informação", Messagebox.OK,
+						Messagebox.INFORMATION);
+			}
+				
 			PackageDataUtil pk = new PackageDataUtil();
 	        pk.setRoot(null);
 	        
@@ -125,12 +140,63 @@ private static final long serialVersionUID = 1L;
 	    	arvore = new DefaultTreeModel<PackageData>(pk.getRoot());
 	    	
 	    	binder.loadAll();
+		}else{
+			
+			Messagebox
+			.show("Insira um nome para o diretório.\n"
+					,"Erro ", Messagebox.OK,
+					Messagebox.ERROR);
 		}
 	}
 
-	public void editarDiretorio()
+	public void abrirEditarDiretorio()
 	{
-		
+		try {
+			Usuario usuario = (Usuario) Sessions.getCurrent().getAttribute("usuario");
+			
+			if (!diretorioSelecionado.equals("")
+					&& diretorioSelecionado != null) {
+				
+				Window winNovoDiretorio = (Window) getFellow("novoDiretorio");
+				winNovoDiretorio.setVisible(true);
+				winNovoDiretorio.setPosition("center");
+				winNovoDiretorio.setMode("modal");
+
+				try {
+
+					diretorio = acervoDigitalFachada
+							.findDiretorioByNome(diretorioSelecionado);
+					
+					data = diretorio.getDataCriacao();
+					diretorioPai = diretorio.getPai();
+					
+//					if(!diretorio.getProprietario().equals(usuario))
+//					{
+//						cancelarNovoDiretorio();
+//						Messagebox
+//						.show("Desculpe. Você só pode editar um diretório em que seja proprietário\n"
+//								+ "Selecione um diretório abaixo e tente novamente ",
+//								"Erro de autorização", Messagebox.OK,
+//								Messagebox.ERROR);
+//					}
+//					else{
+						Sessions.getCurrent().setAttribute("modo", "editar");
+					//}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		} catch (NullPointerException e) {
+			Messagebox
+					.show("Para editar um diretório é necessário selecionar o diretório na árvore.\n"
+							+ "Selecione um diretório abaixo e tente novamente ",
+							"Erro ao editar diretório", Messagebox.OK,
+							Messagebox.ERROR);
+		}
+		binder.loadAll();
+
 	}
 	
 	public void excluirDiretorio()
@@ -142,6 +208,10 @@ private static final long serialVersionUID = 1L;
 	{
 		Window winNovoDiretorio = (Window) getFellow("novoDiretorio");
 		winNovoDiretorio.setVisible(false);
+		
+		diretorioSelecionado = null;
+		diretorioPai = null;
+		diretorio = null;
 		
 		binder.loadAll();
 	}
