@@ -11,7 +11,8 @@ import br.ufma.les.acervodigital.dao.DiretorioDAOImpl;
 import br.ufma.les.acervodigital.dominio.Diretorio;
 
 public class PackageDataUtil {
-    private static DiretorioTreeNode<PackageData> root;
+	
+    private DiretorioTreeNode<PackageData> root;
       
     public void montaArvore(final List<ObjectSql> estrutura) throws SQLException, Exception
     {
@@ -32,7 +33,7 @@ public class PackageDataUtil {
 	                    	for(Diretorio dir:colecao){
 	                    	List<Diretorio> colecaoFilhos = d.carregarFilhos(dir.getId());		
 	                        add(new DiretorioTreeNode<PackageData>(new PackageData(
-	                                dir.getName(), ""),carregaColecao(colecaoFilhos)));
+	                                dir.getName(), ""+dir.getDataCriacao(), dir.getProprietario().getNome()),carregaColecao(colecaoFilhos)));
 	                    	}
 	                    }
 	                }, true); // dist opened
@@ -51,7 +52,7 @@ public class PackageDataUtil {
              	for(Diretorio dir : colecao){
              	List<Diretorio> colecaoFilhos = d.carregarFilhos(dir.getId());
                  add(new DiretorioTreeNode<PackageData>(new PackageData(
-                         dir.getName(), ""),carregaColecao(colecaoFilhos)));
+                         dir.getName(), ""+dir.getDataCriacao(), dir.getProprietario().getNome()),carregaColecao(colecaoFilhos)));
              	}
              }
          };
@@ -69,8 +70,13 @@ public class PackageDataUtil {
     	}
     }
     
- 
-    public static DiretorioTreeNode<PackageData> getRoot() {
+    
+    
+    public void setRoot(DiretorioTreeNode<PackageData> root) {
+		this.root = root;
+	}
+
+	public DiretorioTreeNode<PackageData> getRoot() {
         return root;
     }
 }

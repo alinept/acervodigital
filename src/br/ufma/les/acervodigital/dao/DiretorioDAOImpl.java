@@ -35,6 +35,8 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 			d.setName(rs.getString("nome"));
 			d.setIdpai(rs.getInt("diretorio_pai"));
 			d.setDataCriacao(rs.getDate("data_criacao"));
+			d.setProprietario(usuarioDAO.findByCodigo(rs.getInt("fk_proprietario")));
+			
 			colecaoDiretorio.add(d);
 		}
 		rs.close();
@@ -56,6 +58,8 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 			d.setName(rs.getString("nome"));
 			d.setIdpai(rs.getInt("diretorio_pai"));
 			d.setDataCriacao(rs.getDate("data_criacao"));
+			d.setProprietario(usuarioDAO.findByCodigo(rs.getInt("fk_proprietario")));
+			
 			colecaoDiretorio.add(d);
 		}
 		rs.close();
@@ -181,14 +185,16 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 		PreparedStatement statement = Conexao
 				.get()
 				.prepareStatement(
-						"INSERT INTO"
-								+ "diretorio(id_diretorio,nome,data_criacao,proprietario,diretorio_pai) VALUES (?,?,?,?,?)");
-		statement.setInt(1, diretorio.getId());
-		statement.setString(2, diretorio.getName());
-		statement.setDate(3, (Date) diretorio.getDataCriacao());
-		statement.setInt(4, diretorio.getProprietario().getId());
-		statement.setInt(5, diretorio.getPai().getId());
+						"INSERT INTO "
+								+ "diretorio(nome, data_criacao, fk_proprietario, diretorio_pai) VALUES (?,?,?,?)");
+
+		statement.setString(1, diretorio.getName());
+		statement.setDate(2, sqlDate);
+		statement.setInt(3, diretorio.getProprietario().getId());
+		statement.setInt(4, diretorio.getPai().getId());
+		
 		statement.executeUpdate();
+		
 		statement.close();
 
   }
