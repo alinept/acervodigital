@@ -18,5 +18,8 @@ public interface DiretorioDAO {
 	List<Diretorio> carregarDiretorios() throws SQLException, Exception;
 	public abstract List<Diretorio> carregarFilhos(int idDiretorio) throws SQLException,
 			Exception;
+	public abstract List<Diretorio> carregarDiretoriosRoot() throws SQLException,
+			Exception;
+
 	
 }

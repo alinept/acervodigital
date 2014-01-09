@@ -21,7 +21,31 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 	}
 	
 	
+	@Override
 	public List<Diretorio> carregarDiretorios() throws SQLException, Exception{
+		
+		List<Diretorio> colecaoDiretorio= new ArrayList<Diretorio>();
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM diretorio");
+		ResultSet rs = statement.executeQuery();
+		
+		
+		while(rs.next()){
+			Diretorio d = new Diretorio();
+			d.setId(rs.getInt("id_diretorio"));
+			d.setName(rs.getString("nome"));
+			d.setIdpai(rs.getInt("diretorio_pai"));
+			d.setDataCriacao(rs.getDate("data_criacao"));
+			colecaoDiretorio.add(d);
+		}
+		rs.close();
+		return colecaoDiretorio;
+		
+	}
+	
+	
+@Override
+public List<Diretorio> carregarDiretoriosRoot() throws SQLException, Exception{
 		
 		List<Diretorio> colecaoDiretorio= new ArrayList<Diretorio>();
 		
