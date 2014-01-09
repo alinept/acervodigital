@@ -8,7 +8,6 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.Datebox;
-import org.zkoss.zul.Fileupload;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -154,7 +153,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 				acervoDigitalFachada.inserirDocumento(d);
 				
 				
-				insertFile(doc , FileSupportVerificator.PDF_TYPE);
+				insertFile(doc , FileSupportVerificator.PDF_TYPE,d);
 				
 								
 			}
@@ -199,7 +198,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 	}
 	
 	
-	private void insertFile(Media doc, short type) throws Exception{
+	private void insertFile(Media doc, short type, Documento documento ) throws Exception{
 		switch (type) {
 			case FileSupportVerificator.PDF_TYPE:
 				String title = ((Textbox)getFellow("titleTextBox")).getValue();
@@ -209,7 +208,8 @@ private static final long serialVersionUID = 7268970269306314382L;
 					ArquivoDocumento a = new ArquivoDocumento();
 					a.setByteStream(InputStream2ByteConverter.get(doc.getStreamData()));
 					a.setNomeArquivo(doc.getName().replace(' ', '_'));
-					a.setDocumento(acervoDigitalFachada.findDocumentoByNome(title));
+					a.setDocumento(documento);
+					//a.setDocumento(acervoDigitalFachada.findDocumentoByNome(title));
 					acervoDigitalFachada.inserirArquivo(a);
 					
 				}
