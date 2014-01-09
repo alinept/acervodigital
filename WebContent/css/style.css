@@ -1,0 +1,25 @@
+.mail {
+    background-color: #f2f2f2;
+    border: 1px solid #d7d7d7;
+    padding: 15px;
+}
+ 
+.maillogo {
+    padding: 15px 0;
+}
+ 
+.maillabel {
+    width: 50px;
+    color: #959595;
+    display: block;
+    font-weight: bold;
+}
+ 
+.mailinput {
+    border: 1px solid #d7d7d7;
+    padding: 3px;
+}
+ 
+.mailformrow {
+    padding-bottom: 8px;
+}
