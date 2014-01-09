@@ -174,6 +174,11 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 		
 		return usuarioDAO.findByNome(nome);
 	}
+
+	@Override
+	public Diretorio findDiretorioByNome(String nome) throws Exception {
+		return diretorioDAO.findDiretorioByNome(nome);
+	}
 	
 
 }

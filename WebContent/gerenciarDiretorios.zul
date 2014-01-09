@@ -18,6 +18,12 @@
 					<groupbox id="grp" closable="false" mold='3d'>
 						<caption label="Diretórios" />
 						<tree id="tree" hflex="1" model="@{win.arvore}" >
+							<attribute name="onSelect">
+						   	    if (!tree.getSelectedItem().getValue().equals("")){
+									Treeitem t = (Treeitem)self.getSelectedItem();
+							    	win.setDiretorioSelecionado(t.getLabel());
+							    }
+							</attribute>
 							<treecols>
 								<treecol hflex="1" label="Path" />
 								<treecol hflex="1" label="Description" />
@@ -68,13 +74,13 @@
 			<div align="right" width="150px">
 				<label value="Diretório Pai: "/>
 			</div>
-			<textbox width="200px" disabled="true"/>
+			<textbox width="200px" disabled="true" value="@{win.diretorioPai.name }"/>
 		</hbox>
 		</vbox>
 		<separator height="30px"/>
 		<div align="center">
-			<button label="Salvar"/>
-			<button label="Cancelar"/>
+			<button label="Salvar" />
+			<button label="Cancelar" onClick="win.cancelarNovoDiretorio()"/>
 		</div>
 	</window>
 </window>

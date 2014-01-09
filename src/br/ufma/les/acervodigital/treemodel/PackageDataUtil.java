@@ -17,7 +17,7 @@ public class PackageDataUtil {
     {
     	
 	  final DiretorioDAO d= new DiretorioDAOImpl();
-	  final List<Diretorio> colecao =  d.carregarDiretorios();
+	  final List<Diretorio> colecao =  d.carregarDiretoriosRoot();
 	  
     	
     	if(root == null)

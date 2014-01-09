@@ -19,6 +19,7 @@ public interface AcervoDigitalFachada {
 	
 	/*##################Diretorio###################*/
 	Diretorio findDiretorioByCodigo(int codigo) throws Exception;
+	Diretorio findDiretorioByNome(String nome) throws Exception;
 	void inserirDiretorio(Diretorio diretorio) throws SQLException, Exception;
 	void alterarDiretorio(Diretorio diretorio) throws SQLException, Exception;
 	void excluirDiretorio(int idDiretorio) throws SQLException, Exception;

@@ -21,7 +21,31 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 	}
 	
 	
+	@Override
 	public List<Diretorio> carregarDiretorios() throws SQLException, Exception{
+		
+		List<Diretorio> colecaoDiretorio= new ArrayList<Diretorio>();
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM diretorio");
+		ResultSet rs = statement.executeQuery();
+		
+		
+		while(rs.next()){
+			Diretorio d = new Diretorio();
+			d.setId(rs.getInt("id_diretorio"));
+			d.setName(rs.getString("nome"));
+			d.setIdpai(rs.getInt("diretorio_pai"));
+			d.setDataCriacao(rs.getDate("data_criacao"));
+			colecaoDiretorio.add(d);
+		}
+		rs.close();
+		return colecaoDiretorio;
+		
+	}
+	
+	
+@Override
+public List<Diretorio> carregarDiretoriosRoot() throws SQLException, Exception{
 		
 		List<Diretorio> colecaoDiretorio= new ArrayList<Diretorio>();
 		
@@ -214,5 +238,28 @@ public class DiretorioDAOImpl implements DiretorioDAO{
 	  statement.executeUpdate();
 	  statement.close();
   }
+
+
+@Override
+public Diretorio findDiretorioByNome(String nome) throws Exception {
+	Diretorio diretorio = new Diretorio();
+	
+	PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+			"diretorio WHERE nome = ? ");
+	statement.setString(1, nome);
+	
+	ResultSet resultSet = statement.executeQuery();
+	
+	if (resultSet.next()) {
+		
+		diretorio.setDataCriacao(resultSet.getDate("data_criacao"));
+		diretorio.setId(resultSet.getInt("id_diretorio"));
+		diretorio.setName(resultSet.getString("nome"));
+		//diretorio.setProprietario(usuarioDAO.findByCodigo(resultSet.getInt("fk_proprietario")));
+		
+	}		
+			
+	return diretorio;
+}
   
 }

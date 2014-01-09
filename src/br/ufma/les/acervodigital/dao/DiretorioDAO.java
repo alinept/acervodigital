@@ -9,6 +9,7 @@ import br.ufma.les.acervodigital.treemodel.ObjectSql;
 public interface DiretorioDAO {
 	
 	Diretorio findDiretorioByCodigo(int codigo) throws Exception;
+	Diretorio findDiretorioByNome(String nome) throws Exception;
 	void inserirDiretorio(Diretorio diretorio) throws SQLException, Exception;
 	void alterarDiretorio(Diretorio diretorio) throws SQLException, Exception;
 	void excluirDiretorio(int idDiretorio) throws SQLException, Exception;
@@ -17,5 +18,8 @@ public interface DiretorioDAO {
 	List<Diretorio> carregarDiretorios() throws SQLException, Exception;
 	public abstract List<Diretorio> carregarFilhos(int idDiretorio) throws SQLException,
 			Exception;
+	public abstract List<Diretorio> carregarDiretoriosRoot() throws SQLException,
+			Exception;
+
 	
 }
