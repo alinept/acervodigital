@@ -49,7 +49,7 @@ public List<Diretorio> carregarDiretoriosRoot() throws SQLException, Exception{
 		
 		List<Diretorio> colecaoDiretorio= new ArrayList<Diretorio>();
 		
-		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM diretorio WHERE diretorio_pai = 0");
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM diretorio WHERE diretorio_pai is null");
 		ResultSet rs = statement.executeQuery();
 		
 		
@@ -242,7 +242,7 @@ public List<Diretorio> carregarDiretoriosRoot() throws SQLException, Exception{
   @Override
   public void excluirDiretorio(int idDiretorio) throws SQLException, Exception{
 	  
-	  PreparedStatement statement = Conexao.get().prepareStatement("delete diretorio where="+idDiretorio);
+	  PreparedStatement statement = Conexao.get().prepareStatement("delete from diretorio where id_diretorio="+idDiretorio);
 	  statement.executeUpdate();
 	  statement.close();
   }

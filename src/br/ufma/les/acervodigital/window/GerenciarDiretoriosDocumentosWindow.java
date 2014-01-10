@@ -203,7 +203,7 @@ private static final long serialVersionUID = 1L;
 	public void excluirDiretorio()
 	{
 		if (!diretorioSelecionado.equals("") && diretorioSelecionado != null) {
-		 Messagebox.show("Você deseja excluir esse diretorio?", "Question",
+		 Messagebox.show("Você deseja realmente excluir diretorio "+ diretorioSelecionado + "?", "Question",
 					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 	                   
 						@Override
@@ -214,12 +214,25 @@ private static final long serialVersionUID = 1L;
 										.findDiretorioByNome(diretorioSelecionado);
 								diretorio = acervoDigitalFachada
 										.findDiretorioByNome(diretorioSelecionado);
-								Messagebox.show("excluiu");
+								acervoDigitalFachada.excluirDiretorio(diretorio.getId());
+								
+								PackageDataUtil pk = new PackageDataUtil();
+						        pk.setRoot(null);
+						        
+								try {
+									pk.montaArvore(acervoDigitalFachada.retornaCaminhoDiretorioRaiz());
+								} catch (SQLException e) {
+									e.printStackTrace();
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+						    	arvore = new DefaultTreeModel<PackageData>(pk.getRoot());
+						    	
+						    	binder.loadAll();
+								
+
 							}
-							else{
-								Messagebox.show("cancelou");
-							}
-							
+
 						}
 				
 			 
