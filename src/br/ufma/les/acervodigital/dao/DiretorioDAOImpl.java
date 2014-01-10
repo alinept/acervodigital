@@ -246,6 +246,12 @@ public List<Diretorio> carregarDiretoriosRoot() throws SQLException, Exception{
 	  statement.executeUpdate();
 	  statement.close();
   }
+  
+  public void excluirArquivosDiretorio(int idDiretorio) throws SQLException, Exception{
+	  PreparedStatement statement = Conexao.get().prepareStatement("delete arquivo where="+idDiretorio);
+	  statement.executeUpdate();
+	  statement.close();
+  }
 
 
 @Override

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.Date;
 
 import org.zkoss.zk.ui.Sessions;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.DefaultTreeModel;
@@ -201,6 +202,30 @@ private static final long serialVersionUID = 1L;
 	
 	public void excluirDiretorio()
 	{
+		if (!diretorioSelecionado.equals("") && diretorioSelecionado != null) {
+		 Messagebox.show("Você deseja excluir esse diretorio?", "Question",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+	                   
+						@Override
+						public void onEvent(Event event) throws Exception {
+							// TODO Auto-generated method stub
+							if(event.getName().equals("onOK")){
+								diretorio = acervoDigitalFachada
+										.findDiretorioByNome(diretorioSelecionado);
+								diretorio = acervoDigitalFachada
+										.findDiretorioByNome(diretorioSelecionado);
+								Messagebox.show("excluiu");
+							}
+							else{
+								Messagebox.show("cancelou");
+							}
+							
+						}
+				
+			 
+			});
+		 
+		}
 		
 	}
 	
