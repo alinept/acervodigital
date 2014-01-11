@@ -36,6 +36,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 	protected DataBinder binder;
 	private AcervoDigitalFachada acervoDigitalFachada;
 	private List<Tag> tags;
+	private List<Tag> tagsUtilizadas;
 	private List<ObjectSql> diretorios;
 	private ObjectSql diretorio;
 	
@@ -45,6 +46,8 @@ private static final long serialVersionUID = 7268970269306314382L;
         binder =  new AnnotateDataBinder(window);
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
         tags = new ArrayList<Tag>();
+        tagsUtilizadas = new ArrayList<Tag>();
+        
         try {
 			tags = acervoDigitalFachada.findAllTags();
 			diretorios = acervoDigitalFachada.findAllDiretorios();
@@ -291,6 +294,14 @@ private static final long serialVersionUID = 7268970269306314382L;
 
 	public void setDiretorio(ObjectSql diretorio) {
 		this.diretorio = diretorio;
+	}
+
+	public List<Tag> getTagsUtilizadas() {
+		return tagsUtilizadas;
+	}
+
+	public void setTagsUtilizadas(List<Tag> tagsUtilizadas) {
+		this.tagsUtilizadas = tagsUtilizadas;
 	}
 	
 	
