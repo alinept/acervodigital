@@ -1,6 +1,8 @@
 package br.ufma.les.acervodigital.window;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.zkoss.util.media.Media;
 import org.zkoss.zk.ui.Executions;
@@ -12,8 +14,10 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+
 import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
 import br.ufma.les.acervodigital.dominio.Documento;
+import br.ufma.les.acervodigital.dominio.Tag;
 import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
@@ -31,13 +35,20 @@ private static final long serialVersionUID = 7268970269306314382L;
 	public Window window;
 	protected DataBinder binder;
 	private AcervoDigitalFachada acervoDigitalFachada;
-	
+	private List<Tag> tags;
 	
 	public void onCreate()
     {
     	window = (Window)getFellow("win");
         binder =  new AnnotateDataBinder(window);
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
+        tags = new ArrayList<Tag>();
+        try {
+			tags = acervoDigitalFachada.findAllTags();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         binder.loadAll();
       
     }
@@ -253,7 +264,14 @@ private static final long serialVersionUID = 7268970269306314382L;
 	public void setDocaux(Media docaux) {
 		this.docaux = docaux;
 	}
-	
-	
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
 
 }

@@ -3,7 +3,9 @@
 <?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
 
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
-
+	
+	<style src="/css/style.css"/>
+	
 	<window border="none" id="win"
 		use="br.ufma.les.acervodigital.window.NovoArquivoWindow">
 		<div sclass="container">
@@ -22,12 +24,12 @@
 					<textbox sclass="input-block-level" rows="4"
 						multiline="true" id="descriptionTextBox" />
 				</groupbox>
-				<groupbox zclass="clearfix">
-					<h:h4>Data de Expedição</h:h4>
-					<div class="input-prepend">
-						<datebox sclass="input-append" id="dateBox" />
-					</div>
-				</groupbox>
+<!-- 				<groupbox zclass="clearfix"> -->
+<!-- 					<h:h4>Data de Expedição</h:h4> -->
+<!-- 					<div class="input-prepend"> -->
+<!-- 						<datebox sclass="input-append" id="dateBox" /> -->
+<!-- 					</div> -->
+<!-- 				</groupbox> -->
 				<groupbox zclass="clearfix">
 					<h:h4>Buscar Documento para Upload</h:h4>
 						<div class="pull-left">
@@ -54,8 +56,27 @@
 							rows="2" sclass="span5"
 							disabled="true" id="fileUploadedTextBox" />
 						</div>
-					
 
+				</groupbox>
+				
+				<groupbox zclass="clearfix">
+					<h:h4>Tags</h:h4>
+					<div class="input-prepend">
+					
+						<listbox id="listTags" checkmark="true"
+								model="@{win.tags}" width="600px">
+								<listhead>
+									<listheader label="Nome" width="200px"/>
+									<listheader label="Descrição" width="400px"/>
+								</listhead>
+								<listitem self="@{each=tag}">
+									<listcell label="@{tag.nome}" />
+									<listcell label="@{tag.descricao}" />
+									
+								</listitem>
+
+							</listbox>
+					</div>
 				</groupbox>
 				<separator height="10px" />
 				
