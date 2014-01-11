@@ -72,12 +72,7 @@ public class ArquivoDocumentoDAOImpl implements ArquivoDocumentoDAO{
 		PreparedStatement statement = Conexao
 				.get()
 				.prepareStatement(
-						"SELECT "
-								+ "* FROM arquivo a inner join  documento d"
-								+ " on a.fk_documento=d.id_documento"+
-								" inner join diretorio r"+
-								" on d.fk_diretorio=r.id_diretorio"+
-								"where r.id_diretorio=?");
+						"SELECT arquivo.* FROM arquivo,documento,diretorio where arquivo.fk_documento=documento.id_documento and  documento.fk_diretorio=diretorio.id_diretorio and diretorio.id_diretorio=?");
 		statement.setInt(1, idDiretorio);
 		ResultSet rs = statement.executeQuery();
 		
