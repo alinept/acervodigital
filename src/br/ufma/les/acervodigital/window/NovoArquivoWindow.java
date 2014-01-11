@@ -36,6 +36,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 	protected DataBinder binder;
 	private AcervoDigitalFachada acervoDigitalFachada;
 	private List<Tag> tags;
+	private Tag tag;
 	private List<Tag> tagsUtilizadas;
 	private List<ObjectSql> diretorios;
 	private ObjectSql diretorio;
@@ -183,6 +184,17 @@ private static final long serialVersionUID = 7268970269306314382L;
 		Executions.sendRedirect("/index.zul");
 	}
 	
+	public void informacaoTag()
+	{
+		if(tag != null)
+		{
+		
+			Messagebox.show(tag.getDescricao(), "Informação sobre Tag", 
+					Messagebox.OK, Messagebox.INFORMATION);
+		}
+		binder.loadAll();
+	}
+	
 	private boolean isEmpty(String str){
 		if(str == null) return true;
     	for(int i=0; i<str.length(); i++){
@@ -302,6 +314,14 @@ private static final long serialVersionUID = 7268970269306314382L;
 
 	public void setTagsUtilizadas(List<Tag> tagsUtilizadas) {
 		this.tagsUtilizadas = tagsUtilizadas;
+	}
+
+	public Tag getTag() {
+		return tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
 	
 	
