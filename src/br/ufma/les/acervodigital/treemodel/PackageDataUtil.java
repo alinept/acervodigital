@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.zkoss.zul.Messagebox;
 
+import br.ufma.les.acervodigital.dao.ArquivoDocumentoDAO;
+import br.ufma.les.acervodigital.dao.ArquivoDocumentoDAOImpl;
 import br.ufma.les.acervodigital.dao.DiretorioDAO;
 import br.ufma.les.acervodigital.dao.DiretorioDAOImpl;
+import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
 import br.ufma.les.acervodigital.dominio.Diretorio;
 
 public class PackageDataUtil {
@@ -17,8 +20,11 @@ public class PackageDataUtil {
     public void montaArvore(final List<ObjectSql> estrutura) throws SQLException, Exception
     {
     	
-	  final DiretorioDAO d= new DiretorioDAOImpl();
+	  final DiretorioDAO d = new DiretorioDAOImpl();
+	  final ArquivoDocumentoDAO a = new ArquivoDocumentoDAOImpl();
 	  final List<Diretorio> colecao =  d.carregarDiretoriosRoot();
+	  
+	 
 	  
     	
     	if(root == null)
@@ -31,7 +37,13 @@ public class PackageDataUtil {
 	                    {   
 	                    	
 	                    	for(Diretorio dir:colecao){
-	                    	List<Diretorio> colecaoFilhos = d.carregarFilhos(dir.getId());		
+	                    	List<Diretorio> colecaoFilhos = d.carregarFilhos(dir.getId());	
+	                    	List<ArquivoDocumento> colecaoArquivos = a.carregaArquivos(dir.getId());
+	                    	for(ArquivoDocumento arquivo : colecaoArquivos){
+	                    		add(new DiretorioTreeNode<PackageData>(new PackageData(arquivo.getNomeArquivo()
+                                ,"" , "")));
+	                    		
+	                    	}
 	                        add(new DiretorioTreeNode<PackageData>(new PackageData(
 	                                dir.getName(), ""+dir.getDataCriacao(), dir.getProprietario().getNome()),carregaColecao(colecaoFilhos)));
 	                    	}
@@ -43,6 +55,7 @@ public class PackageDataUtil {
     public DiretorioTreeNodeCollection<PackageData> carregaColecao(final List<Diretorio> colecao) throws Exception{
     	
     	 final DiretorioDAO d= new DiretorioDAOImpl();
+    	 final ArquivoDocumentoDAO a = new ArquivoDocumentoDAOImpl();
     	 DiretorioTreeNodeCollection<PackageData> root=null;
     	 
     	 root = new DiretorioTreeNodeCollection<PackageData>() {
@@ -51,6 +64,12 @@ public class PackageDataUtil {
              {   
              	for(Diretorio dir : colecao){
              	List<Diretorio> colecaoFilhos = d.carregarFilhos(dir.getId());
+             	List<ArquivoDocumento> colecaoArquivos = a.carregaArquivos(dir.getId());
+            	for(ArquivoDocumento arquivo : colecaoArquivos){
+            		add(new DiretorioTreeNode<PackageData>(new PackageData(arquivo.getNomeArquivo()
+                    ,"" , "")));
+            		
+            	}
                  add(new DiretorioTreeNode<PackageData>(new PackageData(
                          dir.getName(), ""+dir.getDataCriacao(), dir.getProprietario().getNome()),carregaColecao(colecaoFilhos)));
              	}

@@ -66,6 +66,7 @@ public class ArquivoDocumentoDAOImpl implements ArquivoDocumentoDAO{
 		return r;
 	}
 	
+	@Override
 	public List<ArquivoDocumento> carregaArquivos(int idDiretorio) throws SQLException, Exception{
 		ArrayList<ArquivoDocumento> r = new ArrayList<ArquivoDocumento>();
 		PreparedStatement statement = Conexao
@@ -76,8 +77,8 @@ public class ArquivoDocumentoDAOImpl implements ArquivoDocumentoDAO{
 								+ " on a.fk_documento=d.id_documento"+
 								" inner join diretorio r"+
 								" on d.fk_diretorio=r.id_diretorio"+
-								"where r.id_diretorio="+idDiretorio);
-		
+								"where r.id_diretorio=?");
+		statement.setInt(1, idDiretorio);
 		ResultSet rs = statement.executeQuery();
 		
 		while(rs.next()){
