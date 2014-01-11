@@ -1,6 +1,5 @@
 package br.ufma.les.acervodigital.dao;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,7 +48,7 @@ public List<Diretorio> carregarDiretoriosRoot() throws SQLException, Exception{
 		
 		List<Diretorio> colecaoDiretorio= new ArrayList<Diretorio>();
 		
-		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM diretorio WHERE diretorio_pai = 0");
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM diretorio WHERE diretorio_pai is null");
 		ResultSet rs = statement.executeQuery();
 		
 		
@@ -149,7 +148,7 @@ public List<Diretorio> carregarDiretoriosRoot() throws SQLException, Exception{
 		if (resultSet.next()) {
 			
 			ObjectSql obj = new ObjectSql();
-			obj.setNivel(resultSet.getInt("nivel"));
+			//obj.setNivel(resultSet.getInt("nivel"));
 			obj.setCaminhoDiretorio(resultSet.getString("arvore"));
 			
 			estrutura.add(obj);
@@ -192,7 +191,7 @@ public List<Diretorio> carregarDiretoriosRoot() throws SQLException, Exception{
 		if (resultSet.next()) {
 			
 			ObjectSql obj = new ObjectSql();
-			obj.setNivel(resultSet.getInt("nivel"));
+			//obj.setNivel(resultSet.getInt("nivel"));
 			obj.setCaminhoDiretorio(resultSet.getString("arvore"));
 			
 			estrutura.add(obj);
@@ -242,7 +241,13 @@ public List<Diretorio> carregarDiretoriosRoot() throws SQLException, Exception{
   @Override
   public void excluirDiretorio(int idDiretorio) throws SQLException, Exception{
 	  
-	  PreparedStatement statement = Conexao.get().prepareStatement("delete diretorio where="+idDiretorio);
+	  PreparedStatement statement = Conexao.get().prepareStatement("delete from diretorio where id_diretorio="+idDiretorio);
+	  statement.executeUpdate();
+	  statement.close();
+  }
+  
+  public void excluirArquivosDiretorio(int idDiretorio) throws SQLException, Exception{
+	  PreparedStatement statement = Conexao.get().prepareStatement("delete arquivo where="+idDiretorio);
 	  statement.executeUpdate();
 	  statement.close();
   }
@@ -270,5 +275,48 @@ public Diretorio findDiretorioByNome(String nome) throws Exception {
 			
 	return diretorio;
 }
+
+
+@Override
+public List<ObjectSql> findAll() throws Exception {
+	List<ObjectSql> diretorios = new ArrayList<ObjectSql>();
+	
+	String sql = "WITH RECURSIVE cte_recursiva (id_diretorio,nome,nivel,arvore)"
+		  	+" AS("
+		  	+" SELECT id_diretorio"
+		  	+" , nome"
+		  	+" , 1 AS nivel"
+		  	+" , CAST(nome AS VARCHAR(255)) AS arvore"
+		  	+" FROM diretorio"
+		  	+" WHERE diretorio_pai IS NULL"
+		  	+" UNION ALL"
+		  	+" SELECT g.id_diretorio"
+		  	+" , g.nome"
+		  	+" , c.nivel + 1 AS nivel"
+		  	+" , CAST((c.arvore || '/' || g.nome) AS VARCHAR(255)) AS arvore"
+		  	+" FROM diretorio g"
+		  	+" INNER JOIN cte_recursiva c "
+		  	+" ON g.diretorio_pai = c.id_diretorio" 
+		  	+" )"
+		  	+" SELECT id_diretorio"
+		  	+" , arvore "
+		  	+" FROM cte_recursiva;";
+	
+	PreparedStatement statement = Conexao.get().prepareStatement(sql);
+	  
+	  ResultSet resultSet = statement.executeQuery();
+		
+		while(resultSet.next()) {
+			
+			ObjectSql obj = new ObjectSql();
+			obj.setCodigo(resultSet.getInt("id_diretorio"));
+			obj.setCaminhoDiretorio(resultSet.getString("arvore"));
+			
+			diretorios.add(obj);
+						
+		}	
+			
+		return diretorios;
+	}
   
 }

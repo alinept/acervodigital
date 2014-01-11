@@ -2,14 +2,14 @@ package br.ufma.les.acervodigital.treemodel;
 
 public class ObjectSql {
 	
-	int nivel;
+	int codigo;
 	String caminhoDiretorio;
 	
-	public int getNivel() {
-		return nivel;
+	public int getCodigo() {
+		return codigo;
 	}
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	public String getCaminhoDiretorio() {
 		return caminhoDiretorio;

@@ -179,6 +179,11 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 	public Diretorio findDiretorioByNome(String nome) throws Exception {
 		return diretorioDAO.findDiretorioByNome(nome);
 	}
+
+	@Override
+	public List<ObjectSql> findAllDiretorios() throws SQLException, Exception {
+		return diretorioDAO.findAll();
+	}
 	
 
 }

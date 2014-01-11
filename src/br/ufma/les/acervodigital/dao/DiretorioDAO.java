@@ -21,5 +21,6 @@ public interface DiretorioDAO {
 	public abstract List<Diretorio> carregarDiretoriosRoot() throws SQLException,
 			Exception;
 
+	List<ObjectSql> findAll() throws Exception;
 	
 }

@@ -14,13 +14,13 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
-
 import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
 import br.ufma.les.acervodigital.dominio.Documento;
 import br.ufma.les.acervodigital.dominio.Tag;
 import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
+import br.ufma.les.acervodigital.treemodel.ObjectSql;
 import br.ufma.les.acervodigital.util.DocumentAnalize;
 import br.ufma.les.acervodigital.util.FileSupportVerificator;
 import br.ufma.les.acervodigital.util.InputStream2ByteConverter;
@@ -36,6 +36,8 @@ private static final long serialVersionUID = 7268970269306314382L;
 	protected DataBinder binder;
 	private AcervoDigitalFachada acervoDigitalFachada;
 	private List<Tag> tags;
+	private List<ObjectSql> diretorios;
+	private ObjectSql diretorio;
 	
 	public void onCreate()
     {
@@ -45,6 +47,8 @@ private static final long serialVersionUID = 7268970269306314382L;
         tags = new ArrayList<Tag>();
         try {
 			tags = acervoDigitalFachada.findAllTags();
+			diretorios = acervoDigitalFachada.findAllDiretorios();
+			diretorio = new ObjectSql();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -273,5 +277,21 @@ private static final long serialVersionUID = 7268970269306314382L;
 		this.tags = tags;
 	}
 
+	public List<ObjectSql> getDiretorios() {
+		return diretorios;
+	}
 
+	public void setDiretorios(List<ObjectSql> diretorios) {
+		this.diretorios = diretorios;
+	}
+
+	public ObjectSql getDiretorio() {
+		return diretorio;
+	}
+
+	public void setDiretorio(ObjectSql diretorio) {
+		this.diretorio = diretorio;
+	}
+	
+	
 }

@@ -1,10 +1,8 @@
 package br.ufma.les.acervodigital.treemodel;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.zkoss.zul.Messagebox;
 
 import br.ufma.les.acervodigital.dao.DiretorioDAO;
 import br.ufma.les.acervodigital.dao.DiretorioDAOImpl;
@@ -62,13 +60,13 @@ public class PackageDataUtil {
     	return root;
     }
     
-    public void addFilhos(ObjectSql obj,List<ObjectSql> estrutura, int posicao)
-    {
-    	for(int i = posicao; i<estrutura.size();i++)
-    	{
-    		if(!(estrutura.get(i).nivel == obj.nivel + 1)) break;
-    	}
-    }
+//    public void addFilhos(ObjectSql obj,List<ObjectSql> estrutura, int posicao)
+//    {
+//    	for(int i = posicao; i<estrutura.size();i++)
+//    	{
+//    		if(!(estrutura.get(i).nivel == obj.nivel + 1)) break;
+//    	}
+//    }
     
     
     

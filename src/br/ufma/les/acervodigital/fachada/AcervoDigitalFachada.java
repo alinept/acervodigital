@@ -25,7 +25,8 @@ public interface AcervoDigitalFachada {
 	void excluirDiretorio(int idDiretorio) throws SQLException, Exception;
 	List<ObjectSql> retornaCaminhoDiretoriosAbaixo(int id) throws SQLException, Exception;
 	List<ObjectSql> retornaCaminhoDiretorioRaiz() throws SQLException, Exception;
-
+	List<ObjectSql> findAllDiretorios() throws SQLException, Exception;
+	
 	/*##################Documento###################*/
 	boolean inserirDocumento(Documento documento) throws Exception ;
 	boolean deletarDocumento(Documento documento) throws Exception ;

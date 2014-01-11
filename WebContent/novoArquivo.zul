@@ -30,40 +30,58 @@
 <!-- 						<datebox sclass="input-append" id="dateBox" /> -->
 <!-- 					</div> -->
 <!-- 				</groupbox> -->
+
 				<groupbox zclass="clearfix">
 					<h:h4>Buscar Documento para Upload</h:h4>
 						<div class="pull-left">
-							<label sclass="label" value="Arquivo de Texto:" />
+<!-- 							<label sclass="label" value="Arquivo de Texto:" /> -->
 							<separator width="20px" />
-							<button sclass="btn" label="Upload"
-								id="docUploadButton" onClick="win.uploadDoc()"/>
-
-							<image src="images/ajuda.gif"
+							<hbox>
+								<textbox  sclass="input-block-level" width="400px"
+								disabled="true" id="fileUploadedTextBox" />
+							
+							
+<!-- 							<button sclass="btn" label="Upload" -->
+<!-- 								id="docUploadButton" onClick="win.uploadDoc()"/> -->
+							
+								<button label="..." image="images/lupa.png" upload="true">
+									<attribute name="onUpload"><![CDATA[
+										win.setDocaux(event.getMedia());
+										win.uploadDoc();
+									]]></attribute>
+								</button>
+								
+								<image src="images/ajuda.gif"
 								onClick="win.helpDoc()" />
 								
-							<button label="Upload Image" upload="true,maxsize=300">
-								<attribute name="onUpload"><![CDATA[
-									win.setDocaux(event.getMedia());
-									win.uploadDoc();
-								]]></attribute>
-							</button>
+							</hbox>
 						</div>
 
 						<div class="pull-right">
-							<label sclass="label label-info" value="Arquivo selecionado:" />
-							<separator width="20px" />	
-							<textbox multiline="true"
-							rows="2" sclass="span5"
-							disabled="true" id="fileUploadedTextBox" />
+<!-- 							<label sclass="label label-info" value="Arquivo selecionado:" /> -->
+<!-- 							<separator width="20px" />	 -->
+							
 						</div>
 
+				</groupbox>
+				
+				<groupbox zclass="clearfix">
+					<hbox>
+						<image src="/images/diretorio.png"/>
+						<h:h4>Salvar documento no diretório:</h:h4>
+					</hbox>
+					
+					<combobox model="@{win.diretorios}" width="500px" selectedItem="@{win.diretorio}">
+						<comboitem self="@{each='diretorio'}" 
+                            label="@{diretorio.caminhoDiretorio}" value="@{diretorio}"/>
+					</combobox>
 				</groupbox>
 				
 				<groupbox zclass="clearfix">
 					<h:h4>Tags</h:h4>
 					<div class="input-prepend">
 					
-						<listbox id="listTags" checkmark="true"
+						<listbox id="listTags" checkmark="true" 
 								model="@{win.tags}" width="600px">
 								<listhead>
 									<listheader label="Nome" width="200px"/>
