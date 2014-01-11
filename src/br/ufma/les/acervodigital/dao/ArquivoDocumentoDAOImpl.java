@@ -65,5 +65,32 @@ public class ArquivoDocumentoDAOImpl implements ArquivoDocumentoDAO{
 		}
 		return r;
 	}
+	
+	public List<ArquivoDocumento> carregaArquivos(int idDiretorio) throws SQLException, Exception{
+		ArrayList<ArquivoDocumento> r = new ArrayList<ArquivoDocumento>();
+		PreparedStatement statement = Conexao
+				.get()
+				.prepareStatement(
+						"SELECT "
+								+ "* FROM arquivo a inner join  documento d"
+								+ " on a.fk_documento=d.id_documento"+
+								" inner join diretorio r"+
+								" on d.fk_diretorio=r.id_diretorio"+
+								"where r.id_diretorio="+idDiretorio);
+		
+		ResultSet rs = statement.executeQuery();
+		
+		while(rs.next()){
+			ArquivoDocumento a = new ArquivoDocumento();
+			String nome = rs.getString("nome");
+			byte[] dados = rs.getBytes("dados");
+			a.setNomeArquivo(nome);
+			a.setByteStream(dados);
+			r.add(a);
+			
+		}
+		
+		return r;
+	}
 
 }
