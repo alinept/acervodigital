@@ -6,7 +6,7 @@
 
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
 	<window border="none" id="win"
-		use="br.ufma.les.acervodigital.window.DadosUsuarioWindow" onOK="win.submeterCadastro()">
+		use="br.ufma.les.acervodigital.window.MeusDadosWindow" onOK="win.atualizarCadastro()">
 		<style>
 				body { padding: 0 0;
 				background-image:url(${c:encodeURL('/images/background.jpg')
@@ -18,7 +18,7 @@
 			<include src="/topo.zul" />
 			<div id="groupbox">
 				<div style="margin-top:5px;" class="well well-content well-small">
-						<label value= "Dados para Cadastro" style="font-size:19px; font-weight: bold; text-shadow:2px 2px 1px #c9a859"/>
+						<label value= "Meus Dados" style="font-size:19px; font-weight: bold; text-shadow:2px 2px 1px #c9a859"/>
 						<separator bar="true"/>
 						<separator height="30px"/>
 						
@@ -42,52 +42,41 @@
 							<div align="right" width="150px">
 								<label value="Email: " style="font-size:17px; "/>		
 							</div>
-							<textbox placeholder="email" width="300px" value="@{win.email}" constraint="/.+@.+\.[a-z]+/: Por favor, insira um email válido"/>
+							<textbox placeholder="email" width="300px" value="@{win.usuario.email}" constraint="/.+@.+\.[a-z]+/: Por favor, insira um email válido"/>
 						</hbox>
 						<hbox>
 							<div align="right" width="150px">
 								<label value="Senha: " style="font-size:17px; "/>		
 							</div>
-							<textbox placeholder="senha" type="password" value="@{win.senha}" width="300px"/>
+							<textbox placeholder="senha" type="password" value="@{win.usuario.senha}" width="300px" disabled="true"/>
+							<a label="Alterar Senha" onClick="win.abrirAlterarSenha()"/>
 						</hbox>					
-						<hbox>
-							<div align="right" width="150px">
-								<label value="Validação: " style="font-size:17px; "/>		
-							</div>
-							<div>
-								<textbox width="150px" onChange='captchaResult.value = cpa.value.equalsIgnoreCase(self.value) ? "OK": "Erro"'/>
-								<label id="captchaResult" zclass="label label-important"/>		
-							</div>
-							
-						</hbox>
-						<hbox>
-							<div align="right" width="150px">
-								<label value="" style="font-size:17px; "/>		
-							</div>
-							<captcha id="cpa" length="6" width="150px" height="50px" />		
-							<button label="Regenerate"
-							onClick="cpa.randomValue();" />
-						
-							
-						</hbox>
-						<hbox>
-							<div align="right" width="150px">
-								<label value="" style="font-size:17px; "/>		
-							</div>
-							Background-Color:
-							<colorbox color="#FFFFFF"
-								onChange="cpa.setBgColor(self.color); cpa.randomValue();" />
-							
-						</hbox>
+						<div id="alterarSenha" visible="false">
+							<hbox>
+								<div align="right" width="150px">
+									<label value="Nova Senha: " style="font-size:17px; "/>		
+								</div>
+								<div>
+									<textbox width="150px" type="password" value="@{win.novaSenha }"/>
+								</div>
+							</hbox>
+							<hbox>
+								<div align="right" width="150px">
+									<label value="Confirmar Senha: " style="font-size:17px; "/>		
+								</div>
+								<div>
+									<textbox width="150px" type="password" value="@{win.confirmacaoSenha }"/>
+								</div>
+							</hbox>
+						</div>
 						
 						<separator height="40px"/>
-						
 						<hbox>
 							<div align="right" width="150px">
 								<label value="" style="font-size:17px; "/>		
 							</div>
 							<button sclass="btn btn-large btn-primary"
-								label="Submeter Cadastro" onClick="win.submeterCadastro()" />
+								label="Alterar Cadastro" onClick="win.atualizarCadastro()" />
 							<button sclass="btn btn-large btn-primary"
 								label="Cancelar" onClick="win.cancelarCadastro()" />
 							

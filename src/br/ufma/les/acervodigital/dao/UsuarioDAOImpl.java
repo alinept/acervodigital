@@ -78,7 +78,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	@Override
 	public void alterarUsuario(Usuario usuario) throws Exception{
 		
-		String sql = "update usuario set login = ?, nome = ?, email = ?, senha = ?, validado = ?  where id = "
+		String sql = "update usuario set login = ?, nome = ?, email = ?, senha = ?, validado = ?  where id_usuario = "
 				+ usuario.getId();
 		
 		try{

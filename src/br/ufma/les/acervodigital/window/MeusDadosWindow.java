@@ -2,8 +2,10 @@ package br.ufma.les.acervodigital.window;
 
 import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Window;
 
@@ -11,30 +13,41 @@ import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
 
-public class DadosUsuarioWindow extends Window{
+public class MeusDadosWindow extends Window{
 
 	private static final long serialVersionUID = 1L;
 	
 	public Window window;
 	private DataBinder binder;
 	private AcervoDigitalFachada acervoDigitalFachada;
+	private Usuario usuario;
 	private String nome;
 	private String login;
-	private String senha;
-	private String email;
+	private String novaSenha;
+	private String confirmacaoSenha;
 	
 	public void onCreate()
     {
     	window = (Window)getFellow("win");
         binder =  new AnnotateDataBinder(window);
-        binder.loadAll();
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
-    
+        usuario = new Usuario();
+        usuario = (Usuario) Sessions.getCurrent().getAttribute("usuario");
+        nome = usuario.getNome();
+        login = usuario.getLogin();
+        binder.loadAll();
     }
+	
+	public void abrirAlterarSenha()
+	{
+		Div divSenha = (Div) getFellow("alterarSenha");
+		divSenha.setVisible(true);
+		binder.loadAll();
+	}
 	
 	public void verificaLogin() throws Exception
 	{
-		if(login != null && !login.equals(""))
+		if(login != null && !login.equals("") && login != usuario.getLogin())
 		{
 			if(acervoDigitalFachada.isLoginUsuarioValido(login))
 			{
@@ -49,7 +62,7 @@ public class DadosUsuarioWindow extends Window{
 		}
 	}
 	
-	public void submeterCadastro()
+	public void atualizarCadastro()
 	{
 		try{
 			
@@ -63,36 +76,45 @@ public class DadosUsuarioWindow extends Window{
 				throw new Exception("Preecha o campo login");
 			}
 			
-			if(email.equals("") || email == null)
+			if(usuario.getEmail().equals("") || usuario.getEmail() == null)
 			{
 				throw new Exception("Preecha o campo email");
 			}
+			Div divSenha = (Div) getFellow("alterarSenha");
 			
-			if(senha.equals("") || senha == null)
+			if(divSenha.isVisible())
 			{
-				throw new Exception("Preecha o campo senha");
+				if(novaSenha.equals("") || novaSenha == null)
+				{
+					throw new Exception("Preecha o campo Nova Senha");
+				}
+				
+				if(confirmacaoSenha.equals("") || confirmacaoSenha == null)
+				{
+					throw new Exception("Preecha o campo Confirmação Senha");
+				}
+				
+				if(novaSenha != confirmacaoSenha)
+				{
+					throw new Exception("Confirmação de Senha divergente");
+				}
 			}
 			
+			
 			Label lbLogin = (Label) getFellow("statusLogin");
+			
 			if(lbLogin.getValue().equals("Login já existente"))
 			{
 				throw new Exception("Insira um login válido");
 			}
-			Label lbValidacao = (Label) getFellow("captchaResult");
-			if(!lbValidacao.getValue().equals("OK"))
-			{
-				throw new Exception("Erro no campo de validação");
-			}
-			//se chegou até aqui, ok, pode salvar !
 			
-			Usuario u = new Usuario();
-			u.setNome(nome);
-			u.setLogin(login);
-			u.setEmail(email);
-			u.setSenha(senha);
-			u.setValidado(false);
-			u.setTipoAcesso(acervoDigitalFachada.findAcessoByCodigo(1));
-			acervoDigitalFachada.inserirUsuario(u);
+			//se chegou até aqui, ok, pode salvar !
+
+			usuario.setSenha(novaSenha);
+			usuario.setLogin(login);
+			usuario.setNome(nome);
+			
+			acervoDigitalFachada.alterarUsuario(usuario);
 			
 			Messagebox.show("Cadastro efetuado com sucesso " +
 					"Contate um moderador para alteração de perfil",
@@ -104,10 +126,34 @@ public class DadosUsuarioWindow extends Window{
 		}
 	
 	}
-	
+
 	public void cancelarCadastro()
 	{
 		Executions.sendRedirect("/novoArquivo.zul");
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getNovaSenha() {
+		return novaSenha;
+	}
+
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
+	}
+
+	public String getConfirmacaoSenha() {
+		return confirmacaoSenha;
+	}
+
+	public void setConfirmacaoSenha(String confirmacaoSenha) {
+		this.confirmacaoSenha = confirmacaoSenha;
 	}
 
 	public String getNome() {
@@ -124,22 +170,6 @@ public class DadosUsuarioWindow extends Window{
 
 	public void setLogin(String login) {
 		this.login = login;
-	}
-
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	
 	

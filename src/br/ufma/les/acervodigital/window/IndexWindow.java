@@ -71,6 +71,12 @@ public class IndexWindow extends Window{
     	Executions.sendRedirect("/resultadosBusca.zul");
 	}
 	
+	public void irLogin()
+	{
+		Executions.sendRedirect("/login.zul");
+		binder.loadAll();
+	}
+	
 	public String getStringBusca() {
 		return stringBusca;
 	}

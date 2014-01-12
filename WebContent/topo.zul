@@ -2,7 +2,8 @@
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
 	<window title="" id="win" border="none"
 		use="br.ufma.les.acervodigital.window.TopoWindow">
-		<div>
+
+		<div class="well well-small well-content">
 			
 			<div class="page-header" style="margin-bottom:0px;">
 				<div class="pull-left">
@@ -11,10 +12,11 @@
 				<div class="pull-left">
 					<label
 						value="Universidade Federal do Maranhão"
-						style="font-size:17px;font-weight: bold; text-shadow:3px 3px 2px #c9a859" />
+						style="font-size:21px;font-weight: bold; text-shadow:3px 3px 2px #c9a859" />
 					<div class="clearfix"></div>
+					<separator height="15px"/>
 					<label value="Acervo Digital"
-						style="font-size:18px; color:gray; font-weight: bold;" />
+						style="font-size:19px; color:black; font-weight: bold;" />
 				</div>
 				
 				<div class="pull-right">
@@ -30,7 +32,7 @@
 						<button zclass="btn btn-danger" label="Sair"
 							onClick="win.logout()" />
 						<h:br/>
-						<a sclass="btn btn-info" style="margin-top:5px;" label="Envie seu documento" onClick="win.irNovoArquivo()"/>
+<!-- 						<a sclass="btn btn-info" style="margin-top:5px;" label="Envie seu documento" onClick="win.irNovoArquivo()"/> -->
 				
 					</div>
 				</div>
@@ -38,19 +40,15 @@
 			</div>
 
 			<menubar>
-				<menu label="Meus dados" />
-				<menu label="Gerenciar" >
-					<menupopup>
-						<menuitem label="Diretórios" onClick="win.gerenciarDiretorios()"/>
-						<menuitem label="Contas" onClick="win.gerenciarContas()"/>
+				<menuitem label="Meus dados" onClick="win.meusDados()"/>
+				<menuitem label="Nova Conta" onClick="win.novaConta()" id="menuNovaConta"/>
+				<menu label="Gerenciar">
+					<menupopup id="menuGerenciar">
+						<menuitem label="Diretórios" id="menuGerenciarDiretorios" onClick="win.gerenciarDiretorios()"/>
+						<menuitem label="Contas" id="menuGerenciarContas" onClick="win.gerenciarContas()"/>
 					</menupopup>
 				</menu>
-				<menu label="teste">
-					<menupopup>
-						<menuitem label="teste" />
-						<menuitem label="teste2" />
-					</menupopup>
-				</menu>
+				
 			</menubar>
 		</div>
 

@@ -1,16 +1,47 @@
 <?page title="Acervo Digital - UFMA"?>
 <?link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"?>
 <?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
+
 <window border="none" id="win"
 	use="br.ufma.les.acervodigital.window.IndexWindow">
-
+	<style>
+				body { padding: 0 0;
+				background-image:url(${c:encodeURL('/images/background.jpg')
+				}); /* 0 padding on top and bottom and 0 padding on
+				right and left */ }
+		</style>
 	<zk xmlns:h="http://www.w3.org/1999/xhtml">
 		
 		<div class="container">
-			<div>
-				<include src="/topo.zul" />
+			<div class="well well-small well-content">
+			
+			<div class="page-header" style="margin-bottom:0px;">
+				<div class="pull-left">
+					<image width="60%" src="images/logoufma.png" />
+				</div>
+				<div class="pull-left">
+					<label
+						value="Universidade Federal do Maranhão"
+						style="font-size:21px;font-weight: bold; text-shadow:3px 3px 2px #c9a859" />
+					<div class="clearfix"></div>
+					<separator height="15px"/>
+					<label value="Acervo Digital"
+						style="font-size:19px; color:black; font-weight: bold;" />
+				</div>
 				
+				<div class="pull-right">
+					
+					<div align="right">
+						<button zclass="btn btn-danger" label="Efetuar Login"
+							onClick="win.irLogin()" />
+						<h:br/>
+					</div>
+				</div>
+				<div class="clearfix"></div>
 			</div>
+			</div>
+				
 			<div class="well well-small well-content">
 				<div>
 					<h:h3>Pesquise no acervo</h:h3>
@@ -28,10 +59,19 @@
 							<space width="25px" />
 
 						</div>
+						
 					<div>
 						<button zclass="btn btn-large btn-primary pull-right" label="Pesquisar"
 							onClick="win.buscarDocumento()" />
 						<div class="clearfix"></div>
+					</div>
+					
+					<div id="ultimosEnvios">
+						<separator height="10px"/>
+						<label value= "Últimos Documentos Enviados" style="font-size:19px; font-weight: bold; text-shadow:2px 2px 1px #c9a859"/>
+						<separator bar="true"/>
+						<separator height="30px"/>
+						
 					</div>
 					
 				</div>

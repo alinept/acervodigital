@@ -2,11 +2,12 @@
 <?link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"?>
 <?link href="/assets/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"?>
 <?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 
 <zk xmlns:h="http://www.w3.org/1999/xhtml">
 	<window border="none" id="win"
 		use="br.ufma.les.acervodigital.window.LoginWindow" onOK="win.realizarLogin()">
-
+		
 		<div sclass="container">
 			<separator height="50px" />
 			<div id="groupbox">
@@ -41,9 +42,9 @@
 						<button sclass="btn btn-large btn-primary"
 								label="Entrar" onClick="win.realizarLogin()" />
 						
-						<div align="right">
-							<a label="Nova Conta" onClick="win.irNovoUsuario()"/>
-						</div>
+<!-- 						<div align="right"> -->
+<!-- 							<a label="Nova Conta" onClick="win.irNovoUsuario()"/> -->
+<!-- 						</div> -->
 					</hbox>
 					
 				</div>

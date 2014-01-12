@@ -44,10 +44,21 @@ public class TopoWindow extends Window{
 		Executions.sendRedirect("/novoArquivo.zul");
 	}
 	
+	public void meusDados()
+	{
+		Executions.sendRedirect("/meusDados.zul");
+	}
+	
 	public void logout()
 	{
-		Sessions.getCurrent().removeAttribute("usuario");
+		Sessions.getCurrent().invalidate();
 		Executions.sendRedirect("/login.zul");
+	}
+	
+	public void novaConta()
+	{
+		Executions.sendRedirect("/novoUsuario.zul");
+		binder.loadAll();
 	}
 
 	public Usuario getUsuario() {
