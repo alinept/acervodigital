@@ -47,6 +47,7 @@ public interface AcervoDigitalFachada {
 	
 	/*##################TipoAcesso###################*/
 	TipoAcesso findAcessoByCodigo(int codigo) throws Exception ;
+	List<TipoAcesso> findAllTiposAcessos() throws Exception ;
 	
 	/*##################Usuario###################*/
 	Usuario buscarUsuario(String login, String senha) throws Exception ;

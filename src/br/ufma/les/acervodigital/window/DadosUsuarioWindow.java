@@ -1,5 +1,7 @@
 package br.ufma.les.acervodigital.window;
 
+import java.util.List;
+
 import org.zkoss.zhtml.Messagebox;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
@@ -7,6 +9,7 @@ import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Window;
 
+import br.ufma.les.acervodigital.dominio.TipoAcesso;
 import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
@@ -18,6 +21,8 @@ public class DadosUsuarioWindow extends Window{
 	public Window window;
 	private DataBinder binder;
 	private AcervoDigitalFachada acervoDigitalFachada;
+	private List<TipoAcesso> tipoAcessos;
+	private TipoAcesso tipoAcesso;
 	private String nome;
 	private String login;
 	private String senha;
@@ -27,9 +32,16 @@ public class DadosUsuarioWindow extends Window{
     {
     	window = (Window)getFellow("win");
         binder =  new AnnotateDataBinder(window);
-        binder.loadAll();
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
-    
+        try {
+			tipoAcessos = acervoDigitalFachada.findAllTiposAcessos();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        binder.loadAll();
+        
     }
 	
 	public void verificaLogin() throws Exception
@@ -140,6 +152,22 @@ public class DadosUsuarioWindow extends Window{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<TipoAcesso> getTipoAcessos() {
+		return tipoAcessos;
+	}
+
+	public void setTipoAcessos(List<TipoAcesso> tipoAcessos) {
+		this.tipoAcessos = tipoAcessos;
+	}
+
+	public TipoAcesso getTipoAcesso() {
+		return tipoAcesso;
+	}
+
+	public void setTipoAcesso(TipoAcesso tipoAcesso) {
+		this.tipoAcesso = tipoAcesso;
 	}
 	
 	

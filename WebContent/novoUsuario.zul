@@ -49,7 +49,17 @@
 								<label value="Senha: " style="font-size:17px; "/>		
 							</div>
 							<textbox placeholder="senha" type="password" value="@{win.senha}" width="300px"/>
-						</hbox>					
+						</hbox>	
+						<hbox>
+							<div align="right" width="150px">
+								<label value="Tipo Acesso: " style="font-size:17px; "/>		
+							</div>
+							<combobox model="@{win.tipoAcessos}" width="300px" selectedItem="@{win.tipoAcesso}">
+								<comboitem self="@{each='tipoAcesso'}" 
+                            	label="@{tipoAcesso.nome}" value="@{tipoAcesso}"/>
+							</combobox>
+						</hbox>
+										
 						<hbox>
 							<div align="right" width="150px">
 								<label value="Validação: " style="font-size:17px; "/>		

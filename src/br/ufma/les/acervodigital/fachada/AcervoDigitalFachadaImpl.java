@@ -201,6 +201,12 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 		tagDocumentoDAO.inserir(tagDocumento);
 		
 	}
+
+	@Override
+	public List<TipoAcesso> findAllTiposAcessos() throws Exception {
+		
+		return tipoAcessoDAO.findAll();
+	}
 	
 
 }
