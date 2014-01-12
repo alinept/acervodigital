@@ -36,17 +36,22 @@
 						</div>
 						
 				</div>
-				<div apply="org.zkoss.bind.BindComposer"   height="278px" width="443px" class="combodivarea"
-					viewModel="@id('vm') @init('br.ufma.les.acervodigital.window.Window')">
-							<combobox>
-								<comboitem label="Simple and Rich" />
-								<comboitem label="Cool!" />
-								<comboitem label="Ajax and RIA" />
-							</combobox>
-				</div>
+				<listbox id="ListDoc"
+					emptyMessage="Nenhum documento encontrado" height="160px"
+					style="margin-top:10px">
+					<listhead>
+						<listheader label="Arquivo" />
+						<listheader label="Diretorio" />
+						<listheader label="Ações" width="20%" />
+					</listhead>
+					<template name="model">
+						<listitem>
+
+						</listitem>
+					</template>
+				</listbox>
+
 			</div>
-			<h:br/>
-			
 			
 			<div class="footer">
 				<label value="SGDU @ Universidade Federal do Maranhão" />
