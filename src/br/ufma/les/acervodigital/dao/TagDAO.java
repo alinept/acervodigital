@@ -9,5 +9,6 @@ public interface TagDAO {
 
 	boolean salvarTags(ArrayList<Tag> tags);
 	List<Tag> findAll() throws Exception;
+	Tag findByNome(String nome) throws Exception;
 
 }

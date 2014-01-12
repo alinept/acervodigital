@@ -10,13 +10,21 @@ import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Div;
+import org.zkoss.zul.Groupbox;
+import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.Listbox;
+import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
 import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
 import br.ufma.les.acervodigital.dominio.Documento;
 import br.ufma.les.acervodigital.dominio.Tag;
+import br.ufma.les.acervodigital.dominio.TagDocumento;
 import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
@@ -40,6 +48,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 	private List<Tag> tagsUtilizadas;
 	private List<ObjectSql> diretorios;
 	private ObjectSql diretorio;
+	private List<TagDocumento> tagDocumento;
 	
 	public void onCreate()
     {
@@ -48,7 +57,7 @@ private static final long serialVersionUID = 7268970269306314382L;
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
         tags = new ArrayList<Tag>();
         tagsUtilizadas = new ArrayList<Tag>();
-        
+        tagDocumento = new ArrayList<TagDocumento>();
         try {
 			tags = acervoDigitalFachada.findAllTags();
 			diretorios = acervoDigitalFachada.findAllDiretorios();
@@ -108,7 +117,6 @@ private static final long serialVersionUID = 7268970269306314382L;
 				
 		String title = ((Textbox)getFellow("titleTextBox")).getValue();
 		String description = ((Textbox)getFellow("descriptionTextBox")).getValue();
-		Date date = ((Datebox)getFellow("dateBox")).getValue();
 		
 		// true = doc | false = imagem
 		boolean isDocMediaType = true;
@@ -122,6 +130,13 @@ private static final long serialVersionUID = 7268970269306314382L;
 			return;
 		}
 		
+		//checando titulo
+		if( diretorio == null ){
+			Messagebox.show("O campo do Diretório está em branco. Este campo é " +
+					"obrigatório.", "Erro no Diretório", Messagebox.OK, Messagebox.ERROR);
+			return;
+		}
+		
 		//checando a descrição
 		if( isEmpty(description) ){
 			Messagebox.show("A descrição está em branco. O preenchimeto desse campo é " +
@@ -130,11 +145,11 @@ private static final long serialVersionUID = 7268970269306314382L;
 		}
 		
 		//checando data
-		if( date == null ){
-			Messagebox.show("A data de expedição está em branco. O preenchimeto desse campo é " +
-					"obrigatório.", "Erro na data de expedição", Messagebox.OK, Messagebox.ERROR);
-			return;
-		}
+		//		if( date == null ){
+		//			Messagebox.show("A data de expedição está em branco. O preenchimeto desse campo é " +
+		//					"obrigatório.", "Erro na data de expedição", Messagebox.OK, Messagebox.ERROR);
+		//			return;
+		//		}
 		
 		//checando conteudo
 		boolean fail = false;
@@ -149,6 +164,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 					"Falta de documento", Messagebox.OK, Messagebox.ERROR);
 			return;
 		}
+		
 		
 		// beleza! se chegou ate aqui entao eh pq ta tudo certo
 		//DbDocManager dbDocManager = new DbDocManager();
@@ -166,9 +182,9 @@ private static final long serialVersionUID = 7268970269306314382L;
 				d.setDescricao(description);
 				d.setConteudo(content);
 				d.setDataUpload(new Date(System.currentTimeMillis()));
-				d.setDataExpedicao(date);
+				//d.setDataExpedicao(date);
 				d.setProprietario((Usuario)Sessions.getCurrent().getAttribute("usuario"));
-				
+				d.setDiretorio(acervoDigitalFachada.findDiretorioByCodigo(diretorio.getCodigo()));
 				acervoDigitalFachada.inserirDocumento(d);
 				
 				
@@ -194,6 +210,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 		}
 		binder.loadAll();
 	}
+	
 	
 	private boolean isEmpty(String str){
 		if(str == null) return true;
@@ -249,7 +266,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 						ArquivoDocumento a = new ArquivoDocumento();
 						a.setByteStream(doc.getStringData().getBytes());
 						a.setNomeArquivo(doc.getName().replace(' ', '_'));
-						a.setDocumento(acervoDigitalFachada.findDocumentoByNome(title));
+						//a.setDocumento(acervoDigitalFachada.findDocumentoByNome(title));
 						
 						acervoDigitalFachada.inserirArquivo(a);
 					}
@@ -257,7 +274,7 @@ private static final long serialVersionUID = 7268970269306314382L;
 						ArquivoDocumento a = new ArquivoDocumento();
 						a.setByteStream(Reader2StringConverter.get(doc.getReaderData()).getBytes());
 						a.setNomeArquivo(doc.getName().replace(' ', '_'));
-						a.setDocumento(acervoDigitalFachada.findDocumentoByNome(title));
+						//a.setDocumento(acervoDigitalFachada.findDocumentoByNome(title));
 						
 						acervoDigitalFachada.inserirArquivo(a);
 						
@@ -268,6 +285,72 @@ private static final long serialVersionUID = 7268970269306314382L;
 		}
 	}
 
+	public void inserirValoresTags()
+	{
+		Listbox list = (Listbox) getFellow("right");
+		List<Listitem> items = list.getItems();
+		Groupbox groupTags = (Groupbox) getFellow("groupTags");
+		if(items.size() > 0)
+		{
+			groupTags.setVisible(true);
+			groupTags.getChildren().clear();
+			tagsUtilizadas.clear();
+			
+			Vbox vbox = new Vbox();
+			
+			for(int i=0; i< items.size(); i++)
+			{
+				Tag tag = new Tag();
+				Listitem item = items.get(i);
+				try {
+					tag = acervoDigitalFachada.findTagByNome(item.getLabel());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				tagsUtilizadas.add(tag);
+				
+				Hbox hbox = new Hbox();
+				
+				Label label = new Label();
+				label.setValue(tag.getNome());
+				label.setId(""+tag.getId());
+				
+				Div div = new Div();
+				div.setAlign("right");
+				div.setWidth("150px");
+				div.appendChild(label);
+				
+				hbox.appendChild(div);
+				if(tag.getNome().contains("data"))
+				{
+					Datebox date = new Datebox();
+					date.setId(""+tag.getId());
+					hbox.appendChild(date);
+				}else{
+					
+					Textbox text = new Textbox();
+					text.setWidth("400px");
+					text.setId(""+tag.getId());
+					hbox.appendChild(text);
+				}
+				
+				
+				
+				vbox.appendChild(hbox);
+			}
+			
+			groupTags.appendChild(vbox);
+			
+		}else{
+			Messagebox.show("Arraste as tags disponíveis para as tags a serem utilizadas", "Erro ao carregar Tags", 
+					Messagebox.OK, Messagebox.INFORMATION);
+		}
+		
+		binder.loadAll();
+	}
+	
 	public Media getDoc() {
 		return doc;
 	}
@@ -322,6 +405,14 @@ private static final long serialVersionUID = 7268970269306314382L;
 
 	public void setTag(Tag tag) {
 		this.tag = tag;
+	}
+
+	public List<TagDocumento> getTagDocumento() {
+		return tagDocumento;
+	}
+
+	public void setTagDocumento(List<TagDocumento> tagDocumento) {
+		this.tagDocumento = tagDocumento;
 	}
 	
 	

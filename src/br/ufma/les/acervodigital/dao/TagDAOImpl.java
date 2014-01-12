@@ -60,4 +60,26 @@ public class TagDAOImpl implements TagDAO{
 		return tags;
 	}
 
+	@Override
+	public Tag findByNome(String nome) throws Exception {
+		
+		Tag tag = new Tag();
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+				"tag WHERE nome = ? ");
+		statement.setString(1, nome);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		if (resultSet.next()) {
+			
+			tag.setId(resultSet.getInt("id_tag"));
+			tag.setNome(resultSet.getString("nome"));
+			tag.setDescricao(resultSet.getString("descricao"));
+		}		
+				
+		return tag;
+
+	}
+
 }

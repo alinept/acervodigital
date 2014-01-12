@@ -12,6 +12,7 @@ import br.ufma.les.acervodigital.dao.DocumentoDAO;
 import br.ufma.les.acervodigital.dao.DocumentoDAOImpl;
 import br.ufma.les.acervodigital.dao.TagDAO;
 import br.ufma.les.acervodigital.dao.TagDAOImpl;
+import br.ufma.les.acervodigital.dao.TagDocumentoDAO;
 import br.ufma.les.acervodigital.dao.TipoAcessoDAO;
 import br.ufma.les.acervodigital.dao.TipoAcessoDAOImpl;
 import br.ufma.les.acervodigital.dao.UsuarioDAO;
@@ -20,6 +21,7 @@ import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
 import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.dominio.Documento;
 import br.ufma.les.acervodigital.dominio.Tag;
+import br.ufma.les.acervodigital.dominio.TagDocumento;
 import br.ufma.les.acervodigital.dominio.TipoAcesso;
 import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.treemodel.ObjectSql;
@@ -32,6 +34,7 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 	TagDAO tagDAO;
 	TipoAcessoDAO tipoAcessoDAO;
 	UsuarioDAO usuarioDAO;
+	TagDocumentoDAO tagDocumentoDAO;
 	
 	public AcervoDigitalFachadaImpl()
 	{
@@ -183,6 +186,18 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 	@Override
 	public List<ObjectSql> findAllDiretorios() throws SQLException, Exception {
 		return diretorioDAO.findAll();
+	}
+
+	@Override
+	public Tag findTagByNome(String nome) throws Exception {
+		return tagDAO.findByNome(nome);
+	}
+
+	@Override
+	public void inserirTagDocumento(TagDocumento tagDocumento) throws Exception {
+		
+		tagDocumentoDAO.inserir(tagDocumento);
+		
 	}
 	
 

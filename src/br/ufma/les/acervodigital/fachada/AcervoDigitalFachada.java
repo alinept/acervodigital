@@ -8,6 +8,7 @@ import br.ufma.les.acervodigital.dominio.ArquivoDocumento;
 import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.dominio.Documento;
 import br.ufma.les.acervodigital.dominio.Tag;
+import br.ufma.les.acervodigital.dominio.TagDocumento;
 import br.ufma.les.acervodigital.dominio.TipoAcesso;
 import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.treemodel.ObjectSql;
@@ -16,6 +17,10 @@ public interface AcervoDigitalFachada {
 	/*##################ArquivoDocumento###################*/
 	boolean inserirArquivo(ArquivoDocumento arquivo);
 	List<ArquivoDocumento> getDocumentFiles(int idDoc) throws Exception;
+	
+	/*##################TagDocumento###################*/
+	void inserirTagDocumento(TagDocumento tagDocumento) throws Exception ;
+	
 	
 	/*##################Diretorio###################*/
 	Diretorio findDiretorioByCodigo(int codigo) throws Exception;
@@ -38,6 +43,7 @@ public interface AcervoDigitalFachada {
 	/*##################Tag###################*/
 	boolean salvarTags(ArrayList<Tag> tags) ;
 	List<Tag> findAllTags() throws Exception;
+	Tag findTagByNome(String nome) throws Exception;
 	
 	/*##################TipoAcesso###################*/
 	TipoAcesso findAcessoByCodigo(int codigo) throws Exception ;
