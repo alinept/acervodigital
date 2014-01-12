@@ -29,14 +29,16 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 		 java.sql.Date dataUpload = new java.sql.Date(documento.getDataUpload().getTime());
 		
 		PreparedStatement statement =
-				Conexao.get().prepareStatement("INSERT INTO documento (data_upload, fk_proprietario, conteudo, fk_diretorio) " +
-						"VALUES (? , ? , ? , ?)",Statement.RETURN_GENERATED_KEYS);
+				Conexao.get().prepareStatement("INSERT INTO documento (data_upload, fk_proprietario, conteudo, fk_diretorio, titulo, descricao) " +
+						"VALUES (? , ? , ? , ? , ? , ?)",Statement.RETURN_GENERATED_KEYS);
 			
 			//statement.setDate(1, dataExpedicao);
 			statement.setDate(1, dataUpload);
 			statement.setInt(2, documento.getProprietario().getId());
 			statement.setString(3, documento.getConteudo());
 			statement.setInt(4, documento.getDiretorio().getId());
+			statement.setString(5, documento.getTitulo());
+			statement.setString(6, documento.getDescricao());
 			
 			statement.executeUpdate();
 			ResultSet rsId = statement.getGeneratedKeys();

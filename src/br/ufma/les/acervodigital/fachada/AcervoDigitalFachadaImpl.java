@@ -13,6 +13,7 @@ import br.ufma.les.acervodigital.dao.DocumentoDAOImpl;
 import br.ufma.les.acervodigital.dao.TagDAO;
 import br.ufma.les.acervodigital.dao.TagDAOImpl;
 import br.ufma.les.acervodigital.dao.TagDocumentoDAO;
+import br.ufma.les.acervodigital.dao.TagDocumentoDAOImpl;
 import br.ufma.les.acervodigital.dao.TipoAcessoDAO;
 import br.ufma.les.acervodigital.dao.TipoAcessoDAOImpl;
 import br.ufma.les.acervodigital.dao.UsuarioDAO;
@@ -44,6 +45,7 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 		tagDAO = new TagDAOImpl();
 		tipoAcessoDAO = new TipoAcessoDAOImpl();
 		usuarioDAO = new UsuarioDAOImpl();
+		tagDocumentoDAO = new TagDocumentoDAOImpl();
 	}
 	
 	@Override

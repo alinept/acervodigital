@@ -1,5 +1,6 @@
 package br.ufma.les.acervodigital.window;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -114,7 +115,10 @@ private static final long serialVersionUID = 7268970269306314382L;
 	 * @throws Exception 
 	 */
 	public void send() throws Exception{
-				
+		
+		tagDocumento.clear();
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		
 		String title = ((Textbox)getFellow("titleTextBox")).getValue();
 		String description = ((Textbox)getFellow("descriptionTextBox")).getValue();
 		
@@ -142,6 +146,43 @@ private static final long serialVersionUID = 7268970269306314382L;
 			Messagebox.show("A descrição está em branco. O preenchimeto desse campo é " +
 					"obrigatório.", "Erro na descrição", Messagebox.OK, Messagebox.ERROR);
 			return;
+		}
+		
+		//checando tags
+		if(tagsUtilizadas.size() > 0)
+		{
+			for(int i=0; i<tagsUtilizadas.size(); i++)
+			{
+				if(tagsUtilizadas.get(i).getNome().contains("data"))
+				{
+					Datebox date = (Datebox) getFellow(""+tagsUtilizadas.get(i).getId());
+					if(date.getValue() == null)
+					{
+						Messagebox.show("Preecha todos os campos das tags selecionadas\n"+ 
+								"Campo "+tagsUtilizadas.get(i).getNome()+" não está preenchido", "Erro nas Tags", Messagebox.OK, Messagebox.ERROR);
+						return;
+					}else{
+						
+						TagDocumento tagDoc = new TagDocumento();
+						tagDoc.setTag(tagsUtilizadas.get(i));
+						tagDoc.setConteudo(df.format(date.getValue()));
+						tagDocumento.add(tagDoc);
+					}
+				}else{
+					Textbox text = (Textbox) getFellow(""+tagsUtilizadas.get(i).getId());
+					if(text.getValue() == null || text.getValue().equals(""))
+					{
+						Messagebox.show("Preecha todos os campos das tags selecionadas\n"+ 
+								"Campo "+tagsUtilizadas.get(i).getNome()+" não está preenchido", "Erro nas Tags", Messagebox.OK, Messagebox.ERROR);
+						return;
+					}else{
+						TagDocumento tagDoc = new TagDocumento();
+						tagDoc.setTag(tagsUtilizadas.get(i));
+						tagDoc.setConteudo(text.getValue());
+						tagDocumento.add(tagDoc);
+					}
+				}
+			}
 		}
 		
 		//checando data
@@ -187,6 +228,11 @@ private static final long serialVersionUID = 7268970269306314382L;
 				d.setDiretorio(acervoDigitalFachada.findDiretorioByCodigo(diretorio.getCodigo()));
 				acervoDigitalFachada.inserirDocumento(d);
 				
+				for(int i = 0; i < tagDocumento.size(); i++)
+				{
+					tagDocumento.get(i).setDocumento(d);
+					acervoDigitalFachada.inserirTagDocumento(tagDocumento.get(i));
+				}
 				
 				insertFile(doc , FileSupportVerificator.PDF_TYPE,d);
 				
