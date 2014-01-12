@@ -35,16 +35,18 @@ public class PackageDataUtil {
 	                    {   
 	                    	
 	                    	for(Diretorio dir:colecao){
-	                    	List<Diretorio> colecaoFilhos = d.carregarFilhos(dir.getId());	
-	                    	List<ArquivoDocumento> colecaoArquivos = a.carregaArquivos(dir.getId());
-	                    	for(ArquivoDocumento arquivo : colecaoArquivos){
-	                    		add(new DiretorioTreeNode<PackageData>(new PackageData(arquivo.getNomeArquivo()
-                                ,"" , "")));
-	                    		
+		                    	List<Diretorio> colecaoFilhos = d.carregarFilhos(dir.getId());	
+		                    	List<ArquivoDocumento> colecaoArquivos = a.carregaArquivos(dir.getId());
+		                    	
+		                        add(new DiretorioTreeNode<PackageData>(new PackageData(
+		                                dir.getName(), ""+dir.getDataCriacao(), dir.getProprietario().getNome()),carregaColecao(colecaoFilhos)));
+		                        for(ArquivoDocumento arquivo : colecaoArquivos){
+		                    		add(new DiretorioTreeNode<PackageData>(new PackageData(arquivo.getNomeArquivo()
+	                                ,"" , "")));
+		                    		
+		                    	}
 	                    	}
-	                        add(new DiretorioTreeNode<PackageData>(new PackageData(
-	                                dir.getName(), ""+dir.getDataCriacao(), dir.getProprietario().getNome()),carregaColecao(colecaoFilhos)));
-	                    	}
+	                    	
 	                    }
 	                }, true); // dist opened
 		}

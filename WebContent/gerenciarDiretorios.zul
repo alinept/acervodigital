@@ -19,7 +19,7 @@
 						<hbox>
 							<button label="Criar Diretório" onClick="win.abrirNovoDiretorio()" sclass="pull-left btn"/>
 							<button label="Excluir Diretório" onClick="win.excluirDiretorio()" sclass="pull-left btn"/>
-							<button label="Editar Diterório" onClick="win.abrirEditarDiretorio()" sclass="pull-left btn"/>
+							<button label="Editar Diretório" onClick="win.abrirEditarDiretorio()" sclass="pull-left btn"/>
 				
 						</hbox>
 					</div>
