@@ -32,7 +32,6 @@ public class IndexWindow extends Window{
     {
     	window = (Window)getFellow("win");
         binder =  new AnnotateDataBinder(window);
-        documentos = new ArrayList<Documento>();
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
         binder.loadAll();
       
@@ -40,8 +39,8 @@ public class IndexWindow extends Window{
 	
 	public void buscarDocumento() throws Exception
 	{
-		
-    	// obtem os componentes da pagina
+		documentos = new ArrayList<Documento>();
+        // obtem os componentes da pagina
    		
 		Checkbox checkTitulo = (Checkbox) getFellow("checkboxTitulo");
 		Checkbox checkDescricao = (Checkbox) getFellow("checkboxDescricao");
@@ -63,13 +62,10 @@ public class IndexWindow extends Window{
     	long time1 = System.currentTimeMillis();
     	documentos = acervoDigitalFachada.buscarDocumento(stringBusca, null, porTitulo, porDescricao, porConteudo);	
     	
-    	Executions.getCurrent().getDesktop().getSession().setAttribute("ultimosParametrosBusca",
-    			new Busca(stringBusca, porTitulo, porDescricao, porConteudo,
-    					System.currentTimeMillis() - time1, 0 ));
+    	Busca b = new Busca(stringBusca, porTitulo, porDescricao, porConteudo,
+				System.currentTimeMillis() - time1, 0 );
     	
-//    	Executions.getCurrent().getDesktop().getSession().setAttribute("commomDocResearch",
-//    			docResearch);
-    	
+    	Sessions.getCurrent().setAttribute("ultimosParametrosBusca", b);
     	Sessions.getCurrent().setAttribute("documentos", documentos);
 		
     	Executions.sendRedirect("/resultadosBusca.zul");

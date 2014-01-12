@@ -21,7 +21,7 @@ public class PDFViewer extends Window {
         binder =  new AnnotateDataBinder(window);
         
         AMedia pdfFile =
-        	(AMedia)Sessions.getCurrent().getAttribute("pdfFile");
+        	(AMedia) Sessions.getCurrent().getAttribute("pdfFile");
         
         if(pdfFile != null){
         	((Iframe)getFellow("pdfField")).setContent(pdfFile);

@@ -2,22 +2,23 @@
 <?link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"?>
 <?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
 <window border="none" id="win"
-	use="br.ufma.les.acervodigital.window.IndexWindow">
+	use="br.ufma.les.acervodigital.window.ResultadoBuscaWindow">
 
 	<zk xmlns:h="http://www.w3.org/1999/xhtml">
 		
 		<div class="container">
+			
 			<div>
 				<include src="/topo.zul" />
-				
 			</div>
+			
 			<div class="well well-small well-content">
-				<div >
+				<div>
 					<h:h3>Pesquise no acervo</h:h3>
-					
 						<div>
-							<textbox zclass="input-block-level" value="@{win.stringBusca}" placeholder="" />
+							<textbox zclass="input-block-level" id="textboxSearch" value="@{win.stringBusca}" placeholder="" />
 						</div>
+						
 						<div class="form-inline pull-left">
 							<checkbox label="Por Título" checked="true"
 								id="checkboxTitulo" />
@@ -26,8 +27,8 @@
 							<checkbox label="Por Conteúdo"
 								checked="false" id="checkboxConteudo" />
 							<space width="25px" />
-
 						</div>
+						
 						<div>
 							<button
 								zclass="btn btn-large btn-primary pull-right" label="Pesquisar"
@@ -36,26 +37,38 @@
 						</div>
 						
 				</div>
-				<listbox id="ListDoc"
-					emptyMessage="Nenhum documento encontrado" height="160px"
-					style="margin-top:10px">
-					<listhead>
-						<listheader label="Arquivo" />
-						<listheader label="Diretorio" />
-						<listheader label="Ações" width="20%" />
-					</listhead>
-					<template name="model">
-						<listitem>
-
-						</listitem>
-					</template>
-				</listbox>
-
 			</div>
-			
-			<div class="footer">
-				<label value="SGDU @ Universidade Federal do Maranhão" />
+		
+				<hbox>
+					<separator width="50px" />
+					<label style="font-size: 10px" id="headLabel" />
+				</hbox>
+				<separator height="15px" />
+				
+				
+				<div align="left">
+					<hbox>
+						<separator width="50px" />
+						<vbox width="750px" id="resultsVBox" />
+					</hbox>
+					<hbox>
+						<space width="50px" />
+						<div align="center" width="750px">
+							<h:hr />
+							<button label="Página Anterior"
+								id="previousButton" onClick="winSearch.previousPage()" />
+							<button label="Próxima Página"
+								id="nextButton" onClick="winSearch.nextPage()" />
+						</div>
+					</hbox>
+					<separator height="20px" />
+				</div>
+				
+				<div class="footer">
+					<label
+						value="SGDU @ Universidade Federal do Maranhão" />
+				</div>
 			</div>
-		</div>
+	
 	</zk>
 </window>

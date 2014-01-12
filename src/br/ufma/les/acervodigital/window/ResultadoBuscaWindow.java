@@ -25,7 +25,6 @@ import br.ufma.les.acervodigital.dominio.Documento;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
 
-import com.lowagie.text.pdf.hyphenation.TernaryTree.Iterator;
 
 public class ResultadoBuscaWindow extends IndexWindow {
 
@@ -34,7 +33,7 @@ public class ResultadoBuscaWindow extends IndexWindow {
 	private int lastIndex = 0;
 	private int lengthIndex;
 	Busca ultimaBusca;
-	List<Documento> docs;
+	ArrayList<Documento> docs;
 	private AcervoDigitalFachada acervoDigitalFachada;
 	
 	@Override
@@ -43,18 +42,16 @@ public class ResultadoBuscaWindow extends IndexWindow {
 		
 		acervoDigitalFachada = new AcervoDigitalFachadaImpl();
 		ultimaBusca =
-			(Busca) Executions.getCurrent().getAttribute("ultimosParametrosBusca");
+			(Busca) Sessions.getCurrent().getAttribute("ultimosParametrosBusca");
 		
-		docs = new ArrayList<Documento>();
-		
-		docs = (List<Documento>) Executions.getCurrent().getAttribute("documentos");
+		docs = (ArrayList<Documento>) Sessions.getCurrent().getAttribute("documentos");
 		
 		if(ultimaBusca != null){
 			
 			((Textbox)getFellow("textboxSearch")).setValue( ultimaBusca.strSearch );
-			((Checkbox)getFellow("checkboxTitle")).setChecked( ultimaBusca.byTitle );
-			((Checkbox)getFellow("checkboxDescription")).setChecked( ultimaBusca.byDescription );
-			((Checkbox)getFellow("checkboxContent")).setChecked( ultimaBusca.byContent );
+			((Checkbox)getFellow("checkboxTitulo")).setChecked( ultimaBusca.byTitle );
+			((Checkbox)getFellow("checkboxDescricao")).setChecked( ultimaBusca.byDescription );
+			((Checkbox)getFellow("checkboxConteudo")).setChecked( ultimaBusca.byContent );
 			lastIndex = ultimaBusca.lastIndex;
 		}
 		if(docs == null) return;
@@ -86,13 +83,13 @@ public class ResultadoBuscaWindow extends IndexWindow {
 			Separator firsSeparator = new Separator();
 			firsSeparator.setWidth("10px");
 			
-			Label expeditionDateLabel =
-				new Label( DateFormat.getDateInstance().format(docs.get(i).getDataExpedicao()) );
-			expeditionDateLabel.setStyle("font-size: small; font-style:italic; color:gray;");
-			
+//			Label expeditionDateLabel =
+//				new Label( DateFormat.getDateInstance().format(docs.get(i).getDataExpedicao()) );
+//			expeditionDateLabel.setStyle("font-size: small; font-style:italic; color:gray;");
+//			
 			firstHbox.appendChild(titleToolbarbutton);
 			firstHbox.appendChild(firsSeparator);
-			firstHbox.appendChild(expeditionDateLabel);
+			//firstHbox.appendChild(expeditionDateLabel);
 			
 			// LABEL - CONTENT
 			Label descriptionLabel = new Label( docs.get(i).getDescricao() );
@@ -158,7 +155,7 @@ public class ResultadoBuscaWindow extends IndexWindow {
 			String filename = files.get(0).getNomeArquivo();
 			
 			//if( FileSupportVerificator.isPDFType(filename) ){
-				Sessions.getCurrent().setAttribute("pdfFile",
+			Sessions.getCurrent().setAttribute("pdfFile",
 						new AMedia(files.get(0).getNomeArquivo(), ".pdf", "application/pdf",
 								files.get(0).getByteStream()) );	
 				Executions.sendRedirect("/viewPdf.zul");
