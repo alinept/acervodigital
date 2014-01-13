@@ -44,6 +44,8 @@ public class DiretorioWindow extends Window {
         
         data = gc.getTime();
         
+     
+        
         PackageDataUtil pk = new PackageDataUtil();
         try {
 			pk.montaArvore(acervoDigitalFachada.retornaCaminhoDiretorioRaiz());

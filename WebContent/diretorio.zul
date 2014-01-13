@@ -1,8 +1,16 @@
 <?page title="Acervo Digital - UFMA"?>
 <?link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"?>
 <?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 
-<window title="new page title" border="normal" id="win" use="br.ufma.les.acervodigital.window.DiretorioWindow" >
+<window title="new page title" border="none" id="win" use="br.ufma.les.acervodigital.window.DiretorioWindow" >
+<style>
+				body { padding: 0 0;
+				background-image:url(${c:encodeURL('/images/background.jpg')
+				}); /* 0 padding on top and bottom and 0 padding on
+				right and left */ }
+		</style>
+
 <zk>
 
   
@@ -18,7 +26,7 @@
 			</div>
 			<div class="well well-small well-content">
 				<div>
-					<h:h2>Diretórios</h:h2>
+					
 					<separator bar="true"/>
 					<separator height="20px" />
 					<separator/>
@@ -49,12 +57,10 @@
 
 				</div>
 			</div>
-			<h:br/>
+		
 			<div class="footer">
 				<label value="SGDU @ Universidade Federal do Maranhão" />
 			</div>
 		</div>
-    
-
 </zk>
 </window>
