@@ -216,6 +216,11 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 		
 		return documentoDAO.buscaAvancada(busca, tags, porTitulo, porDescricao, porConteudo, idDiretorio);
 	}
+
+	@Override
+	public List<Documento> ultimosDocumentosEnviados() throws Exception {
+		return documentoDAO.ultimosEnvios();
+	}
 	
 
 }

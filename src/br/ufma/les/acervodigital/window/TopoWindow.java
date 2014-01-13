@@ -4,6 +4,8 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
+import org.zkoss.zul.Menuitem;
+import org.zkoss.zul.Menupopup;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
@@ -29,6 +31,35 @@ public class TopoWindow extends Window{
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
         
         usuario = (Usuario) Sessions.getCurrent().getAttribute("usuario");
+
+        Menuitem menuNovaConta = (Menuitem) getFellow("menuNovaConta");
+        Menuitem menuGerenciaDiretorios = (Menuitem) getFellow("menuGerenciarDiretorios");
+        Menuitem menuGerenciaContas = (Menuitem) getFellow("menuGerenciarContas");
+        Menupopup menuGerenciar = (Menupopup) getFellow("menuGerenciar");
+
+        if(usuario != null)
+        {
+        	if(usuario.getTipoAcesso().getNome().equals("comum"))
+        	{
+        		menuNovaConta.setVisible(false);
+                menuGerenciaDiretorios.setVisible(false);
+                menuGerenciaContas.setVisible(false);
+                menuGerenciar.invalidate();
+
+        	}else if(usuario.getTipoAcesso().getNome().equals("moderador"))
+        	{
+        		menuNovaConta.setVisible(false);
+                menuGerenciaDiretorios.setVisible(true);
+                menuGerenciaContas.setVisible(false);
+                //menuGerenciar.setVisible(true);
+        	}else if(usuario.getTipoAcesso().getNome().equals("administrador"))
+        	{
+        		menuNovaConta.setVisible(true);
+                menuGerenciaDiretorios.setVisible(true);
+                menuGerenciaContas.setVisible(true);
+                //menuGerenciar.setVisible(true);
+        	}
+        }
         
         if(usuario == null)
         {
