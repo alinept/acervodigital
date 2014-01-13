@@ -7,13 +7,19 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
+import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.dominio.Documento;
+import br.ufma.les.acervodigital.dominio.Tag;
+import br.ufma.les.acervodigital.dominio.TagDocumento;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
+import br.ufma.les.acervodigital.treemodel.ObjectSql;
 
 
 public class IndexWindow extends Window{
@@ -24,6 +30,16 @@ public class IndexWindow extends Window{
 	protected DataBinder binder;
 	private String stringBusca;
 	private List<Documento> documentos;
+	private List<ObjectSql> diretorios;
+	private ObjectSql diretorio;
+	private List<Tag> tags;
+	private Tag tag1;
+	private Tag tag2;
+	private Tag tag3;
+	private String valorTag1;
+	private String valorTag2;
+	private String valorTag3;
+	
 	private AcervoDigitalFachada acervoDigitalFachada;
 	
 	private boolean porTitulo, porDescricao, porConteudo;
@@ -33,6 +49,18 @@ public class IndexWindow extends Window{
     	window = (Window)getFellow("win");
         binder =  new AnnotateDataBinder(window);
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
+        try {
+			diretorios = acervoDigitalFachada.findAllDiretorios();
+			tags = acervoDigitalFachada.findAllTags();
+        } catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        diretorio = new ObjectSql();
+        tag1 = new Tag();
+        tag2 = new Tag();
+        tag3 = new Tag();
+        
         binder.loadAll();
       
     }
@@ -69,6 +97,80 @@ public class IndexWindow extends Window{
     	Sessions.getCurrent().setAttribute("documentos", documentos);
 		
     	Executions.sendRedirect("/resultadosBusca.zul");
+	}
+	
+	public void buscaAvancada() throws Exception
+	{
+		documentos = new ArrayList<Documento>();
+        // obtem os componentes da pagina
+   		
+		Checkbox checkTitulo = (Checkbox) getFellow("checkboxTitulo");
+		Checkbox checkDescricao = (Checkbox) getFellow("checkboxDescricao");
+		Checkbox checkConteudo = (Checkbox) getFellow("checkboxConteudo");
+		
+		porTitulo = checkTitulo.isChecked();
+    	porDescricao = checkDescricao.isChecked();
+    	porConteudo = checkConteudo.isChecked();
+    	
+    	if(diretorio == null && tag1 == null && tag2 == null && tag3 == null)
+    	{
+    		Messagebox.show("Selecione os valores para a busca avançada ",
+					"Erro ao processar a pesquisa",
+					Messagebox.OK,Messagebox.ERROR);
+			return;
+    	}
+    	
+    	ArrayList<TagDocumento> tags = new ArrayList<TagDocumento>();
+    	if(tag1 != null)
+    	{
+    		tags.get(0).setTag(tag1);
+    		tags.get(0).setConteudo(valorTag1);
+    		
+    	}
+    	if(tag2 != null)
+    	{
+    		tags.get(1).setTag(tag1);
+    		tags.get(1).setConteudo(valorTag2);
+    	}
+    	if(tag3 != null)
+    	{
+    		tags.get(2).setTag(tag1);
+    		tags.get(2).setConteudo(valorTag3);
+    	}
+    	
+    	long time1 = System.currentTimeMillis();
+    	documentos = acervoDigitalFachada.buscaAvancada(stringBusca, tags, porTitulo, porDescricao, porConteudo, diretorio.getCodigo());	
+    	
+    	Busca b = new Busca(stringBusca, porTitulo, porDescricao, porConteudo,
+				System.currentTimeMillis() - time1, 0 );
+    	
+    	Sessions.getCurrent().setAttribute("ultimosParametrosBusca", b);
+    	Sessions.getCurrent().setAttribute("documentos", documentos);
+		
+    	Executions.sendRedirect("/resultadosBusca.zul");
+	}
+	
+	
+	
+	public void abrirBuscaAvancada()
+	{
+		Div div = (Div) getFellow("buscaAvancada");
+		div.setVisible(true);
+		Button b = (Button) getFellow("botaoBusca");
+		b.setVisible(false);
+		
+		binder.loadAll();
+	}
+	
+	
+	public void cancelarBuscaAvancada()
+	{
+		Div div = (Div) getFellow("buscaAvancada");
+		div.setVisible(false);
+		Button b = (Button) getFellow("botaoBusca");
+		b.setVisible(true);
+		
+		binder.loadAll();
 	}
 	
 	public void irLogin()
@@ -119,5 +221,79 @@ public class IndexWindow extends Window{
 			this.searchTime = initDate;
 		}
     }
+
+	public List<ObjectSql> getDiretorios() {
+		return diretorios;
+	}
+
+	public void setDiretorios(List<ObjectSql> diretorios) {
+		this.diretorios = diretorios;
+	}
+
+	public ObjectSql getDiretorio() {
+		return diretorio;
+	}
+
+	public void setDiretorio(ObjectSql diretorio) {
+		this.diretorio = diretorio;
+	}
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
+	public Tag getTag1() {
+		return tag1;
+	}
+
+	public void setTag1(Tag tag1) {
+		this.tag1 = tag1;
+	}
+
+	public Tag getTag2() {
+		return tag2;
+	}
+
+	public void setTag2(Tag tag2) {
+		this.tag2 = tag2;
+	}
+
+	public Tag getTag3() {
+		return tag3;
+	}
+
+	public void setTag3(Tag tag3) {
+		this.tag3 = tag3;
+	}
+
+	public String getValorTag1() {
+		return valorTag1;
+	}
+
+	public void setValorTag1(String valorTag1) {
+		this.valorTag1 = valorTag1;
+	}
+
+	public String getValorTag2() {
+		return valorTag2;
+	}
+
+	public void setValorTag2(String valorTag2) {
+		this.valorTag2 = valorTag2;
+	}
+
+	public String getValorTag3() {
+		return valorTag3;
+	}
+
+	public void setValorTag3(String valorTag3) {
+		this.valorTag3 = valorTag3;
+	}
+	
+	
 
 }

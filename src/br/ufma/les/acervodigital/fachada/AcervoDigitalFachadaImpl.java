@@ -207,6 +207,15 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 		
 		return tipoAcessoDAO.findAll();
 	}
+
+	@Override
+	public List<Documento> buscaAvancada(String busca,
+			ArrayList<TagDocumento> tags, boolean porTitulo,
+			boolean porDescricao, boolean porConteudo, int idDiretorio)
+			throws Exception {
+		
+		return documentoDAO.buscaAvancada(busca, tags, porTitulo, porDescricao, porConteudo, idDiretorio);
+	}
 	
 
 }

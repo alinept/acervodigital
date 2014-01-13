@@ -39,7 +39,7 @@ public interface AcervoDigitalFachada {
 	Documento findDocumentoByNome(String nome) throws Exception;
 	
 	List<Documento> buscarDocumento(String busca, ArrayList<Tag> tags, boolean porTitulo, boolean porDescricao, boolean porConteudo) throws Exception;
-	
+	List<Documento> buscaAvancada(String busca, ArrayList<TagDocumento> tags, boolean porTitulo, boolean porDescricao, boolean porConteudo, int idDiretorio) throws Exception;
 	/*##################Tag###################*/
 	boolean salvarTags(ArrayList<Tag> tags) ;
 	List<Tag> findAllTags() throws Exception;

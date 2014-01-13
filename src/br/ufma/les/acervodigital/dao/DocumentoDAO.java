@@ -3,8 +3,10 @@ package br.ufma.les.acervodigital.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.dominio.Documento;
 import br.ufma.les.acervodigital.dominio.Tag;
+import br.ufma.les.acervodigital.dominio.TagDocumento;
 
 public interface DocumentoDAO {
 	
@@ -16,6 +18,7 @@ public interface DocumentoDAO {
 	Documento findByNome(String nome) throws Exception;
 	
 	List<Documento> buscar(String busca, ArrayList<Tag> tags, boolean porTitulo, boolean porDescricao, boolean porConteudo) throws Exception;
+	List<Documento> buscaAvancada(String busca, ArrayList<TagDocumento> tags, boolean porTitulo, boolean porDescricao, boolean porConteudo, int idDiretorio) throws Exception;
 	
 }
 

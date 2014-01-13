@@ -8,8 +8,10 @@ import java.util.List;
 import java.util.ListIterator;
 
 import br.ufma.les.acervodigital.database.Conexao;
+import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.dominio.Documento;
 import br.ufma.les.acervodigital.dominio.Tag;
+import br.ufma.les.acervodigital.dominio.TagDocumento;
 
 public class DocumentoDAOImpl implements DocumentoDAO{
 
@@ -149,6 +151,99 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 		
 		return r;
 	}
+
+	@Override
+	public List<Documento> buscaAvancada(String busca, ArrayList<TagDocumento> tags, boolean porTitulo, boolean porDescricao, boolean porConteudo, int idDiretorio) throws Exception{
+		List<Documento> r = new ArrayList<Documento>();
+		
+		PreparedStatement statement;
+		ResultSet docResultSet;
+		
+		List<String> searchWords = getStrings(busca);
+		
+		// PRE-MONTANDO A STRING SQL
+		String sql = "SELECT * FROM documento, tag, tag_documento WHERE ";
+		sql += "documento.id_documento = tag_documento.fk_documento AND tag.id_tag = tag_documento.fk_tag AND";
+		if(!searchWords.isEmpty())
+		{
+			for(int i=0; i<searchWords.size(); i++){
+				sql += "(";
+				if( porTitulo ){
+					sql += "titulo ~* ?";
+					if( porDescricao || porConteudo ) sql += " OR ";
+				}
+				if( porDescricao ){
+					sql += "descricao ~* ?";
+					if( porConteudo ) sql += " OR ";
+				}
+				if( porConteudo )	sql += "conteudo ~* ?";
+				
+				sql += ") ";
+				if(i < searchWords.size() - 1){
+					sql += "AND ";
+				}
+			}
+		}
+		
+		if(idDiretorio != 0)
+		{
+			sql +=" AND fk_diretorio = "+idDiretorio+" ";
+		}
+		
+		if(tags.size() > 0)
+		{
+			for(int i=0; i<searchWords.size(); i++){
+				
+				sql +=" AND ";
+				
+				sql += "(";
+				sql += "id_tag = "+tags.get(i).getTag().getId();
+				sql += ") AND";
+				sql += "(";
+				sql += "conteudo= "+tags.get(i).getConteudo();
+				sql += ") ";
+				
+			}
+		}
+		
+		sql += "ORDER BY data_criacao DESC LIMIT 50;";
+		// STRING SQL PRE-MONTADA
+		
+		statement = Conexao.get().prepareStatement(sql);
+		int parameterIndex = 1;
+		
+		// TERMINANDO DE MONTAR A STRING SQL DENTRO DO STATEMENT
+		ListIterator<String> iterator = searchWords.listIterator();
+		
+		while( iterator.hasNext() ){
+		
+			String current = iterator.next();
+			if( porTitulo ){
+				statement.setString(parameterIndex, current);
+				parameterIndex++;
+			}
+			if( porDescricao ){
+				statement.setString(parameterIndex, current);
+				parameterIndex++;
+			}
+			if( porConteudo ){
+				statement.setString(parameterIndex, current);
+				parameterIndex++;
+			}
+		}
+		// COMANDO SQL PRONTO
+		
+		// fogo!
+		docResultSet = statement.executeQuery();
+		
+		while( docResultSet.next() ){
+			
+			r.add(findByCodigo(docResultSet.getInt("id_documento")));
+		}
+		
+		return r;
+	}
+
 	
 	private List<String> getStrings(String search){
 		List<String> r = new ArrayList<String>();
