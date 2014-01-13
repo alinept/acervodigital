@@ -34,6 +34,7 @@ private static final long serialVersionUID = 1L;
 	private String diretorioSelecionado;
 	private Diretorio diretorio;
 	private Diretorio diretorioPai;
+	private Usuario usuario;
 	private Date data;
 	
 	public void onCreate()
@@ -42,7 +43,8 @@ private static final long serialVersionUID = 1L;
         binder =  new AnnotateDataBinder(window);
         diretorioSelecionado = null;
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
-        
+        usuario = new Usuario();
+        usuario = (Usuario) Sessions.getCurrent().getAttribute("usuario");
         diretorio = new Diretorio();
         
         GregorianCalendar gc = new GregorianCalendar();
@@ -51,8 +53,9 @@ private static final long serialVersionUID = 1L;
         
         PackageDataUtil pk = new PackageDataUtil();
         try {
-			pk.montaArvore(acervoDigitalFachada.retornaCaminhoDiretorioRaiz());
-		} catch (SQLException e) {
+			if(usuario.getTipoAcesso().getNome().equals("moderador")) pk.montaArvore(usuario.getIdDiretorio());
+			else pk.montaArvore(0);
+        } catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,7 +135,8 @@ private static final long serialVersionUID = 1L;
 	        pk.setRoot(null);
 	        
 			try {
-				pk.montaArvore(acervoDigitalFachada.retornaCaminhoDiretorioRaiz());
+				if(usuario.getTipoAcesso().getNome().equals("moderador")) pk.montaArvore(usuario.getIdDiretorio());
+				else pk.montaArvore(0);
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
@@ -153,7 +157,6 @@ private static final long serialVersionUID = 1L;
 	public void abrirEditarDiretorio()
 	{
 		try {
-			Usuario usuario = (Usuario) Sessions.getCurrent().getAttribute("usuario");
 			
 			if (!diretorioSelecionado.equals("")
 					&& diretorioSelecionado != null) {
@@ -203,7 +206,7 @@ private static final long serialVersionUID = 1L;
 	public void excluirDiretorio()
 	{
 		if (!diretorioSelecionado.equals("") && diretorioSelecionado != null) {
-		 Messagebox.show("Você deseja realmente excluir diretorio "+ diretorioSelecionado + "?", "Question",
+		 Messagebox.show("Vocï¿½ deseja realmente excluir diretorio "+ diretorioSelecionado + "?", "Question",
 					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 	                   
 						@Override
@@ -220,7 +223,10 @@ private static final long serialVersionUID = 1L;
 						        pk.setRoot(null);
 						        
 								try {
-									pk.montaArvore(acervoDigitalFachada.retornaCaminhoDiretorioRaiz());
+									
+									if(usuario.getTipoAcesso().getNome().equals("moderador")) pk.montaArvore(usuario.getIdDiretorio());
+									else pk.montaArvore(0);
+									
 								} catch (SQLException e) {
 									e.printStackTrace();
 								} catch (Exception e) {
@@ -295,5 +301,14 @@ private static final long serialVersionUID = 1L;
 		this.diretorio = diretorio;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	
 	
 }

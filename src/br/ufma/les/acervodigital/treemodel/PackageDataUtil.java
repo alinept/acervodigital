@@ -1,6 +1,7 @@
 package br.ufma.les.acervodigital.treemodel;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,15 +16,21 @@ public class PackageDataUtil {
 	
     private DiretorioTreeNode<PackageData> root;
       
-    public void montaArvore(final List<ObjectSql> estrutura) throws SQLException, Exception
+    public void montaArvore(int diretorio) throws SQLException, Exception
     {
     	
 	  final DiretorioDAO d = new DiretorioDAOImpl();
 	  final ArquivoDocumentoDAO a = new ArquivoDocumentoDAOImpl();
-	  final List<Diretorio> colecao =  d.carregarDiretoriosRoot();
+	  final List<Diretorio> colecao; 
 	  
-	 
-	  
+	  if(diretorio == 0)
+	  {
+		colecao =  d.carregarDiretoriosRoot();
+	  }else{
+		List<Diretorio> l = new ArrayList<Diretorio>();
+		l.add(d.findDiretorioByCodigo(diretorio));
+		colecao = l;
+	  }
     	
     	if(root == null)
 

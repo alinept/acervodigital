@@ -54,12 +54,23 @@
 							<div align="right" width="150px">
 								<label value="Tipo Acesso: " style="font-size:17px; "/>		
 							</div>
-							<combobox model="@{win.tipoAcessos}" width="300px" selectedItem="@{win.tipoAcesso}">
+							<combobox model="@{win.tipoAcessos}" width="300px" selectedItem="@{win.tipoAcesso}" onBlur="win.verificaTipoAcesso()">
 								<comboitem self="@{each='tipoAcesso'}" 
                             	label="@{tipoAcesso.nome}" value="@{tipoAcesso}"/>
 							</combobox>
 						</hbox>
-										
+						
+						<div id="acessoModerador" visible="false">
+							<hbox>
+							<div align="right" width="150px">
+								<label value="Diretório: " style="font-size:17px; "/>		
+							</div>
+							<combobox model="@{win.diretorios}" width="400px" selectedItem="@{win.diretorio}" >
+								<comboitem self="@{each='diretorio'}" 
+                            	label="@{diretorio.caminhoDiretorio}" value="@{diretorio}"/>
+							</combobox>
+						</hbox>
+						</div>				
 						<hbox>
 							<div align="right" width="150px">
 								<label value="Validação: " style="font-size:17px; "/>		

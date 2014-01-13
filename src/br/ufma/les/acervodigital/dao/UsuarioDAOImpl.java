@@ -7,12 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufma.les.acervodigital.database.Conexao;
+import br.ufma.les.acervodigital.dominio.Diretorio;
 import br.ufma.les.acervodigital.dominio.TipoAcesso;
 import br.ufma.les.acervodigital.dominio.Usuario;
+import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
+import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
 
 public class UsuarioDAOImpl implements UsuarioDAO{
 
 	TipoAcessoDAO tipoAcessoDAO;
+	AcervoDigitalFachada acervo;
 	
 	public UsuarioDAOImpl()
 	{
@@ -43,6 +47,11 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			int codigoAcesso = resultSet.getInt("fk_perfil");
 			tipoAcesso = tipoAcessoDAO.findByCodigo(codigoAcesso);
 			
+			if(tipoAcesso.getNome().equals("moderador"))
+			{
+				usuario.setIdDiretorio(resultSet.getInt("fk_diretorio"));
+			}
+			
 			usuario.setTipoAcesso(tipoAcesso);
 			
 			return usuario;
@@ -58,14 +67,14 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		
 		try{
 		PreparedStatement statement = Conexao.get().prepareStatement(
-				"INSERT INTO " + "usuario(login,nome,email,senha,fk_perfil, validado) values (?,?,?,?,?,?)");
+				"INSERT INTO " + "usuario(login,nome,email,senha,fk_perfil, fk_diretorio) values (?,?,?,?,?,?)");
 		
 		statement.setString(1, usuario.getLogin());
 		statement.setString(2, usuario.getNome());
 		statement.setString(3, usuario.getEmail());
 		statement.setString(4, usuario.getSenha());
 		statement.setInt(5, usuario.getTipoAcesso().getId());
-		if(usuario.isValidado()) statement.setInt(6, 1);
+		if(usuario.getTipoAcesso().getNome().equals("moderador")) statement.setInt(6, usuario.getIdDiretorio());
 		else statement.setInt(6, 0);
 		statement.executeUpdate();
 		statement.close();
@@ -78,7 +87,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	@Override
 	public void alterarUsuario(Usuario usuario) throws Exception{
 		
-		String sql = "update usuario set login = ?, nome = ?, email = ?, senha = ?, validado = ?  where id_usuario = "
+		String sql = "update usuario set login = ?, nome = ?, email = ?, senha = ? where id_usuario = "
 				+ usuario.getId();
 		
 		try{
@@ -88,8 +97,6 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			statement.setString(2, usuario.getNome());
 			statement.setString(3, usuario.getEmail());
 			statement.setString(4, usuario.getSenha());
-			if(usuario.isValidado()) statement.setInt(5, 1);
-			else statement.setInt(5, 0);
 			statement.executeUpdate();
 			statement.close();
 			
@@ -101,7 +108,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	@Override
 	public void excluirUsuario(Usuario usuario) throws Exception{
 		
-		String sql = "DELETE FROM usuario where id = "+ usuario.getId();
+		String sql = "DELETE usuario where id = "+ usuario.getId();
 		
 		try{
 			PreparedStatement statement = Conexao.get().prepareStatement(sql);
@@ -133,11 +140,15 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			usuario.setLogin(resultSet.getString("login"));
 			usuario.setNome(resultSet.getString("nome"));
 			usuario.setSenha(resultSet.getString("senha"));
-			if(resultSet.getInt("validado") == 1) usuario.setValidado(true);
-			else usuario.setValidado(false);
+			
 			TipoAcesso tipoAcesso = new TipoAcesso();
 			int codigoAcesso = resultSet.getInt("fk_perfil");
 			tipoAcesso = tipoAcessoDAO.findByCodigo(codigoAcesso);
+			
+			if(tipoAcesso.getNome().equals("moderador"))
+			{
+				usuario.setIdDiretorio(resultSet.getInt("fk_diretorio"));
+			}
 			
 			usuario.setTipoAcesso(tipoAcesso);
 			
@@ -169,7 +180,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		
 		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
-				"usuario where validado = 0 ");
+				"usuario ");
 		
 		ResultSet resultSet = statement.executeQuery();
 		
@@ -182,8 +193,11 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			u.setNome(resultSet.getString("nome"));
 			u.setTipoAcesso(tipoAcessoDAO.findByCodigo(resultSet.getInt("fk_perfil")));
 			u.setSenha(resultSet.getString("senha"));
-			if(resultSet.getInt("validado") == 1) u.setValidado(true);
-			else u.setValidado(false);
+			
+			if(u.getTipoAcesso().getNome().equals("moderador"))
+			{
+				u.setIdDiretorio(resultSet.getInt("fk_diretorio"));
+			}
 			
 			usuarios.add(u);
 		}		
@@ -211,12 +225,14 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 			usuario.setLogin(resultSet.getString("login"));
 			usuario.setNome(resultSet.getString("nome"));
 			usuario.setSenha(resultSet.getString("senha"));
-			if(resultSet.getInt("validado") == 1) usuario.setValidado(true);
-			else usuario.setValidado(false);
 			TipoAcesso tipoAcesso = new TipoAcesso();
 			int codigoAcesso = resultSet.getInt("fk_perfil");
 			tipoAcesso = tipoAcessoDAO.findByCodigo(codigoAcesso);
 			
+			if(tipoAcesso.getNome().equals("moderador"))
+			{
+				usuario.setIdDiretorio(resultSet.getInt("fk_diretorio"));
+			}
 			usuario.setTipoAcesso(tipoAcesso);
 			
 			usuarios.add(usuario);

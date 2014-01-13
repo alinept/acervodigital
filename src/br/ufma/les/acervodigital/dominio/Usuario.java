@@ -8,7 +8,7 @@ public class Usuario {
     private String email;
     private String senha;
     private TipoAcesso tipoAcesso;
-    private boolean validado;
+    private int idDiretorio;
     
 	public Integer getId() {
 		return id;
@@ -46,12 +46,14 @@ public class Usuario {
 	public void setTipoAcesso(TipoAcesso tipoAcesso) {
 		this.tipoAcesso = tipoAcesso;
 	}
-	public boolean isValidado() {
-		return validado;
+	public int getIdDiretorio() {
+		return idDiretorio;
 	}
-	public void setValidado(boolean validado) {
-		this.validado = validado;
+	public void setIdDiretorio(int idDiretorio) {
+		this.idDiretorio = idDiretorio;
 	}
+	
+	
 	
     
 }
