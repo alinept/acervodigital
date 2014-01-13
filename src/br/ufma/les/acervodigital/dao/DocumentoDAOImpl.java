@@ -162,8 +162,16 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 		List<String> searchWords = getStrings(busca);
 		
 		// PRE-MONTANDO A STRING SQL
-		String sql = "SELECT * FROM documento, tag, tag_documento WHERE ";
-		sql += "documento.id_documento = tag_documento.fk_documento AND tag.id_tag = tag_documento.fk_tag AND";
+		String sql = "SELECT * FROM documento ";
+		
+		if(tags.size() > 0)	sql += ", tag, tag_documento ";
+		
+		sql += " WHERE ";
+		
+		if(tags.size() > 0)	sql += "documento.id_documento = tag_documento.fk_documento AND tag.id_tag = tag_documento.fk_tag ";
+		
+		if (!tags.isEmpty() && !searchWords.isEmpty()) sql += " AND ";
+		
 		if(!searchWords.isEmpty())
 		{
 			for(int i=0; i<searchWords.size(); i++){
@@ -173,7 +181,7 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 					if( porDescricao || porConteudo ) sql += " OR ";
 				}
 				if( porDescricao ){
-					sql += "descricao ~* ?";
+					sql += "documento.descricao ~* ?";
 					if( porConteudo ) sql += " OR ";
 				}
 				if( porConteudo )	sql += "conteudo ~* ?";
@@ -192,7 +200,7 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 		
 		if(tags.size() > 0)
 		{
-			for(int i=0; i<searchWords.size(); i++){
+			for(int i=0; i<tags.size(); i++){
 				
 				sql +=" AND ";
 				
@@ -200,7 +208,7 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 				sql += "id_tag = "+tags.get(i).getTag().getId();
 				sql += ") AND";
 				sql += "(";
-				sql += "conteudo= "+tags.get(i).getConteudo();
+				sql += "tag_documento.conteudo= '"+tags.get(i).getConteudo()+"' ";
 				sql += ") ";
 				
 			}
@@ -340,6 +348,27 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 		}
 		
 		return documento;
+	}
+
+	@Override
+	public List<Documento> ultimosEnvios() throws Exception {
+		List<Documento> docs = new ArrayList<Documento>();
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+				"documento order by data_upload desc LIMIT 10");
+				
+		ResultSet resultSet = statement.executeQuery();
+		
+		
+		while(resultSet.next())
+		{
+			Documento doc = new Documento();
+			doc = findByCodigo(resultSet.getInt("id_documento"));
+			
+			docs.add(doc);
+		}
+		
+		return docs;
 	}
 	
 

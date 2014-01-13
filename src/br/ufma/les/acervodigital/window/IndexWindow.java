@@ -11,6 +11,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
 import br.ufma.les.acervodigital.dominio.Diretorio;
@@ -30,15 +31,18 @@ public class IndexWindow extends Window{
 	protected DataBinder binder;
 	private String stringBusca;
 	private List<Documento> documentos;
+	private List<Documento> documentosEnviados;
 	private List<ObjectSql> diretorios;
 	private ObjectSql diretorio;
-	private List<Tag> tags;
+	private List<Tag> tagDisponiveis1;
+	private List<Tag> tagDisponiveis2;
+	private List<Tag> tagDisponiveis3;
 	private Tag tag1;
 	private Tag tag2;
 	private Tag tag3;
-	private String valorTag1;
-	private String valorTag2;
-	private String valorTag3;
+	private String valorTag1 = null;
+	private String valorTag2 = null;
+	private String valorTag3 = null;
 	
 	private AcervoDigitalFachada acervoDigitalFachada;
 	
@@ -51,9 +55,12 @@ public class IndexWindow extends Window{
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
         try {
 			diretorios = acervoDigitalFachada.findAllDiretorios();
-			tags = acervoDigitalFachada.findAllTags();
+			documentosEnviados = acervoDigitalFachada.ultimosDocumentosEnviados();
+			tagDisponiveis1 = acervoDigitalFachada.findAllTags();
+			tagDisponiveis2 = acervoDigitalFachada.findAllTags();
+			tagDisponiveis3 = acervoDigitalFachada.findAllTags();
         } catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
         diretorio = new ObjectSql();
@@ -121,21 +128,30 @@ public class IndexWindow extends Window{
     	}
     	
     	ArrayList<TagDocumento> tags = new ArrayList<TagDocumento>();
-    	if(tag1 != null)
+    	if(tag1.getNome() != null && !tag1.getNome().equals(""))
     	{
-    		tags.get(0).setTag(tag1);
-    		tags.get(0).setConteudo(valorTag1);
+    		Textbox txt = (Textbox) getFellow("valorTag1");
+    		TagDocumento t = new TagDocumento();
+    		t.setTag(tag1);
+    		t.setConteudo(txt.getValue());
+    		tags.add(t);
     		
     	}
-    	if(tag2 != null)
+    	if(tag2.getNome() != null && !tag2.getNome().equals(""))
     	{
-    		tags.get(1).setTag(tag1);
-    		tags.get(1).setConteudo(valorTag2);
+    		Textbox txt = (Textbox) getFellow("valorTag2");
+    		TagDocumento t = new TagDocumento();
+    		t.setTag(tag2);
+    		t.setConteudo(txt.getValue());
+    		tags.add(t);
     	}
-    	if(tag3 != null)
+    	if(tag3.getNome() != null && !tag3.getNome().equals(""))
     	{
-    		tags.get(2).setTag(tag1);
-    		tags.get(2).setConteudo(valorTag3);
+    		Textbox txt = (Textbox) getFellow("valorTag3");
+    		TagDocumento t = new TagDocumento();
+    		t.setTag(tag3);
+    		t.setConteudo(txt.getValue());
+    		tags.add(t);
     	}
     	
     	long time1 = System.currentTimeMillis();
@@ -238,13 +254,6 @@ public class IndexWindow extends Window{
 		this.diretorio = diretorio;
 	}
 
-	public List<Tag> getTags() {
-		return tags;
-	}
-
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
-	}
 
 	public Tag getTag1() {
 		return tag1;
@@ -292,6 +301,38 @@ public class IndexWindow extends Window{
 
 	public void setValorTag3(String valorTag3) {
 		this.valorTag3 = valorTag3;
+	}
+
+	public List<Tag> getTagDisponiveis1() {
+		return tagDisponiveis1;
+	}
+
+	public void setTagDisponiveis1(List<Tag> tagDisponiveis1) {
+		this.tagDisponiveis1 = tagDisponiveis1;
+	}
+
+	public List<Tag> getTagDisponiveis2() {
+		return tagDisponiveis2;
+	}
+
+	public void setTagDisponiveis2(List<Tag> tagDisponiveis2) {
+		this.tagDisponiveis2 = tagDisponiveis2;
+	}
+
+	public List<Tag> getTagDisponiveis3() {
+		return tagDisponiveis3;
+	}
+
+	public void setTagDisponiveis3(List<Tag> tagDisponiveis3) {
+		this.tagDisponiveis3 = tagDisponiveis3;
+	}
+
+	public List<Documento> getDocumentosEnviados() {
+		return documentosEnviados;
+	}
+
+	public void setDocumentosEnviados(List<Documento> documentosEnviados) {
+		this.documentosEnviados = documentosEnviados;
 	}
 	
 	

@@ -15,10 +15,34 @@
 		
 		<div class="container">
 			
-			<div>
-				<include src="/topo.zul" />
-			</div>
+			<div class="well well-small well-content">
 			
+			<div class="page-header" style="margin-bottom:0px;">
+				<div class="pull-left">
+					<image width="60%" src="images/logoufma.png" />
+				</div>
+				<div class="pull-left">
+					<label
+						value="Universidade Federal do Maranhão"
+						style="font-size:21px;font-weight: bold; text-shadow:3px 3px 2px #c9a859" />
+					<div class="clearfix"></div>
+					<separator height="15px"/>
+					<label value="Acervo Digital"
+						style="font-size:19px; color:black; font-weight: bold;" />
+				</div>
+				
+				<div class="pull-right">
+					
+					<div align="right">
+						<button zclass="btn btn-danger" label="Efetuar Login"
+							onClick="win.irLogin()" />
+						<h:br/>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			</div>
+				
 			<div class="well well-small well-content">
 				<div>
 					<h:h3>Pesquise no acervo</h:h3>
