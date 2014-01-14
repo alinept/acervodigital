@@ -3,7 +3,7 @@
 <?link href="/assets/css/application.css" rel="stylesheet" type="text/css"?>
 <?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c"?>
 
-<window title="new page title" border="none" id="win" use="br.ufma.les.acervodigital.window.DiretorioWindow" >
+<window  border="none" id="win" use="br.ufma.les.acervodigital.window.DiretorioWindow" >
 <style>
 				body { padding: 0 0;
 				background-image:url(${c:encodeURL('/images/background.jpg')
@@ -12,12 +12,8 @@
 		</style>
 
 <zk>
-
-  
-    <label id="diretorio"/>
-    <zscript >
-        diretorio.value = Executions.getCurrent().getParameter("diretorio");
-        win.setPath(diretorio.value);
+    <zscript > 
+        win.setPath(Executions.getCurrent().getParameter("diretorio"));
     </zscript>
 		
 		<div class="container">

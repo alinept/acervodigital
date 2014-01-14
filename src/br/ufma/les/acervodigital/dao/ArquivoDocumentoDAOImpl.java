@@ -1,5 +1,7 @@
 package br.ufma.les.acervodigital.dao;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -44,6 +46,9 @@ public class ArquivoDocumentoDAOImpl implements ArquivoDocumentoDAO{
 	}
 	
 	public List<ArquivoDocumento> getDocumentFiles(int idDoc) throws Exception{
+		
+		//File f=null;
+		
 		ArrayList<ArquivoDocumento> r = new ArrayList<ArquivoDocumento>();
 		
 		PreparedStatement statement = Conexao.get().prepareStatement("SELECT " +
@@ -62,6 +67,11 @@ public class ArquivoDocumentoDAOImpl implements ArquivoDocumentoDAO{
 			a.setNomeArquivo(filename);
 			
 			r.add(a);
+			
+			/* f = new File( "C:/Users/JoãoVictor/Documents/" + filename );
+	            FileOutputStream fos = new FileOutputStream( f);
+	            fos.write(byteStream);
+	            fos.close();*/
 		}
 		return r;
 	}

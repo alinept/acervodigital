@@ -14,13 +14,14 @@ public class PDFViewer extends Window {
 	private static final long serialVersionUID = -1101476698719648801L;
 	public Window window;
 	private DataBinder binder;
+	AMedia pdfFile;
 	
 	public void onCreate()
     {
     	window = (Window)getFellow("pdfWindow");
         binder =  new AnnotateDataBinder(window);
         
-        AMedia pdfFile =
+        pdfFile =
         	(AMedia) Sessions.getCurrent().getAttribute("pdfFile");
         
         if(pdfFile != null){
@@ -28,4 +29,14 @@ public class PDFViewer extends Window {
         }
         binder.loadAll();
     }
+
+	public AMedia getPdfFile() {
+		return pdfFile;
+	}
+
+	public void setPdfFile(AMedia pdfFile) {
+		this.pdfFile = pdfFile;
+	}
+	
+	
 }
