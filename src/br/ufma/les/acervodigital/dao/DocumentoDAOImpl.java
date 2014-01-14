@@ -193,9 +193,11 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 			}
 		}
 		
+		if (!tags.isEmpty() && !searchWords.isEmpty()) sql += " AND ";
+		
 		if(idDiretorio != 0)
 		{
-			sql +=" AND fk_diretorio = "+idDiretorio+" ";
+			sql +="fk_diretorio = "+idDiretorio+" ";
 		}
 		
 		if(tags.size() > 0)
