@@ -1,15 +1,20 @@
 package br.ufma.les.acervodigital.window;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.zkoss.zhtml.Messagebox;
+import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zkplus.databind.DataBinder;
+import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Window;
 
 import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
+import br.ufma.les.acervodigital.treemodel.PackageData;
+import br.ufma.les.acervodigital.treemodel.PackageDataUtil;
 
 public class GerenciarContasWindow extends Window{
 
@@ -17,7 +22,7 @@ public class GerenciarContasWindow extends Window{
 	
 	public Window window;
 	private DataBinder binder;
-	private Usuario usuario;
+	private Usuario user;
 	private List<Usuario> usuarios;
 	private AcervoDigitalFachada acervoDigitalFachada;
 	private String campoBusca;
@@ -27,7 +32,7 @@ public class GerenciarContasWindow extends Window{
     	window = (Window)getFellow("win");
         binder =  new AnnotateDataBinder(window);
         
-        usuario = new Usuario();
+        user = new Usuario();
         acervoDigitalFachada = new AcervoDigitalFachadaImpl();
         try {
 			usuarios = acervoDigitalFachada.usuariosNaoValidados();
@@ -51,7 +56,7 @@ public class GerenciarContasWindow extends Window{
 		
 			if(usuarios.size() == 0)
 			{
-				Messagebox.show("Usuário não encontrado" 
+				Messagebox.show("Usuario nao encontrado" 
 						,"Erro", Messagebox.OK, Messagebox.EXCLAMATION);
 				
 				usuarios = acervoDigitalFachada.usuariosNaoValidados();
@@ -62,12 +67,83 @@ public class GerenciarContasWindow extends Window{
 		}
 	}
 	
-	public Usuario getUsuario() {
-		return usuario;
+	public void abrirWinUsuario()
+	{
+		Window winUsuario = (Window) getFellow("winUsuario");
+		winUsuario.setVisible(true);
+		winUsuario.setPosition("center");
+		winUsuario.setMode("modal");
+		
+		binder.loadAll();
+	}
+	
+	public void cancelar()
+	{
+		Window winUsuario = (Window) getFellow("winUsuario");
+		winUsuario.setVisible(false);
+		
+		binder.loadAll();
+	}
+	
+	public void salvar() throws Exception
+	{
+		
+		if(user.getNome()!=null && user.getEmail()!=null && user.getLogin()!= null && user.getSenha()!=null)
+		{
+			acervoDigitalFachada.alterarUsuario(user);
+			
+			Messagebox.show("Usuario alterado com sucesso" 
+					,"Erro", Messagebox.OK, Messagebox.EXCLAMATION);
+			
+		}else{
+			Messagebox.show("Preencha todos os campos" 
+					,"Erro", Messagebox.OK, Messagebox.EXCLAMATION);
+			
+		}
+		
+		binder.loadAll();
+	}
+	
+	public void excluir()
+	{
+		if(user != null)
+		{
+			Messagebox.show("Voce deseja realmente excluir este usuario ?", "Question",
+					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+	                   
+						@Override
+						public void onEvent(Event event) throws Exception {
+							// TODO Auto-generated method stub
+							if(event.getName().equals("onOK")){
+								acervoDigitalFachada.excluirUsuario(user);
+						    	cancelar();
+								binder.loadAll();
+								
+
+							}
+
+						}
+				
+			 
+			});
+
+		}
+	}
+	
+	public void limparBusca() throws Exception
+	{
+		usuarios = acervoDigitalFachada.usuariosNaoValidados();
+		campoBusca = "";
+		binder.loadAll();
+		
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public Usuario getUser() {
+		return user;
+	}
+
+	public void setUser(Usuario user) {
+		this.user = user;
 	}
 
 	public List<Usuario> getUsuarios() {

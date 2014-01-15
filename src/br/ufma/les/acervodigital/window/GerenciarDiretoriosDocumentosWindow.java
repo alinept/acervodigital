@@ -15,6 +15,7 @@ import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Window;
 
 import br.ufma.les.acervodigital.dominio.Diretorio;
+import br.ufma.les.acervodigital.dominio.Documento;
 import br.ufma.les.acervodigital.dominio.Usuario;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachada;
 import br.ufma.les.acervodigital.fachada.AcervoDigitalFachadaImpl;
@@ -33,6 +34,7 @@ private static final long serialVersionUID = 1L;
 	private TreeModel<TreeNode<PackageData>> arvore;
 	private String diretorioSelecionado;
 	private Diretorio diretorio;
+	private Documento documento;
 	private Diretorio diretorioPai;
 	private Usuario usuario;
 	private Date data;
@@ -203,20 +205,21 @@ private static final long serialVersionUID = 1L;
 
 	}
 	
-	public void excluirDiretorio()
+	public void excluirDiretorio() throws Exception
 	{
 		if (!diretorioSelecionado.equals("") && diretorioSelecionado != null) {
-		 Messagebox.show("Voc� deseja realmente excluir diretorio "+ diretorioSelecionado + "?", "Question",
+		 
+		 diretorio = acervoDigitalFachada.findDiretorioByNome(diretorioSelecionado);
+		 
+		 if(diretorio.getName()!= null && !diretorio.getName().equals(""))
+		 {
+			 		Messagebox.show("Voce deseja realmente excluir diretorio "+ diretorioSelecionado + "?", "Question",
 					Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
 	                   
 						@Override
 						public void onEvent(Event event) throws Exception {
 							// TODO Auto-generated method stub
 							if(event.getName().equals("onOK")){
-								diretorio = acervoDigitalFachada
-										.findDiretorioByNome(diretorioSelecionado);
-								diretorio = acervoDigitalFachada
-										.findDiretorioByNome(diretorioSelecionado);
 								acervoDigitalFachada.excluirDiretorio(diretorio.getId());
 								
 								PackageDataUtil pk = new PackageDataUtil();
@@ -243,10 +246,50 @@ private static final long serialVersionUID = 1L;
 				
 			 
 			});
-		 
 		}
+		else{
 		
-	}
+			documento = acervoDigitalFachada.findDocumentoByNomeArquivo(diretorioSelecionado);
+		
+			if(documento != null)
+			{
+				Messagebox.show("Voce deseja realmente excluir documento "+ diretorioSelecionado + "?", "Question",
+						Messagebox.OK | Messagebox.CANCEL, Messagebox.QUESTION, new org.zkoss.zk.ui.event.EventListener() {
+		                   
+							@Override
+							public void onEvent(Event event) throws Exception {
+								// TODO Auto-generated method stub
+								if(event.getName().equals("onOK")){
+									
+									acervoDigitalFachada.deletarDocumento(documento);
+									
+									PackageDataUtil pk = new PackageDataUtil();
+							        pk.setRoot(null);
+							        
+									try {
+										
+										if(usuario.getTipoAcesso().getNome().equals("moderador")) pk.montaArvore(usuario.getIdDiretorio());
+										else pk.montaArvore(0);
+										
+									} catch (SQLException e) {
+										e.printStackTrace();
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+							    	arvore = new DefaultTreeModel<PackageData>(pk.getRoot());
+							    	
+							    	binder.loadAll();
+									
+
+								}
+					 }
+				});
+
+			}
+		
+		}
+	 }
+}
 	
 	public void cancelarNovoDiretorio()
 	{
@@ -307,6 +350,14 @@ private static final long serialVersionUID = 1L;
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Documento getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento(Documento documento) {
+		this.documento = documento;
 	}
 
 	

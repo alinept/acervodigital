@@ -33,6 +33,7 @@
 								<label value="Filtro: " style="font-size:17px; "/>		
 								<textbox placeholder="nome usuário" width="500px" value="@{win.campoBusca }"/>
 								<button label="buscar" onClick="win.buscarUsuario()"/>
+								<button label="limpar" onClick="win.limparBusca()"/>
 							</hbox>
 						</div>
 						<separator height="20px" />
@@ -42,17 +43,21 @@
 						<div align="center">
 							<listbox id="listUsuarios"
 								model="@{win.usuarios}" width="600px"
-								selectedItem="@{win.usuario}">
+								selectedItem="@{win.user}">
 								<listhead>
-									<listheader label="Nome" width="300px"/>
+									<listheader label="Nome" width="250px"/>
 									<listheader label="Login" width="150px"/>
 									<listheader label="Perfil" width="150px"/>
-								</listhead>
-								<listitem self="@{each=usuario}">
-									<listcell label="@{usuario.nome}" />
-									<listcell label="@{usuario.login}" />
-									<listcell label="@{usuario.tipoAcesso.nome}" />
+									<listheader label="Ações" width="50px"/>
 									
+								</listhead>
+								<listitem self="@{each=user}">
+									<listcell label="@{user.nome}" />
+									<listcell label="@{user.login}" />
+									<listcell label="@{user.tipoAcesso.nome}" />
+									<listcell label="">
+										<image src="images/edit.png" onClick="win.abrirWinUsuario()"/>
+									</listcell>
 								</listitem>
 
 							</listbox>
@@ -65,4 +70,40 @@
 			</div>
 		</div>
 	</zk>
+	
+	<window id="winUsuario" visible="false" border="normal" title="Usuário" width="500px" height="400px">
+		<separator height="20px"/>
+		<vbox>
+		<hbox>
+			<div align="right" width="150px">
+				<label value="Nome: "/>
+			</div>
+			<textbox width="200px" value="@{win.user.nome}"/>
+		</hbox>
+		<hbox>
+			<div align="right" width="150px">
+				<label value="Login: "/>
+			</div>
+			<textbox width="200px" value="@{win.user.login}"/>
+		</hbox>
+		<hbox>
+			<div align="right" width="150px">
+				<label value="Email: "/>
+			</div>
+			<textbox width="200px" value="@{win.user.email}"/>
+		</hbox>
+		<hbox>
+			<div align="right" width="150px">
+				<label value="Senha: "/>
+			</div>
+			<textbox width="200px" value="@{win.user.senha }" type="password"/>
+		</hbox>
+		</vbox>
+		<separator height="30px"/>
+		<div align="center">
+			<button label="Salvar Alterações" onClick="win.salvar()"/>
+			<button label="Excluir Usuário" onClick="win.excluir()"/>
+			<button label="Cancelar" onClick="win.cancelar()"/>
+		</div>
+	</window>
 </window>

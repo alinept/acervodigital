@@ -66,34 +66,34 @@
 								onClick="win.buscarDocumento()" />
 							<div class="clearfix"></div>
 						</div>
-						
+					<hbox>
+						<separator width="50px" />
+						<label style="font-size: 10px" id="headLabel" />
+					</hbox>
+					<separator height="15px" />
+					
+					
+					<div align="left">
+						<hbox>
+							<separator width="50px" />
+							<vbox width="750px" id="resultsVBox" />
+						</hbox>
+						<hbox>
+							<space width="50px" />
+							<div align="center" width="750px">
+								<h:hr />
+								<button label="Página Anterior"
+									id="previousButton" onClick="winSearch.previousPage()" />
+								<button label="Próxima Página"
+									id="nextButton" onClick="winSearch.nextPage()" />
+							</div>
+						</hbox>
+						<separator height="20px" />
+					</div>		
 				</div>
 			</div>
 		
-				<hbox>
-					<separator width="50px" />
-					<label style="font-size: 10px" id="headLabel" />
-				</hbox>
-				<separator height="15px" />
 				
-				
-				<div align="left">
-					<hbox>
-						<separator width="50px" />
-						<vbox width="750px" id="resultsVBox" />
-					</hbox>
-					<hbox>
-						<space width="50px" />
-						<div align="center" width="750px">
-							<h:hr />
-							<button label="Página Anterior"
-								id="previousButton" onClick="winSearch.previousPage()" />
-							<button label="Próxima Página"
-								id="nextButton" onClick="winSearch.nextPage()" />
-						</div>
-					</hbox>
-					<separator height="20px" />
-				</div>
 				
 				<div class="footer">
 					<label

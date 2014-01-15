@@ -16,6 +16,7 @@ public interface DocumentoDAO {
 	
 	Documento findByCodigo(int codigo) throws Exception;
 	Documento findByNome(String nome) throws Exception;
+	Documento findByNomeArquivo(String nome) throws Exception ; 
 	List<Documento> ultimosEnvios() throws Exception;
 	
 	List<Documento> buscar(String busca, ArrayList<Tag> tags, boolean porTitulo, boolean porDescricao, boolean porConteudo) throws Exception;

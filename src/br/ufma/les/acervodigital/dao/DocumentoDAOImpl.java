@@ -353,6 +353,34 @@ public class DocumentoDAOImpl implements DocumentoDAO{
 	}
 
 	@Override
+	public Documento findByNomeArquivo(String nome) throws Exception {
+		Documento documento = new Documento();
+		
+		PreparedStatement statement = Conexao.get().prepareStatement("SELECT * FROM " +
+				"documento, arquivo WHERE documento.id_documento = arquivo.fk_documento and arquivo.nome  = ? ");
+		statement.setString(1, nome);
+		
+		ResultSet resultSet = statement.executeQuery();
+		
+		if (resultSet.next()) {
+			
+			documento.setId(resultSet.getInt("id_documento"));
+			documento.setConteudo(resultSet.getString("conteudo"));
+			documento.setDataExpedicao(resultSet.getDate("data_criacao"));
+			documento.setDataUpload(resultSet.getDate("data_upload"));
+			documento.setDiretorio(diretorioDAO.findDiretorioByCodigo(resultSet.getInt("fk_diretorio")));
+			documento.setProprietario(usuarioDAO.findByCodigo(resultSet.getInt("fk_proprietario")));
+			documento.setTitulo(resultSet.getString("titulo"));
+			documento.setDescricao(resultSet.getString("descricao"));
+
+			//documento.setTags(tags);
+			
+		}
+		
+		return documento;
+	}
+	
+	@Override
 	public List<Documento> ultimosEnvios() throws Exception {
 		List<Documento> docs = new ArrayList<Documento>();
 		

@@ -108,7 +108,7 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 	@Override
 	public void excluirUsuario(Usuario usuario) throws Exception{
 		
-		String sql = "DELETE usuario where id = "+ usuario.getId();
+		String sql = "DELETE from usuario where id_usuario = "+ usuario.getId();
 		
 		try{
 			PreparedStatement statement = Conexao.get().prepareStatement(sql);

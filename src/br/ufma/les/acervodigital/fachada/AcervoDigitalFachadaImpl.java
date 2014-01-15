@@ -221,6 +221,12 @@ public class AcervoDigitalFachadaImpl implements AcervoDigitalFachada{
 	public List<Documento> ultimosDocumentosEnviados() throws Exception {
 		return documentoDAO.ultimosEnvios();
 	}
+
+	@Override
+	public Documento findDocumentoByNomeArquivo(String nome) throws Exception {
+		
+		return documentoDAO.findByNomeArquivo(nome);
+	}
 	
 
 }

@@ -24,7 +24,7 @@ public class PDFViewer extends Window {
         pdfFile =
         	(AMedia) Sessions.getCurrent().getAttribute("pdfFile");
         
-        if(pdfFile != null){
+       if(pdfFile != null){
         	((Iframe)getFellow("pdfField")).setContent(pdfFile);
         }
         binder.loadAll();

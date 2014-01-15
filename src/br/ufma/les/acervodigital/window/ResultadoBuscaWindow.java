@@ -158,7 +158,7 @@ public class ResultadoBuscaWindow extends IndexWindow {
 			Sessions.getCurrent().setAttribute("pdfFile",
 						new AMedia(files.get(0).getNomeArquivo(), ".pdf", "application/pdf",
 								files.get(0).getByteStream()) );	
-				Executions.sendRedirect("/iframe.zul");
+				Executions.sendRedirect("/viewPdf.zul");
 			//}
 		
 				

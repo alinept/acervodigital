@@ -6,12 +6,6 @@
 		style="border: 1px solid gray" />
 	<separator bar="true" if="true" />
 	<hbox if="true">
-
-		<attribute name="onUpload">{
-		Object media =  event.getMedia();
-		if (media != null)
-			iframe.setContent(media);
-		}</attribute>
 	
 	</hbox>
 	</div>
